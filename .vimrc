@@ -99,6 +99,7 @@ nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 
 "#### Edit ####
 " insertモードを抜けるとIMEオフ
+set paste
 set noimdisable
 set iminsert=0 imsearch=0
 set noimcmdline
