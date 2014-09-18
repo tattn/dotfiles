@@ -69,7 +69,7 @@ set showmatch   "Emphasize the bracket corresponding to when you input a bracket
 syntax on
 set tabstop=4
 set smartindent "indent automatically
-set list        " show invisible character
+"set list        " show invisible character
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 set cursorline
 augroup cch
