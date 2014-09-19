@@ -133,3 +133,18 @@ inoremap <C-l> <Right>
 " ‘Î‰ž‚·‚éŠ‡ŒÊ‚ÉˆÚ“®
 nnoremap ( %
 nnoremap ) %
+
+"#### NeoBundle ####
+filetype plugin indent off
+
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+  call neobundle#rc(expand('~/.vim/bundle'))
+endif 
+
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+"hogehoge
+
+filetype plugin indent on
+
