@@ -9,7 +9,7 @@ if [ -e ~/.gitconfig ]; then
 fi
 ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 
-if [ -e ~/.vimrc ]; then
+if [ -e ~/.vim ]; then
 	rm -r ~/.vim
 fi
 ln -s ~/dotfiles/.vim ~/.vim
