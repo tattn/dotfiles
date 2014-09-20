@@ -1,8 +1,60 @@
+"#### NeoBundle ####
+filetype plugin indent off
+
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+  call neobundle#rc(expand('~/.vim/bundle'))
+endif 
+
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" NERDTree
+NeoBundle 'scrooloose/nerdtree'
+
+" caw.vim for comment out
+NeoBundle 'tyru/caw.vim.git'
+nmap <Leader>c <Plug>(caw:i:toggle)
+vmap <Leader>c <Plug>(caw:i:toggle)
+
+" AutoComplete
+NeoBundle 'Shougo/neocomplete.vim'
+
+" AutoComplete for Python
+NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'jmcantrell/vim-virtualenv'
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#auto_vim_configuration = 0
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+
+" molokai [ColorScheme]
+NeoBundle 'tomasr/molokai'
+
+" Solarized [ColorScheme]
+NeoBundle 'altercation/vim-colors-solarized'
+
+call neobundle#end()
+
+colorscheme molokai
+
+filetype plugin indent on
+
+NeoBundleCheck		" check not installed plugins 
+
+
 "#### Basics ####
-let mapleader="," "Key map reader
-set scrolloff=5   "Space when scrolling
+let mapleader="," " Key map leader
+" Escape insert mode
+" imap <C-j>  <ESC>
+imap <C-k>  <ESC>
+imap <C-c> <ESC>
+set scrolloff=5   " Space when scrolling
 set nobackup
-set autoread      "Read automatically when the file is rewrited
+set autoread      " Read automatically when the file is rewrited
 set noswapfile
 set hidden
 set backspace=indent,eol,start
@@ -16,7 +68,6 @@ set mouse=a                    " use mouse
 set guioptions+=a
 set ttymouse=xterm2
 set clipboard=unnamed          " yank to clipboard
-filetype plugin on             " judge filetype
 
 
 "#### StatusLine ####
@@ -24,9 +75,26 @@ set laststatus=2               " always show statusline
 set ruler                      " show cursor position
 
 " show encording
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+function! GetStatusEx()
+  let str = ''
+  if &ft != ''
+    let str = str . '[' . &ft . ']'
+  endif
+  if has('multi_byte')
+    if &fenc != ''
+      let str = str . '[' . &fenc . ']'
+    elseif &enc != ''
+      let str = str . '[' . &enc . ']'
+    endif
+  endif
+  if &ff != ''
+    let str = str . '[' . &ff . ']'
+  endif
+  return str
+endfunction
+set statusline=%<%f\ %m%r%h%w%=%{GetStatusEx()}\ \ %l,%c%V%8P
 
-"“ü—Íƒ‚[ƒhAƒXƒe[ƒ^ƒXƒ‰ƒCƒ“‚ÌƒJƒ‰[‚ğ•ÏX
+"å…¥åŠ›ãƒ¢ãƒ¼ãƒ‰æ™‚ã€ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ©ã‚¤ãƒ³ã®ã‚«ãƒ©ãƒ¼ã‚’å¤‰æ›´
 let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
 
 if has('syntax')
@@ -57,7 +125,7 @@ function! s:GetHighlight(hi)
   return hl
 endfunction
 
-"©“®“I‚É QuickFix ƒŠƒXƒg‚ğ•\¦‚·‚é
+"è‡ªå‹•çš„ã« QuickFix ãƒªã‚¹ãƒˆã‚’è¡¨ç¤ºã™ã‚‹
 autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd cwin
 autocmd QuickfixCmdPost lmake,lgrep,lgrepadd,lvimgrep,lvimgrepadd lwin
 
@@ -66,9 +134,8 @@ autocmd QuickfixCmdPost lmake,lgrep,lgrepadd,lvimgrep,lvimgrepadd lwin
 set number
 set title
 set showmatch   "Emphasize the bracket corresponding to when you input a bracket
-syntax on
+syntax on 
 set tabstop=4
-set smartindent "indent automatically
 "set list        " show invisible character
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 set cursorline
@@ -81,9 +148,9 @@ hi clear CursorLine
 hi CursorLine gui=underline
 highlight CursorLine ctermbg=black guibg=black
 
-" ƒRƒ}ƒ“ƒhÀs’†‚ÍÄ•`‰æ‚µ‚È‚¢
+" ã‚³ãƒãƒ³ãƒ‰å®Ÿè¡Œä¸­ã¯å†æç”»ã—ãªã„
 set lazyredraw
-" ‚‘¬ƒ^[ƒ~ƒiƒ‹Ú‘±‚ğs‚¤
+" é«˜é€Ÿã‚¿ãƒ¼ãƒŸãƒŠãƒ«æ¥ç¶šã‚’è¡Œã†
 set ttyfast
 
 
@@ -92,59 +159,48 @@ set ignorecase "Ignore upper/lower case
 set smartcase "Distinguish cases when contains upper case
 set wrapscan "Back to top when finds until the end
 set incsearch
-set hlsearch   " ŒŸõ•¶š‚ğƒnƒCƒ‰ƒCƒg
-"Esc‚Ì2‰ñ‰Ÿ‚µ‚ÅƒnƒCƒ‰ƒCƒgÁ‹
+set hlsearch   " æ¤œç´¢æ–‡å­—ã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆ
+"Escã®2å›æŠ¼ã—ã§ãƒã‚¤ãƒ©ã‚¤ãƒˆæ¶ˆå»
 nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 
 
 "#### Edit ####
-" insertƒ‚[ƒh‚ğ”²‚¯‚é‚ÆIMEƒIƒt
+" insertãƒ¢ãƒ¼ãƒ‰ã‚’æŠœã‘ã‚‹ã¨IMEã‚ªãƒ•
+"set smartindent "indent automatically
+set autoindent   "indent automatically
 set paste
 set noimdisable
 set iminsert=0 imsearch=0
 set noimcmdline
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
-" XML‚Ì•Âƒ^ƒO‚ğ©“®‘}“ü
+" XMLã®é–‰ã‚¿ã‚°ã‚’è‡ªå‹•æŒ¿å…¥
 augroup MyXML
   autocmd!
   autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
 augroup END
-" ƒJ[ƒ\ƒ‹‚©‚çs“ª‚Ü‚Åíœ
+" ã‚«ãƒ¼ã‚½ãƒ«ã‹ã‚‰è¡Œé ­ã¾ã§å‰Šé™¤
 nnoremap <silent> <C-d> d0
 
-" ƒJ[ƒ\ƒ‹‚©‚çs“ª‚Ü‚Åíœ(ƒCƒ“ƒT[ƒgƒ‚[ƒh)
+" ã‚«ãƒ¼ã‚½ãƒ«ã‹ã‚‰è¡Œé ­ã¾ã§å‰Šé™¤(ã‚¤ãƒ³ã‚µãƒ¼ãƒˆãƒ¢ãƒ¼ãƒ‰)
 inoremap <silent> <C-k> <Esc>lc^
-" ƒJ[ƒ\ƒ‹‚©‚çs––‚Ü‚Åíœ(ƒCƒ“ƒT[ƒgƒ‚[ƒh)
+" ã‚«ãƒ¼ã‚½ãƒ«ã‹ã‚‰è¡Œæœ«ã¾ã§å‰Šé™¤(ã‚¤ãƒ³ã‚µãƒ¼ãƒˆãƒ¢ãƒ¼ãƒ‰)
 inoremap <silent> <C-d> <Esc>lc$
-" ƒJ[ƒ\ƒ‹‚©‚çs“ª‚Ü‚Åƒ„ƒ“ƒN(ƒCƒ“ƒT[ƒgƒ‚[ƒh)
+" ã‚«ãƒ¼ã‚½ãƒ«ã‹ã‚‰è¡Œé ­ã¾ã§ãƒ¤ãƒ³ã‚¯(ã‚¤ãƒ³ã‚µãƒ¼ãƒˆãƒ¢ãƒ¼ãƒ‰)
 inoremap <silent> <C-y>e <Esc>ly0<Insert>
-" ƒJ[ƒ\ƒ‹‚©‚çs––‚Ü‚Åƒ„ƒ“ƒN(ƒCƒ“ƒT[ƒgƒ‚[ƒh)
+" ã‚«ãƒ¼ã‚½ãƒ«ã‹ã‚‰è¡Œæœ«ã¾ã§ãƒ¤ãƒ³ã‚¯(ã‚¤ãƒ³ã‚µãƒ¼ãƒˆãƒ¢ãƒ¼ãƒ‰)
 inoremap <silent> <C-y>0 <Esc>ly$<Insert>
 
 
 "#### KeyBindings ####
 " paste clipboard using Ctrl+p
 imap <C-p>  <ESC>"*pa
-" ƒCƒ“ƒT[ƒgƒ‚[ƒh‚Å‚àhjkl‚ÅˆÚ“®iCtrl‰Ÿ‚·‚¯‚Ç‚Ëj
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
-" ‘Î‰‚·‚éŠ‡ŒÊ‚ÉˆÚ“®
+" " ã‚¤ãƒ³ã‚µãƒ¼ãƒˆãƒ¢ãƒ¼ãƒ‰ã§ã‚‚hjklã§ç§»å‹•
+" inoremap <C-j> <Down>
+" inoremap <C-k> <Up>
+" inoremap <C-h> <Left>
+" inoremap <C-l> <Right>
+" å¯¾å¿œã™ã‚‹æ‹¬å¼§ã«ç§»å‹•
 nnoremap ( %
 nnoremap ) %
 
-"#### NeoBundle ####
-filetype plugin indent off
-
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle'))
-endif 
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-"hogehoge
-
-filetype plugin indent on
 
