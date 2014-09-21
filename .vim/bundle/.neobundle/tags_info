@@ -1,8 +1,10 @@
 caw.vim
 jedi-vim
 molokai
-neobundle.vim
 neocomplete.vim
 nerdtree
+vim-airline
 vim-colors-solarized
+vim-indent-guides
+vim-quickrun
 vim-virtualenv
