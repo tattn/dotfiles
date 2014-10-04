@@ -4,7 +4,6 @@ set nocompatible
 let mapleader="," " Key map leader
 " Escape insert mode
 imap <C-j>  <ESC>
-imap <C-c> <ESC>
 set expandtab
 set ts=4 sw=4 sts=0
 set scrolloff=5   " Space when scrolling
@@ -38,10 +37,34 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " NERDTree
 NeoBundle 'scrooloose/nerdtree'
 
-" caw.vim for comment out
-NeoBundle 'tyru/caw.vim.git'
-nmap <Leader>c <Plug>(caw:i:toggle)
-vmap <Leader>c <Plug>(caw:i:toggle)
+" " caw.vim for comment out
+" NeoBundle 'tyru/caw.vim.git'
+" nmap <Leader>c <Plug>(caw:i:toggle)
+" vmap <Leader>c <Plug>(caw:i:toggle)
+NeoBundle 'tomtom/tcomment_vim'
+if !exists('g:tcomment_types')
+  let g:tcomment_types = {}
+endif
+let g:tcomment_types = {
+      \'php_surround' : "<?php %s ?>",
+      \'eruby_surround' : "<%% %s %%>",
+      \'eruby_surround_minus' : "<%% %s -%%>",
+      \'eruby_surround_equality' : "<%%= %s %%>",
+\}
+function! SetErubyMapping2()
+  nmap <buffer> <C-_>c :TCommentAs eruby_surround<CR>
+  nmap <buffer> <C-_>- :TCommentAs eruby_surround_minus<CR>
+  nmap <buffer> <C-_>= :TCommentAs eruby_surround_equality<CR>
+
+  vmap <buffer> <C-_>c :TCommentAs eruby_surround<CR>
+  vmap <buffer> <C-_>- :TCommentAs eruby_surround_minus<CR>
+  vmap <buffer> <C-_>= :TCommentAs eruby_surround_equality<CR>
+endfunction
+" for eruby
+au FileType eruby call SetErubyMapping2()
+" for php
+au FileType php nmap <buffer><C-_>c :TCommentAs php_surround<CR>
+au FileType php vmap <buffer><C-_>c :TCommentAs php_surround<CR>
 
 " Unite and VimFiler
 NeoBundle 'Shougo/unite.vim'
@@ -59,18 +82,39 @@ nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 " rails.vim
 NeoBundle 'tpope/vim-rails'
 
+" VimProc for asynchronous
+NeoBundle "Shougo/vimproc", {
+        \ "build": {
+        \   "windows"   : "make -f make_mingw32.mak",
+        \   "cygwin"    : "make -f make_cygwin.mak",
+        \   "mac"       : "make -f make_mac.mak",
+        \   "unix"      : "make -f make_unix.mak",
+        \ }}
+
 " QuickRun
 NeoBundle 'thinca/vim-quickrun'
-let g:quickrun_config={'*': {'split': ''}}
+let g:quickrun_config = {
+\   "_" : {
+\       "runner" : "vimproc",
+\       "runner/vimproc/updatetime" : 60
+\   },
+\}
 set splitbelow
+nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+
 
 NeoBundle "nathanaelkane/vim-indent-guides"
-let g:indent_guides_auto_colors=0
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=110
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=140
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_start_level=4
-let g:indent_guides_guide_size=1
+let s:hooks = neobundle#get_hooks("vim-indent-guides")
+function! s:hooks.on_source(bundle)
+  let g:indent_guides_guide_size = 1
+  IndentGuidesEnable
+endfunction
+" let g:indent_guides_auto_colors=0
+" " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=110
+" " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=140
+" let g:indent_guides_enable_on_vim_startup=1
+" let g:indent_guides_start_level=4
+" let g:indent_guides_guide_size=1
 
 " AutoComplete
 NeoBundle 'Shougo/neocomplete.vim'
@@ -87,7 +131,7 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " AutoComplete for Python
 NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'jmcantrell/vim-virtualenv'
+" NeoBundle 'jmcantrell/vim-virtualenv'
 " let g:jedi#completions_enabled=0
 let g:jedi#auto_vim_configuration = 1
 let g:jedi#popup_on_dot = 0
@@ -98,6 +142,11 @@ endif
 let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 autocmd FileType python setlocal completeopt-=preview " docstringは表示しない
 autocmd FileType python setlocal omnifunc=jedi#completions
+NeoBundleLazy 'lambdalisue/vim-pyenv', {
+        \ 'depends': ['davidhalter/jedi-vim'],
+        \ 'autoload': {
+        \   'filetypes': ['python', 'python3'],
+        \ }}
 
 "AutoComplete for Ruby
 NeoBundleLazy 'marcus/rsense', {
@@ -141,7 +190,7 @@ NeoBundle 'bling/vim-airline'
 let g:airline_enable_branch = 0
 " let g:airline_section_a = airline#section#create(['mode','','branch'])
 let g:airline_section_b = "%t %M"
-let g:airline_section_c = ''
+let g:airline_section_c = pyenv#statusline#component
 let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
 let g:airline_section_x =
     \ "%{strlen(&fileformat)?&fileformat:''}".s:sep.
@@ -221,16 +270,16 @@ set iminsert=0 imsearch=0
 set noimcmdline
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 " auto input end bracket
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-vnoremap { "zdi^V{<C-R>z}<ESC>
-vnoremap [ "zdi^V[<C-R>z]<ESC>
-vnoremap ( "zdi^V(<C-R>z)<ESC>
-vnoremap " "zdi^V"<C-R>z^V"<ESC>
-vnoremap ' "zdi'<C-R>z'<ESC>
+" inoremap { {}<LEFT>
+" inoremap [ []<LEFT>
+" inoremap ( ()<LEFT>
+" inoremap " ""<LEFT>
+" inoremap ' ''<LEFT>
+" vnoremap { "zdi^V{<C-R>z}<ESC>
+" vnoremap [ "zdi^V[<C-R>z]<ESC>
+" vnoremap ( "zdi^V(<C-R>z)<ESC>
+" vnoremap " "zdi^V"<C-R>z^V"<ESC>
+" vnoremap ' "zdi'<C-R>z'<ESC>
 " fix arrow keys
 imap OA <UP>
 imap OB <DOWN>
