@@ -14,3 +14,8 @@ if [ -e ~/.vim ]; then
 fi
 ln -s ~/dotfiles/.vim ~/.vim
 
+if [ -e ~/.zshenv ]; then
+    rm ~/.zshenv
+fi
+ln -s ~/dotfiles/.zshenv ~/.zshenv
+

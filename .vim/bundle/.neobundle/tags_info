@@ -1,4 +1,3 @@
-caw.vim
 jedi-vim
 molokai
 neocomplete-rsense.vim
@@ -8,11 +7,13 @@ neosnippet
 neosnippet-snippets
 nerdtree
 rsense
+tcomment_vim
 unite.vim
 vim-airline
 vim-colors-solarized
 vim-indent-guides
+vim-pyenv
 vim-quickrun
 vim-rails
-vim-virtualenv
 vimfiler
+vimproc
