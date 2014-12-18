@@ -1,0 +1,34 @@
+" .vimrc for xcode
+
+"############################################
+" KeyBindings
+"############################################
+
+inoremap <C-j> <ESC>
+inoremap jj <ESC>
+nnoremap gcc :xccmd commentAndUncommentCurrentLines<CR>
+vnoremap gc :xccmd commentAndUncommentCurrentLines<CR>
+noremap ,b :xccmd toggleBreakpointAtCurrentLine<CR>
+
+set cursorline
+
+
+"############################################
+" Tab
+"############################################
+" tab pre
+"map ,ti :xccmd selectPreviousTab<CR>
+map gT :tabprevious<CR>
+" tab next
+"map ,to :xccmd selectNextTab<CR>
+map gt :tabnext<CR>
+
+"#### Search ####
+set ignorecase "Ignore upper/lower case
+set smartcase  "Distinguish cases when contains upper case
+set wrapscan   "Back to top when finds until the end
+set incsearch
+set hlsearch   " hilight word
+" cancel hilight
+nnoremap <ESC><ESC> :noh<CR><ESC>
+

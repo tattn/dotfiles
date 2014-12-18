@@ -19,6 +19,7 @@ setopt auto_resume          # リダイレクトしてない suspend job を同�
 setopt bg_nice              # bg の nice を低くして実行
 setopt notify               # バックグラウンドジョブの状態変化を即時報告する
 setopt nohup                # default は nohup
+setopt nonomatch            # zsh: no matches found 対策
 
 ## functions treat as array
 typeset -Uga chpwd_functions
@@ -118,12 +119,13 @@ function update_prompt (){
     # @see Zshをかわいくする.zshrcの設定
     # URL: http://qiita.com/kubosho_/items/c200680c26e509a4f41c
     # 横幅等を調整.
-    local ps_status="[%j]%(?.%B%F{green}.%B%F{blue})%(?!(*'-')%b!(*;-;%)%b)%f "
+    # local ps_status="[%j]%(?.%B%F{green}.%B%F{blue})%(?!(*'-')%b!(*;-;%)%b)%f "
+    local ps_status="%(?.%B%F{green}.%B%F{blue})%(?!ヽ(*ﾟд ﾟ)ノ%b!(*;-;%)%b)%f "
     local ps_mark="%(!,%B%F{magenta}#%f%b,%%)"
     # local prompt_1st_left="[$ps_user@$ps_host$chroot_info]"
     local prompt_1st_left="$ps_status"
-    ## プロンプト: 1段目右
-    local prompt_1st_right="[%F{white}%(5~,%-2~/.../%1~,%~)%f]"
+    ## プロンプト: 1段目右(深さが8以上になったら省略)
+    local prompt_1st_right="[%F{white}%(8~,%-2~/.../%1~,%~)%f]"
     ## 1段目行の残り文字列の計算
     local left_length=$(count_prompt_chars $prompt_1st_left)
     local right_length=$(count_prompt_chars $prompt_1st_right)

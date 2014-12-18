@@ -19,3 +19,8 @@ if [ -e ~/.zshenv ]; then
 fi
 ln -s ~/dotfiles/.zshenv ~/.zshenv
 
+if [ -e ~/.xvimrc ]; then
+    rm ~/.xvimrc
+fi
+ln -s ~/dotfiles/.xvimrc ~/.xvimrc
+
