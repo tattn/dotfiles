@@ -1,5 +1,6 @@
 jedi-vim
 molokai
+neobundle.vim
 neocomplete-rsense.vim
 neocomplete.vim
 neomru.vim
@@ -10,8 +11,10 @@ rsense
 tcomment_vim
 unite.vim
 vim-airline
+vim-coffee-script
 vim-colors-solarized
 vim-indent-guides
+vim-less
 vim-pyenv
 vim-quickrun
 vim-rails
