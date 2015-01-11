@@ -163,7 +163,7 @@ alias lla='ls -hlaFG'
 alias lsd='ls -ld *(-/DN)'
 alias man='LANG=C man'
 alias vim="mvim --remote-tab-silent"
-alias vi=vim
+alias vi="/usr/local/Cellar/vim/*/bin/vim"
 # PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
 
 eval "$(anyenv init -)"
