@@ -6,6 +6,8 @@ export LANG=ja_JP.UTF-8
 path=(
   $HOME/.anyenv/bin
   /usr/local/Cellar/qt5/5.3.2/bin/
+  /Applications/Android/ndk
+  /Applications/Android/sdk/platform-tools
   {/usr/local,/usr,}{/bin,/sbin}(N-/)
 )
 typeset -gxU path

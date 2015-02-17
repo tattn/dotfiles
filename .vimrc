@@ -431,10 +431,19 @@ autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 autocmd FileType make setlocal noexpandtab
 autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 
+"" auto compiling for coffee script
+autocmd BufWritePost *.coffee silent make!
+
 if has("gui_running")
   autocmd BufWritePre * :call TrimWhiteSpace()
 endif
 
+
+"" Add filetypes
+augroup addfiletype
+	au BufNewFile,BufRead *.gyp setf gyp
+	au BufNewFile,BufRead *.gypi setf gyp
+augroup END
 
 "" Tab settings
 augroup vimrc
@@ -445,6 +454,7 @@ augroup vimrc
 	autocmd! FileType perl setlocal shiftwidth=4 tabstop=2 softtabstop=2
 	autocmd! FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd! FileType css  setlocal shiftwidth=4 tabstop=2 softtabstop=2
+	autocmd! FileType gyp  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 augroup END
 
 "" Show QuickFix list automatically
