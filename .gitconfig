@@ -1,14 +1,70 @@
 [user]
-email = tatsuyars@yahoo.co.jp
-name = tanakasan2525
+	email = tatsuyars@yahoo.co.jp
+	name = tanakasan2525
 
 [core]
 	editor = /usr/local/Cellar/vim/*/bin/vim
 
-[alias]
-    ;graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
-    ;graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    graph = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[color]
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+	grep = auto
 
+[alias]
+	ad = add
+	co = checkout
+	fp = fetch --prune
+	wc = whatchanged
+
+	branches = branch -a
+	remotes = remote -v
+	tags = tag -l
+
+	# status
+	st = status --branch --short
+	si = status --ignored --short
+
+	# commit
+	cm = commit -m
+	cma = commit -am
 	fixup = commit --amend -C HEAD
+
+	# branch
+	br = branch
+	ba = branch -a
+	bm = branch --merged
+	bn = branch --no-merged
+
+	# log
+	ll = log --pretty=oneline
+	ls = log --stat          # logに変更されたファイルも一緒に出す
+	lp = log -p              # diffも一緒に出す
+	la = log --pretty=\"format:%ad %h (%an): %s\" --date=short  # ざっくりログ出す
+	lr = log origin
+	graph = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+	# mergeの際にconflictが起きたファイルを編集
+	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+	# mergeの際にconflictが起きたファイルをadd
+	add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+
+	# diff
+	dm = diff master
+	dh = diff --histogram
+	dw = diff --color-words
+	dc = diff --cached
+	ds = diff --staged
+	d1 = diff HEAD~
+	d2 = diff HEAD~~
+	d3 = diff HEAD~~~
+	d4 = diff HEAD~~~~
+	d5 = diff HEAD~~~~~
+	d10 = diff HEAD~~~~~~~~~~
+
+	# grep
+	gr = grep
+	gn = grep -n
+
 
