@@ -142,6 +142,11 @@ function update_prompt (){
 }
 precmd_functions+=update_prompt
 
+# Git completion
+fpath=(~/.zsh/completion $fpath)
+autoload -U compinit
+compinit -u
+
 export MANPAGER='less -s'
 export PAGER='less -R'
 if whence lv >/dev/null ; then
