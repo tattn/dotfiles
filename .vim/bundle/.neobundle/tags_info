@@ -7,12 +7,14 @@ neomru.vim
 neosnippet
 neosnippet-snippets
 nerdtree
+omnisharp-vim
 rsense
 tcomment_vim
 unite.vim
 vim-airline
 vim-coffee-script
 vim-colors-solarized
+vim-dispatch
 vim-indent-guides
 vim-less
 vim-pyenv

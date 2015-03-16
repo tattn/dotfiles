@@ -167,16 +167,20 @@ alias ll='ls -hlFG'
 alias lla='ls -hlaFG'
 alias lsd='ls -ld *(-/DN)'
 alias man='LANG=C man'
-alias vim="mvim --remote-tab-silent"
-alias vi="/usr/local/Cellar/vim/*/bin/vim"
+if [ "$(uname)" == 'Darwin' ]; then
+	alias vim="mvim --remote-tab-silent"
+	alias vi="/usr/local/Cellar/vim/*/bin/vim"
+fi
 # PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
 
-eval "$(anyenv init -)"
+if hash anyenv 2>/dev/null; then
+	eval "$(anyenv init -)"
 
-for D in `ls $HOME/.anyenv/envs`
-	do
-		export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
-	done
+	for D in `ls $HOME/.anyenv/envs`
+		do
+			export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
+		done
+fi
 
 if [ ! -f $ZDOTDIR/.zshenv.zwc -o $ZDOTDIR/.zshenv -nt $ZDOTDIR/.zshenv.zwc ]; then
   zcompile $ZDOTDIR/.zshenv

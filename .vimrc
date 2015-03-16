@@ -2,22 +2,22 @@
 "" NeoBundle
 "################################################################
 
-if has('vim_starting')
-  set nocompatible
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle'))
-endif
-
-let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
-
-if !filereadable(neobundle_readme)
-  echo "Installing NeoBundle..."
-  echo ""
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
-endif
+" if has('vim_starting')
+"   set nocompatible
+"
+"   " Required:
+"   set runtimepath+=~/.vim/bundle/neobundle.vim
+"   call neobundle#rc(expand('~/.vim/bundle'))
+" endif
+"
+" let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+"
+" if !filereadable(neobundle_readme)
+"   echo "Installing NeoBundle..."
+"   echo ""
+"   silent !mkdir -p ~/.vim/bundle
+"   silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
+" endif
 
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
@@ -71,6 +71,9 @@ NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 
+"" Syntax checker
+" NeoBundle 'scrooloose/syntastic'
+
 
 "---------------------------
 "" CoffeeScript
@@ -115,6 +118,22 @@ NeoBundle 'supermomonga/neocomplete-rsense.vim', {
       \ 'depends': ['Shougo/neocomplete.vim', 'marcus/rsense'],
       \ }
 
+"---------------------------
+"" C#
+"---------------------------
+" AutoComplete for C#
+NeoBundleLazy 'OmniSharp/omnisharp-vim', {
+\   'autoload': { 'filetypes': [ 'cs', 'csi', 'csx' ] },
+\   'build': {
+\     'windows' : 'msbuild server/OmniSharp.sln',
+\     'mac': 'xbuild server/OmniSharp.sln',
+\     'unix': 'xbuild server/OmniSharp.sln',
+\   },
+\ }
+
+" Connect to OmniSharp
+NeoBundle 'tpope/vim-dispatch'
+
 
 call neobundle#end()
 
@@ -126,6 +145,9 @@ NeoBundleCheck		" check uninstalled plugins
 "################################################################
 "" NeoBundle Configuration
 "################################################################
+
+"" Shougo/vimfiler
+" let g:vimfiler_edit_action = 'tabopen'
 
 "" Shougo/unite
 let g:unite_enable_start_insert=1
@@ -218,6 +240,10 @@ let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" Completion
+imap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <expr><C-Space> pumvisible() ? "\<down>" : neocomplete#start_manual_complete()
 
 
 "" davidhalter/jedi-vim
@@ -241,17 +267,86 @@ let g:rsenseUseOmniFunc = 1
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
 
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
+
+"" scroolloose/syntastic
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+
+"" omnishar-vim
+" Get Code Issues and syntax errors
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+" If you are using the omnisharp-roslyn backend, use the following
+" let g:syntastic_cs_checkers = ['code_checker']
+augroup omnisharp_commands
+	autocmd!
+
+	"Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
+	autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+	" Synchronous build (blocks Vim)
+	"autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
+	" Builds can also run asynchronously with vim-dispatch installed
+	autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr>
+	" automatic syntax check on events (TextChanged requires Vim 7.4)
+	" autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+
+	" Automatically add new cs files to the nearest project on save
+	" autocmd BufWritePost *.cs call OmniSharp#AddToProject()
+
+	"show type information automatically when the cursor stops moving
+	autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+
+	"The following commands are contextual, based on the current cursor position.
+
+	autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
+	autocmd FileType cs nnoremap <leader>fi :OmniSharpFindImplementations<cr>
+	autocmd FileType cs nnoremap <leader>ft :OmniSharpFindType<cr>
+	autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
+	autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
+	"finds members in the current buffer
+	autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr>
+	" cursor can be anywhere on the line containing an issue
+	autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
+	autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
+	autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
+	autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
+	"navigate up by method/property/field
+	autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
+	"navigate down by method/property/field
+	autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
+
+augroup END
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.cs = '.*[^=\);]'
 
 
 "################################################################
