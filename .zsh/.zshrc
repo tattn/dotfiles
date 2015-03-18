@@ -174,7 +174,7 @@ fi
 # PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
 
 if hash anyenv 2>/dev/null; then
-	eval "$(anyenv init -)"
+	eval "$(anyenv init - zsh)"
 
 	for D in `ls $HOME/.anyenv/envs`
 		do

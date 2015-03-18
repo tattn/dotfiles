@@ -24,3 +24,8 @@ if [ -e ~/.xvimrc ]; then
 fi
 ln -s ~/dotfiles/.xvimrc ~/.xvimrc
 
+if [ -e ~/.tmux.conf ]; then
+    rm ~/.tmux.conf
+fi
+ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+
