@@ -182,6 +182,10 @@ if hash anyenv 2>/dev/null; then
 		done
 fi
 
+if hash direnv 2>/dev/null; then
+	eval "$(direnv hook zsh)"
+fi
+
 if [ ! -f $ZDOTDIR/.zshenv.zwc -o $ZDOTDIR/.zshenv -nt $ZDOTDIR/.zshenv.zwc ]; then
   zcompile $ZDOTDIR/.zshenv
 fi
