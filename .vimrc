@@ -1,9 +1,9 @@
 "################################################################
 "" NeoBundle
 "################################################################
+set nocompatible
 
 " if has('vim_starting')
-"   set nocompatible
 "
 "   " Required:
 "   set runtimepath+=~/.vim/bundle/neobundle.vim
