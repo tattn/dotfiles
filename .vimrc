@@ -552,6 +552,7 @@ augroup vimrc
 	autocmd! FileType css  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd! FileType scss  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd! FileType gyp  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd! FileType yaml  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 augroup END
 
 "" Show QuickFix list automatically
