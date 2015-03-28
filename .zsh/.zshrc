@@ -171,8 +171,36 @@ if [ "$(uname)" == 'Darwin' ]; then
 	alias vim="mvim --remote-tab-silent"
 	alias vi="/usr/local/Cellar/vim/*/bin/vim"
 fi
-# PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
 
+## Docker
+if hash docker 2>/dev/null; then
+	# Get latest container ID
+	alias docl="docker ps -l -q"
+	# Get container process
+	alias docps="docker ps"
+	# Get process included stop container
+	alias docpa="docker ps -a"
+	# Get images
+	alias doci="docker images"
+	# Get container IP, e.g., $docip `docl`
+	alias docip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
+	# Run deamonized container, e.g., $dkd base /bin/echo hello
+	alias docrd="docker run -d -P"
+	# Run interactive container, e.g., $dki base /bin/bash
+	alias docri="docker run -i -t -P"
+	# Stop all containers
+	docstop() { docker stop $(docker ps -a -q); }
+	# Remove all containers
+	docrm() { docker rm $(docker ps -a -q); }
+	# Stop and Remove all containers
+	alias docrmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+	# Remove all images
+	docrmi() { docker rmi $(docker images -q); }
+	# Show all alias related docker
+	docalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
+fi
+
+## Anyenv
 if hash anyenv 2>/dev/null; then
 	eval "$(anyenv init - zsh)"
 
