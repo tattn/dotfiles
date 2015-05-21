@@ -40,6 +40,9 @@ NeoBundle 'Shougo/neomru.vim'
 
 NeoBundle 'scrooloose/nerdtree'
 
+"" vim-surround
+NeoBundle 'tpope/vim-surround'
+
 "" Comment out
 NeoBundle 'tomtom/tcomment_vim'
 
@@ -93,6 +96,9 @@ NeoBundle 'groenewege/vim-less'
 "---------------------------
 "" rails.vim
 NeoBundle 'tpope/vim-rails'
+
+"" unite-rails.vim
+NeoBundle 'basyura/unite-rails'
 
 "---------------------------
 "" Python
@@ -611,6 +617,9 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 "" Opens a tab edit command with the path of the currently edited file filled
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+
+"" CTags
+nnoremap <C-]> g<C-]>
 
 
 
