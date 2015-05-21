@@ -10,6 +10,7 @@ nerdtree
 omnisharp-vim
 rsense
 tcomment_vim
+unite-rails
 unite.vim
 vim-airline
 vim-coffee-script
@@ -20,5 +21,6 @@ vim-less
 vim-pyenv
 vim-quickrun
 vim-rails
+vim-surround
 vimfiler
 vimproc

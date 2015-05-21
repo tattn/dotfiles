@@ -120,7 +120,8 @@ function update_prompt (){
     # URL: http://qiita.com/kubosho_/items/c200680c26e509a4f41c
     # 横幅等を調整.
     # local ps_status="[%j]%(?.%B%F{green}.%B%F{blue})%(?!(*'-')%b!(*;-;%)%b)%f "
-    local ps_status="%(?.%B%F{green}.%B%F{blue})%(?!ヽ(*ﾟд ﾟ)ノ%b!(*;-;%)%b)%f "
+    # local ps_status="%(?.%B%F{green}.%B%F{blue})%(?!ヽ(*ﾟд ﾟ)ノ%b!(*;-;%)%b)%f "
+    local ps_status="%(?.%B%F{green}.%B%F{blue})%(?!✘ ╹◡╹✘%b!✘ >﹏<✘%b)%f "
     local ps_mark="%(!,%B%F{magenta}#%f%b,%%)"
     # local prompt_1st_left="[$ps_user@$ps_host$chroot_info]"
     local prompt_1st_left="$ps_status"
