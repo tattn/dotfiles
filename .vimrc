@@ -78,6 +78,9 @@ NeoBundle 'Shougo/neosnippet-snippets'
 "" Syntax checker
 " NeoBundle 'scrooloose/syntastic'
 
+"" Gtags
+NeoBundle 'vim-scripts/gtags.vim'
+
 
 "---------------------------
 "" CoffeeScript
@@ -620,6 +623,25 @@ noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 "" CTags
 nnoremap <C-]> g<C-]>
+
+"" Gtags
+" Grep in source codes
+nnoremap <C-g> :Gtags -g<CR>
+" Show functions in current file
+nnoremap <C-l> :Gtags -f %<CR>
+" Search definition
+nnoremap <C-d> :Gtags <C-r><C-w><CR>
+" Search reference
+nnoremap <C-k> :Gtags -r <C-r><C-w><CR>
+" Jump to next
+nnoremap <C-n> :cn<CR>
+" Jump to previous
+nnoremap <C-p> :cp<CR>
+
+"" QuickFix
+" Close quickfix
+nnoremap <C-q> :ccl<CR>
+
 
 
 
