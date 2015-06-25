@@ -155,6 +155,9 @@ NeoBundleLazy 'OmniSharp/omnisharp-vim', {
 " Connect to OmniSharp
 NeoBundle 'tpope/vim-dispatch'
 
+" CRuby
+NeoBundle 'mrkn/vim-cruby'
+
 
 call neobundle#end()
 
@@ -646,9 +649,17 @@ augroup END
 "" カーソルを現在のウィンドウのみに表示
 augroup currentcursorline
 	autocmd!
-	autocmd! currentcursorline
+	autocmd currentcursorline
 	autocmd WinLeave * set nocursorline
 	autocmd WinEnter,BufRead * set cursorline
+augroup END
+
+"" CRuby
+augroup cruby_settings
+	autocmd!
+	au FileType cruby setl ts=8 sw=4 noexpandtab
+	au FileType cruby let g:changelog_timeformat = "%c"
+	au FileType cruby let g:changelog_username = "Tatsuya Tanaka tatsuya@sw.it.aoyama.ac.jp"
 augroup END
 
 set autoread      " Read automatically when the file is rewrited
