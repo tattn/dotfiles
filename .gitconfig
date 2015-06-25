@@ -14,6 +14,7 @@
 
 [alias]
 	ad = add
+	adu = add -u
 	co = checkout
 	fp = fetch --prune
 	wc = whatchanged
@@ -67,4 +68,10 @@
 	gr = grep
 	gn = grep -n
 
+	# config
+	cfg = config
+	cfgrep = config --get-regexp
+
+	# alias の確認
+	alias = !git config --get-regexp ^alias. | sed -e 's/^alias.//g'
 

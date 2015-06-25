@@ -1,3 +1,4 @@
+clang_complete
 gtags.vim
 jedi-vim
 molokai
@@ -17,6 +18,7 @@ vim-airline
 vim-coffee-script
 vim-colors-solarized
 vim-dispatch
+vim-fugitive
 vim-indent-guides
 vim-less
 vim-pyenv

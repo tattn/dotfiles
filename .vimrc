@@ -75,6 +75,9 @@ NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 
+"" Fugitive for git
+NeoBundle 'tpope/vim-fugitive'
+
 "" Syntax checker
 " NeoBundle 'scrooloose/syntastic'
 
@@ -102,6 +105,14 @@ NeoBundle 'tpope/vim-rails'
 
 "" unite-rails.vim
 NeoBundle 'basyura/unite-rails'
+
+"---------------------------
+"" C/C++
+"---------------------------
+"" AutoComplete for C/C++
+NeoBundleLazy 'Rip-Rip/clang_complete', {
+            \ 'autoload' : {'filetypes' : ['c', 'cpp']}
+            \ }
 
 "---------------------------
 "" Python
@@ -163,11 +174,31 @@ NeoBundleCheck		" check uninstalled plugins
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable =1
 let g:unite_source_file_mru_limit = 200
-nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+let g:unite_source_menu_menus = {
+\   "shortcut" : {
+\       "description" : "Utility functions",
+\       "command_candidates" : [
+\           ["edit vimrc", "edit ~/.vimrc"],
+\           ["reload vimrc", "source ~/.vimrc"],
+\           ["Keymapping", "Unite mapping"],
+\           ["Unite Beautiful Attack", "Unite -auto-preview colorscheme"],
+\           ["unite-output:message", "Unite output:message"],
+\       ],
+\   },
+\}
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+nnoremap <silent> ,uy  :<C-u>Unite history/yank<CR>
+nnoremap <silent> ,ub  :<C-u>Unite buffer<CR>
+nnoremap <silent> ,uf  :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,ur  :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> ,uu  :<C-u>Unite file_mru buffer<CR>
+nnoremap <silent> ,um  :<C-u>Unite menu:shortcut<CR>
+nnoremap <silent> ,ug  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> ,ugr :<C-u>UniteResume search-buffer<CR>
 
 
 "" tomtom/tcomment_vim
@@ -190,10 +221,10 @@ function! SetErubyMapping2()
   vmap <buffer> <C-_>= :TCommentAs eruby_surround_equality<CR>
 endfunction
 " for eruby
-au FileType eruby call SetErubyMapping2()
+au! FileType eruby call SetErubyMapping2()
 " for php
-au FileType php nmap <buffer><C-_>c :TCommentAs php_surround<CR>
-au FileType php vmap <buffer><C-_>c :TCommentAs php_surround<CR>
+au! FileType php nmap <buffer><C-_>c :TCommentAs php_surround<CR>
+au! FileType php vmap <buffer><C-_>c :TCommentAs php_surround<CR>
 
 
 "" thinca/vim-quickrun
@@ -219,7 +250,12 @@ endfunction
 " let g:airline_theme = 'molokai'
 let g:airline_enable_branch = 0
 " let g:airline_section_a = airline#section#create(['mode','','branch'])
-let g:airline_section_b = "%t %M"
+" let g:airline_section_b = "%t %M"
+let g:airline_section_b =
+			\ '%{airline#extensions#branch#get_head()}' .
+			\ '%{""!=airline#extensions#branch#get_head()?("  " . g:airline_left_alt_sep . " "):""}' .
+			\ '%{airline#parts#readonly()}' .
+			\ '%t%( %M%)'
 " let g:airline_section_c = pyenv#statusline#component
 let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
 let g:airline_section_x =
@@ -236,6 +272,8 @@ let g:airline_linecolumn_prefix = '⭡'
 let g:airline_branch_prefix = '⭠'
 let g:airline#extensions#tabline#left_sep = '⮀'
 let g:airline#extensions#tabline#left_alt_sep = '⮀'
+" let g:airline_symbols.branch = '⭠'
+" let g:airline_symbols.readonly = '⭤'
 let g:airline#extensions#readonly#symbol = '⭤ '
 
 
@@ -250,10 +288,36 @@ let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" For other plugins
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
 " Completion
 imap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 imap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 inoremap <expr><C-Space> pumvisible() ? "\<down>" : neocomplete#start_manual_complete()
+
+
+"" Rip-Rip/clang_complete
+let g:clang_user_options = '-std=c++11 -stdlib=libc++'
+
+let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#force_omni_input_patterns.c =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.objc =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.objcpp =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+let g:clang_use_library=1
+let g:clang_debug=1
+if has('mac')
+  let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
+endif
 
 
 "" davidhalter/jedi-vim
@@ -261,12 +325,12 @@ inoremap <expr><C-Space> pumvisible() ? "\<down>" : neocomplete#start_manual_com
 let g:jedi#auto_vim_configuration = 1
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0   " no select
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
 let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-autocmd FileType python setlocal completeopt-=preview " docstringは表示しない
-autocmd FileType python setlocal omnifunc=jedi#completions
+augroup jedi_augroup
+	autocmd!
+	autocmd FileType python setlocal completeopt-=preview " docstringは表示しない
+	autocmd FileType python setlocal omnifunc=jedi#completions
+augroup END
 
 
 "" marcus/rsense
@@ -337,12 +401,16 @@ augroup omnisharp_commands
 	autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
 
 augroup END
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+augroup omnicomplete_augroup
+	autocmd!
+	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+	autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+	autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+augroup END
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -455,7 +523,6 @@ set t_Co=256
 set cursorline
 "set guioptions+=a
 set guioptions=egmrti          " メニュー等の設定
-set guifont=Monospace\ 8
 
 if has("gui_running")
   if has("gui_mac") || has("gui_macvim")
@@ -511,9 +578,9 @@ endif
 
 if !exists('*TrimWhiteSpace')
   function TrimWhiteSpace()
-    let @*=line(".")
-    %s/\s*$//e
-    ''
+    " let @*=line(".")
+    %s/\s\+$//e
+    " ''
   endfunction
 endif
 
@@ -524,58 +591,65 @@ endif
 "################################################################
 
 "" The PC is fast enough, do syntax highlight syncing from start
-autocmd BufEnter * :syntax sync fromstart
+augroup basic_augroup
+	autocmd!
+	autocmd BufEnter * :syntax sync fromstart
 
-"" Remember cursor position
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+	"" Remember cursor position
+	autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-"" txt
-autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
+	"" txt
+	autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 
-"" make/cmake
-autocmd FileType make setlocal noexpandtab
-autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
+	"" make/cmake
+	autocmd FileType make setlocal noexpandtab
+	autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 
-"" auto compiling for coffee script
-autocmd BufWritePost *.coffee silent make!
+	"" auto compiling for coffee script
+	autocmd BufWritePost *.coffee silent make!
 
-if has("gui_running")
-  autocmd BufWritePre * :call TrimWhiteSpace()
-endif
+	if has("gui_running")
+		autocmd! BufWritePre * :call TrimWhiteSpace()
+	endif
+augroup END
 
 
 "" Add filetypes
 augroup addfiletype
+	au!
 	au BufNewFile,BufRead *.gyp setf gyp
 	au BufNewFile,BufRead *.gypi setf gyp
 augroup END
 
 "" Tab settings
 augroup vimrc
-	autocmd! FileType vim setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd! FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd! FileType eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd! FileType coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd! FileType perl setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd! FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd! FileType css  setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd! FileType scss  setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd! FileType gyp  setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd! FileType yaml  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd!
+	autocmd FileType vim setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType perl setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType css  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType scss  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType gyp  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType yaml  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 augroup END
 
 "" Show QuickFix list automatically
 augroup quickfix
-autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd cwin
-autocmd QuickfixCmdPost lmake,lgrep,lgrepadd,lvimgrep,lvimgrepadd lwin
+	autocmd!
+	autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd cwin
+	autocmd QuickfixCmdPost lmake,lgrep,lgrepadd,lvimgrep,lvimgrepadd lwin
 augroup END
 
 "" カーソルを現在のウィンドウのみに表示
 augroup currentcursorline
-    autocmd! currentcursorline
-    autocmd WinLeave * set nocursorline
-    autocmd WinEnter,BufRead * set cursorline
-  augroup END
+	autocmd!
+	autocmd! currentcursorline
+	autocmd WinLeave * set nocursorline
+	autocmd WinEnter,BufRead * set cursorline
+augroup END
 
 set autoread      " Read automatically when the file is rewrited
 

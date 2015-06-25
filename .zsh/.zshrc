@@ -144,9 +144,11 @@ function update_prompt (){
 precmd_functions+=update_prompt
 
 # Git completion
-fpath=(~/.zsh/completion $fpath)
-autoload -U compinit
-compinit -u
+if [ -e /usr/local/share/zsh-completions ]; then
+	fpath=(/usr/local/share/zsh-completions $fpath)
+	autoload -U compinit
+	compinit -u
+fi
 
 export MANPAGER='less -s'
 export PAGER='less -R'
