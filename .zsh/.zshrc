@@ -143,6 +143,9 @@ function update_prompt (){
 }
 precmd_functions+=update_prompt
 
+# Set tab title automatically
+function chpwd() { echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007"}
+
 # Git completion
 if [ -e /usr/local/share/zsh-completions ]; then
 	fpath=(/usr/local/share/zsh-completions $fpath)

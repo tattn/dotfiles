@@ -181,11 +181,12 @@ let g:unite_source_menu_menus = {
 \   "shortcut" : {
 \       "description" : "Utility functions",
 \       "command_candidates" : [
-\           ["edit vimrc", "edit ~/.vimrc"],
-\           ["reload vimrc", "source ~/.vimrc"],
+\           ["Change current directory", ":lcd %:p:h"],
+\           ["Edit vimrc", "edit ~/.vimrc"],
+\           ["Reload vimrc", "source ~/.vimrc"],
 \           ["Keymapping", "Unite mapping"],
 \           ["Unite Beautiful Attack", "Unite -auto-preview colorscheme"],
-\           ["unite-output:message", "Unite output:message"],
+\           ["Unite-output:message", "Unite output:message"],
 \       ],
 \   },
 \}
