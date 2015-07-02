@@ -5,6 +5,7 @@ export LANG=ja_JP.UTF-8
 
 path=(
   $HOME/.anyenv/bin
+  /usr/local/bin
   /usr/local/Cellar/qt5/5.3.2/bin/
   /usr/local/Cellar/llvm/3.6.0/bin/
   /Applications/Android/ndk
