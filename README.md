@@ -1,6 +1,6 @@
 ```
 cd ~
-git clone https://github.com/tanakasan2525/dotfiles
+git clone https://github.com/tattn/dotfiles.git
 sh dotfiles/setup.sh
 ```
 
