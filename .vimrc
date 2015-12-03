@@ -214,6 +214,12 @@ nnoremap <silent> ,ug  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 nnoremap <silent> ,ugr :<C-u>UniteResume search-buffer<CR>
 
 
+"" scrooloose/nerdtree
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+
 "" tomtom/tcomment_vim
 " if !exists('g:tcomment_types')
 "   let g:tcomment_types = {}
@@ -622,7 +628,8 @@ augroup basic_augroup
 	autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 
 	"" auto compiling for coffee script
-	autocmd BufWritePost *.coffee silent make!
+	au BufRead,BufNewFile,BufReadPre *.coffee setlocal filetype=coffee
+	au BufWritePost *.coffee compiler coffee | silent make!
 
 	if has("gui_running")
 		autocmd! BufWritePre * :call TrimWhiteSpace()
@@ -643,7 +650,7 @@ augroup vimrc
 	autocmd FileType vim setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 	autocmd FileType eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
-	autocmd FileType coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 	autocmd FileType perl setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd FileType css  setlocal shiftwidth=2 tabstop=2 softtabstop=2
