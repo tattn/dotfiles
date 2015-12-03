@@ -106,6 +106,9 @@ NeoBundle 'tpope/vim-rails'
 "" unite-rails.vim
 NeoBundle 'basyura/unite-rails'
 
+"" vim-ruby
+NeoBundle 'vim-ruby/vim-ruby'
+
 "---------------------------
 "" C/C++
 "---------------------------
@@ -172,6 +175,12 @@ NeoBundleCheck		" check uninstalled plugins
 
 "" Shougo/vimfiler
 " let g:vimfiler_edit_action = 'tabopen'
+let g:vimfiler_safe_mode_by_default = 0
+augroup vimfiler_augroup
+	autocmd!
+	" open tree by enter
+	autocmd FileType vimfiler nmap <buffer> <CR> <Plug>(vimfiler_expand_or_edit)
+augroup END
 
 "" Shougo/unite
 let g:unite_enable_start_insert=1
@@ -204,6 +213,11 @@ nnoremap <silent> ,um  :<C-u>Unite menu:shortcut<CR>
 nnoremap <silent> ,ug  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 nnoremap <silent> ,ugr :<C-u>UniteResume search-buffer<CR>
 
+
+"" scrooloose/nerdtree
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 "" tomtom/tcomment_vim
 " if !exists('g:tcomment_types')
@@ -252,9 +266,10 @@ endfunction
 
 "" bling/vim-airline
 " let g:airline_theme = 'molokai'
-let g:airline_enable_branch = 0
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
 " let g:airline_section_a = airline#section#create(['mode','','branch'])
-" let g:airline_section_b = "%t %M"
 let g:airline_section_b =
 			\ '%{airline#extensions#branch#get_head()}' .
 			\ '%{""!=airline#extensions#branch#get_head()?("  " . g:airline_left_alt_sep . " "):""}' .
@@ -268,12 +283,15 @@ let g:airline_section_x =
     \ "%{strlen(&filetype)?&filetype:'no ft'}"
 let g:airline_section_y = '%3p%%'
 let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
+let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline_theme='badwolf'
 let g:airline_left_sep = '⮀'
 let g:airline_right_sep = '⮂'
-let g:airline_linecolumn_prefix = '⭡'
-let g:airline_branch_prefix = '⭠'
+let g:airline_symbols.linenr = '⭡'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
 let g:airline#extensions#tabline#left_sep = '⮀'
 let g:airline#extensions#tabline#left_alt_sep = '⮀'
 " let g:airline_symbols.branch = '⭠'
@@ -452,7 +470,7 @@ imap OD <LEFT>
 
 "" Tabs. May be overriten by autocmd rules
 set tabstop=4
-set softtabstop=0
+set softtabstop=4
 set shiftwidth=4
 set expandtab
 
@@ -610,7 +628,8 @@ augroup basic_augroup
 	autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 
 	"" auto compiling for coffee script
-	autocmd BufWritePost *.coffee silent make!
+	au BufRead,BufNewFile,BufReadPre *.coffee setlocal filetype=coffee
+	au BufWritePost *.coffee compiler coffee | silent make!
 
 	if has("gui_running")
 		autocmd! BufWritePre * :call TrimWhiteSpace()
@@ -629,9 +648,9 @@ augroup END
 augroup vimrc
 	autocmd!
 	autocmd FileType vim setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd FileType eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd FileType coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+	autocmd FileType eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+	autocmd FileType coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 	autocmd FileType perl setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd FileType css  setlocal shiftwidth=2 tabstop=2 softtabstop=2

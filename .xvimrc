@@ -32,3 +32,6 @@ set hlsearch   " hilight word
 " cancel hilight
 nnoremap <ESC><ESC> :noh<CR><ESC>
 
+set clipboard+=unnamed
+set clipboard=unnamed
+

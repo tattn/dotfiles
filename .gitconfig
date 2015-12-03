@@ -12,6 +12,9 @@
 	interactive = auto
 	grep = auto
 
+[merge]
+	tool = vimdiff2
+
 [alias]
 	ad = add
 	adu = add -u
