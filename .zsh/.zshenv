@@ -8,6 +8,7 @@ path=(
   /usr/local/bin
   /usr/local/Cellar/qt5/5.3.2/bin/
   /usr/local/Cellar/llvm/3.6.0/bin/
+  /usr/local/texlive/2014/bin/x86_64-darwin/
   /Applications/Android/ndk
   /Applications/Android/sdk/platform-tools
   {/usr/local,/usr,}{/bin,/sbin}(N-/)
