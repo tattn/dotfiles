@@ -84,20 +84,6 @@ NeoBundle 'kchmck/vim-coffee-script'
 "" hilighter
 NeoBundle 'groenewege/vim-less'
 
-"---------------------------
-"" Rails
-"---------------------------
-"" rails.vim
-NeoBundle 'tpope/vim-rails'
-
-"" unite-rails.vim
-NeoBundle 'basyura/unite-rails'
-
-"" vim-ruby
-NeoBundle 'vim-ruby/vim-ruby'
-
-"" hilighter
-NeoBundle 'slim-template/vim-slim'
 
 "---------------------------
 "" C/C++
@@ -106,19 +92,6 @@ NeoBundle 'slim-template/vim-slim'
 NeoBundleLazy 'Rip-Rip/clang_complete', {
             \ 'autoload' : {'filetypes' : ['c', 'cpp']}
             \ }
-
-"---------------------------
-"" Ruby
-"---------------------------
-"" AutoComplete for Ruby
-NeoBundleLazy 'marcus/rsense', {
-      \ 'autoload': {
-      \   'filetypes': 'ruby',
-      \ },
-      \ }
-NeoBundle 'supermomonga/neocomplete-rsense.vim', {
-      \ 'depends': ['Shougo/neocomplete.vim', 'marcus/rsense'],
-      \ }
 
 "---------------------------
 "" C#
@@ -196,9 +169,6 @@ function! s:hooks.on_source(bundle)
 endfunction
 
 
-
-"" marcus/rsense
-let g:rsenseUseOmniFunc = 1
 
 
 "" Shougo/neosnippet
