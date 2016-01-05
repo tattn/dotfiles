@@ -91,22 +91,6 @@ NeoBundleLazy 'Rip-Rip/clang_complete', {
             \ 'autoload' : {'filetypes' : ['c', 'cpp']}
             \ }
 
-"---------------------------
-"" C#
-"---------------------------
-" AutoComplete for C#
-NeoBundleLazy 'OmniSharp/omnisharp-vim', {
-\   'autoload': { 'filetypes': [ 'cs', 'csi', 'csx' ] },
-\   'build': {
-\     'windows' : 'msbuild server/OmniSharp.sln',
-\     'mac': 'xbuild server/OmniSharp.sln',
-\     'unix': 'xbuild server/OmniSharp.sln',
-\   },
-\ }
-
-" Connect to OmniSharp
-NeoBundle 'tpope/vim-dispatch'
-
 " CRuby
 NeoBundle 'mrkn/vim-cruby'
 
