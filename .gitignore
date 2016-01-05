@@ -1,5 +1,5 @@
 .vim/bundle
 .DS_Store
 .zsh/.zcompdump
-.zsh/.zshenv.zwc
+.zsh/*.zwc
 
