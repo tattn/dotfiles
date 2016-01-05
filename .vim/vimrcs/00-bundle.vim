@@ -1,12 +1,5 @@
 set nocompatible
 
-" if has('vim_starting')
-"
-"   " Required:
-"   set runtimepath+=~/.vim/bundle/neobundle.vim
-"   call neobundle#rc(expand('~/.vim/bundle'))
-" endif
-"
 let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
 
 if !filereadable(neobundle_readme)
@@ -33,9 +26,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/neomru.vim'
-
-
-NeoBundle 'scrooloose/nerdtree'
 
 "" vim-surround
 NeoBundle 'tpope/vim-surround'
@@ -173,52 +163,6 @@ NeoBundleCheck		" check uninstalled plugins
 "" NeoBundle Configuration
 "################################################################
 
-"" Shougo/vimfiler
-" let g:vimfiler_edit_action = 'tabopen'
-let g:vimfiler_safe_mode_by_default = 0
-augroup vimfiler_augroup
-	autocmd!
-	" open tree by enter
-	autocmd FileType vimfiler nmap <buffer> <CR> <Plug>(vimfiler_expand_or_edit)
-augroup END
-
-"" Shougo/unite
-let g:unite_enable_start_insert=1
-let g:unite_source_history_yank_enable =1
-let g:unite_source_file_mru_limit = 200
-let g:unite_source_menu_menus = {
-\   "shortcut" : {
-\       "description" : "Utility functions",
-\       "command_candidates" : [
-\           ["Change current directory", ":lcd %:p:h"],
-\           ["Edit vimrc", "edit ~/.vimrc"],
-\           ["Reload vimrc", "source ~/.vimrc"],
-\           ["Keymapping", "Unite mapping"],
-\           ["Unite Beautiful Attack", "Unite -auto-preview colorscheme"],
-\           ["Unite-output:message", "Unite output:message"],
-\       ],
-\   },
-\}
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-nnoremap <silent> ,uy  :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,ub  :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uf  :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,ur  :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> ,uu  :<C-u>Unite file_mru buffer<CR>
-nnoremap <silent> ,um  :<C-u>Unite menu:shortcut<CR>
-nnoremap <silent> ,ug  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-nnoremap <silent> ,ugr :<C-u>UniteResume search-buffer<CR>
-
-
-"" scrooloose/nerdtree
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-
 "" tomtom/tcomment_vim
 " if !exists('g:tcomment_types')
 "   let g:tcomment_types = {}
@@ -262,42 +206,6 @@ function! s:hooks.on_source(bundle)
   let g:indent_guides_guide_size = 1
   IndentGuidesEnable
 endfunction
-
-
-"" bling/vim-airline
-" let g:airline_theme = 'molokai'
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-" let g:airline_section_a = airline#section#create(['mode','','branch'])
-let g:airline_section_b =
-			\ '%{airline#extensions#branch#get_head()}' .
-			\ '%{""!=airline#extensions#branch#get_head()?("  " . g:airline_left_alt_sep . " "):""}' .
-			\ '%{airline#parts#readonly()}' .
-			\ '%t%( %M%)'
-" let g:airline_section_c = pyenv#statusline#component
-let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
-let g:airline_section_x =
-    \ "%{strlen(&fileformat)?&fileformat:''}".s:sep.
-    \ "%{strlen(&fenc)?&fenc:&enc}".s:sep.
-    \ "%{strlen(&filetype)?&filetype:'no ft'}"
-let g:airline_section_y = '%3p%%'
-let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
-let g:airline#extensions#branch#enabled = 0
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline_theme='badwolf'
-let g:airline_left_sep = '⮀'
-let g:airline_right_sep = '⮂'
-let g:airline_symbols.linenr = '⭡'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline#extensions#tabline#left_sep = '⮀'
-let g:airline#extensions#tabline#left_alt_sep = '⮀'
-" let g:airline_symbols.branch = '⭠'
-" let g:airline_symbols.readonly = '⭤'
-let g:airline#extensions#readonly#symbol = '⭤ '
-
 
 "" Shougo/neocomplete.vim
 let g:neocomplete#enable_auto_select = 0
