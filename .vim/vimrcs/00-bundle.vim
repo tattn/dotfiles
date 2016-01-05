@@ -9,12 +9,10 @@ if !filereadable(neobundle_readme)
   silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
 endif
 
-" Required:
 set runtimepath+=~/.vim/bundle/neobundle.vim
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
-" Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 
@@ -134,17 +132,6 @@ let g:tcomment_types = {
       \'eruby_surround_minus' : "<%% %s -%%>",
       \'eruby_surround_equality' : "<%%= %s %%>",
 \}
-function! SetErubyMapping2()
-  nmap <buffer> <C-_>c :TCommentAs eruby_surround<CR>
-  nmap <buffer> <C-_>- :TCommentAs eruby_surround_minus<CR>
-  nmap <buffer> <C-_>= :TCommentAs eruby_surround_equality<CR>
-
-  vmap <buffer> <C-_>c :TCommentAs eruby_surround<CR>
-  vmap <buffer> <C-_>- :TCommentAs eruby_surround_minus<CR>
-  vmap <buffer> <C-_>= :TCommentAs eruby_surround_equality<CR>
-endfunction
-" for eruby
-au! FileType eruby call SetErubyMapping2()
 " for php
 au! FileType php nmap <buffer><C-_>c :TCommentAs php_surround<CR>
 au! FileType php vmap <buffer><C-_>c :TCommentAs php_surround<CR>
@@ -160,16 +147,12 @@ let g:quickrun_config = {
 set splitbelow
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 
-
 "" nathanaelkane/vim-indent-guides
 let s:hooks = neobundle#get_hooks("vim-indent-guides")
 function! s:hooks.on_source(bundle)
   let g:indent_guides_guide_size = 1
   IndentGuidesEnable
 endfunction
-
-
-
 
 "" Shougo/neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)

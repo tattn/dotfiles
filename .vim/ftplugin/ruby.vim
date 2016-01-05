@@ -30,3 +30,15 @@ filetype plugin indent on
 "" marcus/rsense
 let g:rsenseUseOmniFunc = 1
 
+"" tomtom/tcomment_vim
+function! SetErubyMapping2()
+  nmap <buffer> <C-_>c :TCommentAs eruby_surround<CR>
+  nmap <buffer> <C-_>- :TCommentAs eruby_surround_minus<CR>
+  nmap <buffer> <C-_>= :TCommentAs eruby_surround_equality<CR>
+
+  vmap <buffer> <C-_>c :TCommentAs eruby_surround<CR>
+  vmap <buffer> <C-_>- :TCommentAs eruby_surround_minus<CR>
+  vmap <buffer> <C-_>= :TCommentAs eruby_surround_equality<CR>
+endfunction
+" for eruby
+au! FileType eruby call SetErubyMapping2()
