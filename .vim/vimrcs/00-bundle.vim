@@ -108,18 +108,6 @@ NeoBundleLazy 'Rip-Rip/clang_complete', {
             \ }
 
 "---------------------------
-"" Python
-"---------------------------
-"" AutoComplete for Python
-NeoBundle 'davidhalter/jedi-vim'
-" NeoBundle 'jmcantrell/vim-virtualenv'
-NeoBundleLazy 'lambdalisue/vim-pyenv', {
-        \ 'depends': ['davidhalter/jedi-vim'],
-        \ 'autoload': {
-        \   'filetypes': ['python', 'python3'],
-        \ }}
-
-"---------------------------
 "" Ruby
 "---------------------------
 "" AutoComplete for Ruby
@@ -207,18 +195,6 @@ function! s:hooks.on_source(bundle)
   IndentGuidesEnable
 endfunction
 
-
-"" davidhalter/jedi-vim
-" let g:jedi#completions_enabled=0
-let g:jedi#auto_vim_configuration = 1
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0   " no select
-let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-augroup jedi_augroup
-	autocmd!
-	autocmd FileType python setlocal completeopt-=preview " docstringは表示しない
-	autocmd FileType python setlocal omnifunc=jedi#completions
-augroup END
 
 
 "" marcus/rsense
