@@ -1,31 +1,9 @@
 #! /bin/bash
-if [ -e ~/.vimrc ]; then
-	rm ~/.vimrc
-fi
-ln -s ~/dotfiles/.vimrc ~/.vimrc
-
-if [ -e ~/.gitconfig ]; then
-	rm ~/.gitconfig
-fi
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-
-if [ -e ~/.vim ]; then
-	rm -r ~/.vim
-fi
-ln -s ~/dotfiles/.vim ~/.vim
-
-if [ -e ~/.zshenv ]; then
-    rm ~/.zshenv
-fi
-ln -s ~/dotfiles/.zshenv ~/.zshenv
-
-if [ -e ~/.xvimrc ]; then
-    rm ~/.xvimrc
-fi
-ln -s ~/dotfiles/.xvimrc ~/.xvimrc
-
-if [ -e ~/.tmux.conf ]; then
-    rm ~/.tmux.conf
-fi
-ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+ln -sf ~/dotfiles/.vimrc ~/.vimrc
+ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
+ln -sf ~/dotfiles/.vim ~/.vim
+ln -sf ~/dotfiles/.zshenv ~/.zshenv
+ln -sf ~/dotfiles/.xvimrc ~/.xvimrc
+ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
+ln -sf ~/dotfiles/.tmux.osx.conf ~/.tmux.osx.conf
 
