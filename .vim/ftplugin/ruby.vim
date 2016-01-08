@@ -1,5 +1,8 @@
 filetype off
 
+set runtimepath+=~/.vim/bundle/neobundle.vim
+call neobundle#begin(expand('~/.vim/bundle/'))
+
 "" AutoComplete for Ruby
 NeoBundleLazy 'marcus/rsense', {
       \ 'autoload': {
@@ -25,6 +28,7 @@ NeoBundle 'vim-ruby/vim-ruby'
 "" hilighter
 NeoBundle 'slim-template/vim-slim'
 
+call neobundle#end()
 filetype plugin indent on
 
 "" marcus/rsense

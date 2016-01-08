@@ -1,15 +1,14 @@
 filetype off
 
-" if has('vim_starting')
-"   set runtimepath+=~/.vim/bundle/neobundle.vim                 
-"   call neobundle#rc(expand('~/.vim/bundle/'))
-" endif   
+set runtimepath+=~/.vim/bundle/neobundle.vim
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 "" AutoComplete for Python
 NeoBundle 'davidhalter/jedi-vim'
 " NeoBundle 'jmcantrell/vim-virtualenv'
 NeoBundle 'lambdalisue/vim-pyenv'
 
+call neobundle#end()
 filetype plugin indent on
 
 "" davidhalter/jedi-vim
