@@ -3,7 +3,7 @@
 #
 export LANG=ja_JP.UTF-8
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 path=(
   $HOME/.anyenv/bin

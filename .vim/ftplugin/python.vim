@@ -1,5 +1,9 @@
 filetype off
 
+if isdirectory("~/.anyenv/envs/pyenv/shims")
+		let $PATH = "~/.anyenv/envs/pyenv/shims:".$PATH
+endif
+
 set runtimepath+=~/.vim/bundle/neobundle.vim
 call neobundle#begin(expand('~/.vim/bundle/'))
 
