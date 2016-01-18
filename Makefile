@@ -2,7 +2,7 @@ ALL_DOTFILES := $(notdir $(shell find . -maxdepth 1 -name '\.*'))
 IGNORES      := . .DS_Store .git .gitmodule .travis.yml
 DOTFILES     := $(filter-out $(wildcard ${IGNORES}), ${ALL_DOTFILES})
 
-all: deploy
+all: install
 
 help:
 	@echo "make deploy   => create symlinks to home"
@@ -16,7 +16,11 @@ deploy:
 
 
 update:
+	@echo '=====> update dotfiles...'
 	git pull origin master
 
 up: update
+
+
+install: update deploy
 
