@@ -47,13 +47,28 @@ fi
 
 if has zsh; then
 	mkdir -p $DOTPATH/.zsh/plugins
-	##### Zaw
+	pushd $DOTPATH/.zsh/plugins
 	if [ ! -d $DOTPATH/.zsh/plugins/zaw ]; then
 		echo "====> Install a zsh plugin [zaw]"
-		pushd $DOTPATH/.zsh/plugins
 		git clone git://github.com/zsh-users/zaw.git
+	fi
+	if [ ! -d $DOTPATH/.zsh/plugins/bd ]; then
+		echo "====> Install a zsh plugin [bd]"
+		mkdir -p $DOTPATH/.zsh/plugins/bd
+		curl https://raw.githubusercontent.com/Tarrasch/zsh-bd/master/bd.zsh > $DOTPATH/.zsh/plugins/bd/bd.zsh
+	fi
+	if [ ! -d $DOTPATH/.zsh/plugins/autojump ]; then
+		echo "====> Install a zsh plugin [autojump]"
+		git clone git://github.com/joelthelion/autojump.git
+		pushd autojump
+		./install.py
 		popd
 	fi
+	popd
 fi
 
+
+if is_osx; then
+	. $DOTPATH/etc/osx/install.sh
+fi
 

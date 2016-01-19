@@ -159,8 +159,7 @@ function chpwd() { echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'
 # Git completion
 if [ -e /usr/local/share/zsh-completions ]; then
 	fpath=(/usr/local/share/zsh-completions $fpath)
-	autoload -U compinit
-	compinit -u
+	autoload -U compinit && compinit -u
 fi
 
 export MANPAGER='less -s'
@@ -237,6 +236,11 @@ if [ -f ~/dotfiles/.zsh/scripts/k.sh ]; then
 	source ~/dotfiles/.zsh/scripts/k.sh
 fi
 
+## bd
+if [ -f ~/dotfiles/.zsh/plugins/bd/bd.zsh ]; then
+	source ~/dotfiles/.zsh/plugins/bd/bd.zsh
+fi
+
 ## zaw
 if [ -f ~/dotfiles/.zsh/plugins/zaw/zaw.zsh ]; then
 	source ~/dotfiles/.zsh/plugins/zaw/zaw.zsh
@@ -246,6 +250,12 @@ if [ -f ~/dotfiles/.zsh/plugins/zaw/zaw.zsh ]; then
 	bindkey '^X^B' zaw-git-branches
 	bindkey '^X^P' zaw-process
 	bindkey '^A' zaw-tmux
+fi
+
+## autojump
+if [ -s ~/.autojump/etc/profile.d/autojump.sh ]; then
+	source ~/.autojump/etc/profile.d/autojump.sh
+	autoload -U compinit && compinit -u
 fi
 
 if [ ! -f $ZDOTDIR/.zshenv.zwc -o $ZDOTDIR/.zshenv -nt $ZDOTDIR/.zshenv.zwc ]; then

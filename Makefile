@@ -26,6 +26,6 @@ up: update
 install: update deploy
 
 
-install-submodule:
+install-utility:
 	@DOTPATH=$(DOTPATH) bash ${DOTPATH}/etc/install.sh
 

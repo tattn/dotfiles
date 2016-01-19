@@ -15,6 +15,6 @@ curl https://gist.github.com/raw/022a5cda3e2a1b8ef77f/dotfiles.sh | sh.
 
 ```
 cd ~/dotfiles
-sh etc/install.sh
+make install-utility
 ```
 
