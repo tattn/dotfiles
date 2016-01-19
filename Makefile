@@ -1,3 +1,4 @@
+DOTPATH      := ~/dotfiles
 ALL_DOTFILES := $(notdir $(shell find . -maxdepth 1 -name '\.*'))
 IGNORES      := . .DS_Store .git .gitmodule .travis.yml
 DOTFILES     := $(filter-out $(wildcard ${IGNORES}), ${ALL_DOTFILES})
@@ -23,4 +24,8 @@ up: update
 
 
 install: update deploy
+
+
+install-submodule:
+	@DOTPATH=$(DOTPATH) bash ${DOTPATH}/etc/install.sh
 

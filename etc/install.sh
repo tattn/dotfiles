@@ -1,7 +1,21 @@
+if [ -z $DOTPATH ]; then
+    echo '$DOTPATH was not found' >&2
+    exit 1
+fi
+
+. $DOTPATH/etc/utils.sh
+
+has() {
+	if type $1 > /dev/null 2>&1; then
+		echo "====> Pass $1"
+		return 0
+	else
+		return 1
+	fi
+}
+
 ##### Anyenv
-if type anyenv > /dev/null 2>&1; then
-	echo "====> Pass anyenv"
-else
+if ! has anyenv; then
 	dir=~/.anyenv
 	if [ -d $dir ]; then
 		source dotfiles/.zsh/.zshrc
@@ -13,9 +27,7 @@ else
 fi
 
 ##### Rbenv
-if type rbenv > /dev/null 2>&1; then
-	echo "====> Pass rbenv"
-else
+if ! has rbenv; then
 	echo "====> Install Rbenv"
 	anyenv install rbenv
 
@@ -27,10 +39,15 @@ else
 fi
 
 ##### Pyenv
-if type pyenv > /dev/null 2>&1; then
-	echo "====> Pass pyenv"
-else
+if ! has pyenv; then
 	echo "====> Install Pyenv"
 	anyenv install pyenv
 fi
+
+if is_osx; then
+	echo $(osname)
+fi
+echo $PLATFORM
+
+
 
