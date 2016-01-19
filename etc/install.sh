@@ -5,17 +5,17 @@ fi
 
 . $DOTPATH/etc/utils.sh
 
-has() {
-	if type $1 > /dev/null 2>&1; then
+check() {
+	if has $1; then
 		echo "====> Pass $1"
-		return 0
+		return 1 # false
 	else
-		return 1
+		return 0
 	fi
 }
 
 ##### Anyenv
-if ! has anyenv; then
+if check anyenv; then
 	dir=~/.anyenv
 	if [ -d $dir ]; then
 		source dotfiles/.zsh/.zshrc
@@ -27,7 +27,7 @@ if ! has anyenv; then
 fi
 
 ##### Rbenv
-if ! has rbenv; then
+if check rbenv; then
 	echo "====> Install Rbenv"
 	anyenv install rbenv
 
@@ -39,15 +39,21 @@ if ! has rbenv; then
 fi
 
 ##### Pyenv
-if ! has pyenv; then
+if check pyenv; then
 	echo "====> Install Pyenv"
 	anyenv install pyenv
 fi
 
-if is_osx; then
-	echo $(osname)
-fi
-echo $PLATFORM
 
+if has zsh; then
+	mkdir -p $DOTPATH/.zsh/plugins
+	##### Zaw
+	if [ ! -d $DOTPATH/.zsh/plugins/zaw ]; then
+		echo "====> Install a zsh plugin [zaw]"
+		pushd $DOTPATH/.zsh/plugins
+		git clone git://github.com/zsh-users/zaw.git
+		popd
+	fi
+fi
 
 

@@ -1,5 +1,5 @@
 #! /usr/bin/env zsh
-#
+
 umask 022                   # default umask
 bindkey -e                  # keybind  -> emacs like
 setopt no_beep              # beep を無効化
@@ -64,6 +64,14 @@ setopt magic_equal_subst      # = 以降も補完(--prefix= 等)
 setopt complete_in_word       # コマンドの途中でもカーソル位置で補完
 setopt always_last_prompt     # カーソル位置を保持してファイル名一覧を補完
 
+# recent-dirs
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-max 500 # cdrの履歴を保存する個数
+zstyle ':chpwd:*' recent-dirs-default yes
+zstyle ':filter-select:highlight' selected fg=black,bg=white,standout
+zstyle ':filter-select' case-insensitive yes
+
 ## style
 zstyle ':completion:*' menu select=2 # カーソルによる補完候補の選択を有効化
 # 色指定に LS_COLORS を使用
@@ -77,6 +85,8 @@ zstyle ':completion:*' keep-prefix
 zstyle ':completion:*' remote-access true
 zstyle ':completion:*' completer \
     _oldlist _complete _match _ignored _approximate _list _history
+# Add recent-dirs
+zstyle ':completion:*' recent-dirs-insert both
 ## 補完候補の追加
 [ -d $ZDOTDIR/modules/completions ] && \
     fpath+=( $ZDOTDIR/modules/zsh-completions/src $fpath)
@@ -178,6 +188,8 @@ if [ "$(uname)" == 'Darwin' ]; then
 	alias vi="/usr/local/Cellar/vim/*/bin/vim"
 fi
 
+alias reload='exec zsh -l'
+
 ## Docker
 if hash docker 2>/dev/null; then
 	# Get latest container ID
@@ -223,6 +235,17 @@ fi
 ## rimraf/k
 if [ -f ~/dotfiles/.zsh/scripts/k.sh ]; then
 	source ~/dotfiles/.zsh/scripts/k.sh
+fi
+
+## zaw
+if [ -f ~/dotfiles/.zsh/plugins/zaw/zaw.zsh ]; then
+	source ~/dotfiles/.zsh/plugins/zaw/zaw.zsh
+	bindkey '^@' zaw-cdr
+	bindkey '^R' zaw-history
+	bindkey '^X^F' zaw-git-files
+	bindkey '^X^B' zaw-git-branches
+	bindkey '^X^P' zaw-process
+	bindkey '^A' zaw-tmux
 fi
 
 if [ ! -f $ZDOTDIR/.zshenv.zwc -o $ZDOTDIR/.zshenv -nt $ZDOTDIR/.zshenv.zwc ]; then
