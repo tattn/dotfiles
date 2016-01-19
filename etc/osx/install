@@ -1,0 +1,19 @@
+for i in $DOTPATH/etc/$PLATFORM/*.sh
+do
+    if [ -f "$i" ]; then
+        log_info "$(e_arrow $(basename "$i"))"
+		. $i
+    else
+        continue
+    fi
+done
+
+mkdir -p $DOTPATH/plugins
+
+if [ ! -d $DOTPATH/plugins/solarized ]; then
+
+	log_info "====> Install solarized"
+	pushd $DOTPATH/plugins
+	git clone https://github.com/altercation/solarized
+	popd
+fi

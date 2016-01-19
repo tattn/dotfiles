@@ -173,14 +173,19 @@ whence vim >/dev/null && alias vi=vim
 export EDITOR=vi
 
 ## ls
-alias sl='ls'  #fxxk!!
 export TIME_STYLE=long-iso
 export LS_OPTIONS="-N -T 0 --time-style=$TIME_STYLE"
+alias sl='ls'
 alias ls='ls -FG'
 alias la='ls -haFG'
 alias ll='ls -hlFG'
 alias lla='ls -hlaFG'
 alias lsd='ls -ld *(-/DN)'
+if [ "$(uname)" == 'Darwin' ]; then
+	alias ls='gls --color=auto -FG'
+else
+
+fi
 alias man='LANG=C man'
 if [ "$(uname)" == 'Darwin' ]; then
 	alias vim="mvim --remote-tab-silent"
@@ -256,6 +261,11 @@ fi
 if [ -s ~/.autojump/etc/profile.d/autojump.sh ]; then
 	source ~/.autojump/etc/profile.d/autojump.sh
 	autoload -U compinit && compinit -u
+fi
+
+## dircolors-solarized
+if [ -d ~/dotfiles/.zsh/plugins/dircolors-solarized ]; then
+	eval $(gdircolors ~/dotfiles/.zsh/plugins/dircolors-solarized/dircolors.ansi-dark)
 fi
 
 if [ ! -f $ZDOTDIR/.zshenv.zwc -o $ZDOTDIR/.zshenv -nt $ZDOTDIR/.zshenv.zwc ]; then
