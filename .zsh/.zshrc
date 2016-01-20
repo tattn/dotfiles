@@ -75,72 +75,12 @@ zstyle ':completion:*' recent-dirs-insert both # Add recent-dirs
 typeset -gxU fpath
 # autoload $ZDOTDIR/functions/*.zsh
 
-setopt prompt_subst            # プロンプト定義内で変数置換やコマンド置換を扱う
-setopt prompt_percent          # %文字から始まる置換機能を有効に
-unsetopt promptcr              # 被る時は右プロンプトを消す
-setopt transient_rprompt       # コマンド実行後は右プロンプトを消す
-
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git bzr svn hg
-zstyle ':vcs_info:*' formats '%s:%b'
-zstyle ':vcs_info:*' actionformats '%s:%b%a'
-zstyle ':vcs_info:(svn|bzr)' branchformat '%b:r%r'
-zstyle ':vcs_info:bzr:*' use-simple true
-function prompt_vcs_info() {
-    LANG=C vcs_info
-    if [[ -n "$vcs_info_msg_0_" ]]; then
-        ps_vcs_info="[%B%F{red}$vcs_info_msg_0_%f%b]"
-    else
-        ps_vcs_info=''
-    fi
-}
-precmd_functions+=prompt_vcs_info
-
-function count_prompt_chars (){
-    print -n -P -- "$1" | sed -e $'s/\e\[[0-9;]*m//g' | wc -m | sed -e 's/ //g'
-}
-# precmd のプロンプト更新用関数
-function update_prompt (){
-    ## プロンプト: 1段目左
-    local ps_user="%(!,%B%F{magenta}%n%b,%n)"
-    local ps_host="%m"
-    [[ -n ${SSH_CONNECTION} ]] && ps_host="%F{yellow}%m%f"
-    # @see Zshをかわいくする.zshrcの設定
-    # URL: http://qiita.com/kubosho_/items/c200680c26e509a4f41c
-    # local ps_status="[%j]%(?.%B%F{green}.%B%F{blue})%(?!(*'-')%b!(*;-;%)%b)%f "
-    # local ps_status="%(?.%B%F{green}.%B%F{blue})%(?!ヽ(*ﾟд ﾟ)ノ%b!(*;-;%)%b)%f "
-    local ps_status="%(?.%B%F{green}.%B%F{blue})%(?!✘ ╹◡╹✘%b!✘ >﹏<✘%b)%f "
-    local ps_mark="%(!,%B%F{magenta}#%f%b,%%)"
-    # local prompt_1st_left="[$ps_user@$ps_host$chroot_info]"
-    local prompt_1st_left="$ps_status"
-    ## プロンプト: 1段目右(深さが8以上になったら省略)
-    local prompt_1st_right="[%F{white}%(8~,%-2~/.../%1~,%~)%f]"
-    ## 1段目行の残り文字列の計算
-    local left_length=$(count_prompt_chars $prompt_1st_left)
-    local right_length=$(count_prompt_chars $prompt_1st_right)
-    local bar_rest_length=$[ COLUMNS - left_length - right_length -1 ]
-    ## 1段目に水平線を引く
-    local prompt_1st_hr=${(l:${bar_rest_length}::-:)}
-    ## PROMPT の設定
-    # PROMPT="$prompt_1st_left$prompt_1st_hr$prompt_1st_right-"$'\n'"$ps_status$ps_mark "
-    PROMPT="$prompt_1st_left$prompt_1st_hr$prompt_1st_right-"$'\n'"$ps_mark "
-    PROMPT2='|%j]> '
-    SPROMPT="[%j]%B%F{red}%{$suggest%}(*'~'%)?<%b %U%r%u is correct? [n,y,a,e]:%f "
-    # 右プロンプト
-    RPROMPT="$ps_vcs_info"
-}
-precmd_functions+=update_prompt
+# load my prompt style
+source $ZDOTDIR/.zprompt
 
 # Set tab title automatically
 function chpwd() { echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007"}
 
-export MANPAGER='less -s'
-export PAGER='less -R'
-if whence lv >/dev/null ; then
-    export PAGER=lv ;  export LV="-c -T8192 -l"
-else
-    alias lv=$PAGER
-fi
 
 ## ls
 export TIME_STYLE=long-iso
@@ -153,12 +93,6 @@ alias lla='ls -hlaFG'
 alias lsd='ls -ld *(-/DN)'
 if [ "$(uname)" == 'Darwin' ]; then
 	alias ls='gls --color=auto -FG'
-fi
-
-alias man='LANG=C man'
-if [ "$(uname)" == 'Darwin' ]; then
-	alias vim="mvim --remote-tab-silent"
-	alias vi="/usr/local/Cellar/vim/*/bin/vim"
 fi
 
 alias reload='exec zsh -l'
@@ -196,9 +130,9 @@ if hash anyenv 2>/dev/null; then
 	eval "$(anyenv init - zsh)"
 
 	for D in `ls $HOME/.anyenv/envs`
-		do
-			export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
-		done
+	do
+		export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
+	done
 fi
 
 if hash direnv 2>/dev/null; then

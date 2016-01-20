@@ -1,6 +1,9 @@
 #! /usr/bin/env zsh
 # -*- mode: sh; coding: utf-8; indent-tabs-mode: nil -*-
 
+# Load utilities
+source "$DOTPATH/etc/utils.sh"
+
 export LANGUAGE=ja_JP.UTF-8
 export LANG=${LANGUAGE}
 export LC_ALL=${LANGUAGE}
@@ -11,8 +14,32 @@ export HISTSIZE=100000
 export SAVEHIST=HISTSIZE
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
+# Editor
 whence vim >/dev/null && alias vi=vim
 export EDITOR=vi
+
+# Pager
+export PAGER=less
+# Less status line
+export LESS='-R -f -X -i -P ?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
+export LESSCHARSET='utf-8'
+
+# LESS man page colors (makes Man pages more readable).
+alias man='LANG=C man'
+export MANPAGER='less -s'
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[00;44;37m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+# if whence lv >/dev/null ; then
+#     export PAGER=lv ;  export LV="-c -T8192 -l"
+# else
+#     alias lv=$PAGER
+# fi
+#
 
 path=(
   $HOME/.anyenv/bin
@@ -50,3 +77,4 @@ function _auto_zcompile_source() {
 typeset -gxU path cdpath fpath manpath ld_library_path include
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+

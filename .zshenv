@@ -1,3 +1,4 @@
 #! /usr/bin/env zsh
-export ZDOTDIR=${HOME}/dotfiles/.zsh
+export DOTPATH=${HOME}/dotfiles
+export ZDOTDIR=${DOTPATH}/.zsh
 source ${ZDOTDIR}/.zshenv
