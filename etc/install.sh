@@ -56,7 +56,7 @@ if check pyenv; then
 	anyenv install pyenv
 fi
 
-install_zsh_plugin() {
+zsh_plugin() {
 	if [ -d $DOTPATH/.zsh/plugins/$1 ]; then
 		return 1
 	fi
@@ -64,25 +64,28 @@ install_zsh_plugin() {
 	return 0
 }
 
+gitclone() {
+	git clone git://github.com/$1.git
+}
+
 if has zsh; then
 	mkdir -p $DOTPATH/.zsh/plugins
 	pushd $DOTPATH/.zsh/plugins
-	if install_zsh_plugin zaw; then
-		git clone git://github.com/zsh-users/zaw.git
+	zsh_plugin zaw && gitclone zsh-users/zaw
+	if zsh_plugin bd; then
+		mkdir -p bd
+		curl https://raw.githubusercontent.com/Tarrasch/zsh-bd/master/bd.zsh > bd/bd.zsh
 	fi
-	if install_zsh_plugin bd; then
-		mkdir -p $DOTPATH/.zsh/plugins/bd
-		curl https://raw.githubusercontent.com/Tarrasch/zsh-bd/master/bd.zsh > $DOTPATH/.zsh/plugins/bd/bd.zsh
+	if zsh_plugin k; then
+		mkdir -p k
+		curl https://raw.githubusercontent.com/rimraf/k/master/k.sh > k/k.sh
 	fi
-	if install_zsh_plugin autojump; then
-		git clone git://github.com/joelthelion/autojump.git
-		pushd autojump
-		./install.py
-		popd
+	if zsh_plugin autojump; then
+		gitclone joelthelion/autojump
+		pushd autojump && ./install.py && popd
 	fi
-	if install_zsh_plugin "dircolors-solarized"; then
-		git clone https://github.com/seebi/dircolors-solarized.git
-	fi
+	zsh_plugin "dircolors-solarized" && gitclone seebi/dircolors-solarized
+	zsh_plugin "zsh-completions" && gitclone zsh-users/zsh-completions
 	popd
 fi
 

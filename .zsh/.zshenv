@@ -1,9 +1,18 @@
 #! /usr/bin/env zsh
 # -*- mode: sh; coding: utf-8; indent-tabs-mode: nil -*-
-#
-export LANG=ja_JP.UTF-8
 
+export LANGUAGE=ja_JP.UTF-8
+export LANG=${LANGUAGE}
+export LC_ALL=${LANGUAGE}
+export LC_CTYPE=${LANGUAGE}
+export DIRSTACKSIZE=20
+export HISTFILE=$ZDOTDIR/history/${USER}-zhistory
+export HISTSIZE=100000
+export SAVEHIST=HISTSIZE
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+whence vim >/dev/null && alias vi=vim
+export EDITOR=vi
 
 path=(
   $HOME/.anyenv/bin
@@ -16,10 +25,10 @@ path=(
   /Applications/Android/sdk/platform-tools
   {/usr/local,/usr,}{/bin,/sbin}(N-/)
 )
-typeset -gxU path
 manpath=(
     {/usr,/usr/local}/share/man(N-/)
 )
+typeset -gxU path
 typeset -gxU manpath
 
 [ -z "$ld_library_path" ] && typeset -xT LD_LIBRARY_PATH ld_library_path
@@ -27,14 +36,13 @@ typeset -gxU manpath
 typeset -xU ld_library_path include
 
 ## function: auto-zcompile & source
-function _auto_zcompile_source  () {
+function _auto_zcompile_source() {
     local A; A=$1
     [[ -e "${A:r}.zwc" ]] && [[ "$A" -ot "${A:r}.zwc" ]] ||
     zcompile $A >/dev/null 2>&1 ; source $A
 }
 
-[ -f $ZDOTDIR/proxy ] && \
-    _auto_zcompile_source $ZDOTDIR/proxy
+[ -f $ZDOTDIR/proxy ] && _auto_zcompile_source $ZDOTDIR/proxy
 
 [ -d $HOME/bin ] && path=( $HOME/bin $path )
 
