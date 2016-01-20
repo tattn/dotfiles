@@ -1,0 +1,80 @@
+#!/usr/bin/env zsh
+
+. $DOTPATH/etc/utils.sh
+
+tattn() {
+    typeset -a modes
+
+    help() {
+		tattn
+        echo 'Usage: tattn <mode>'
+        echo
+        echo 'Modes:'
+        echo '  neko, usagi, kuma, github'
+    }
+
+	tattn() {
+		ink red "  _        _   _         ";echo
+		ink red " | |_ __ _| |_| |_ _ __  ";echo
+		ink red " | __/ _\` | __| __| '_ \ ";echo
+		ink red " | || (_| | |_| |_| | | |";echo
+		ink red "  \__\__,_|\__|\__|_| |_|";echo
+	}
+
+    neko() {
+        # echo ' ∧_∧'
+        # echo "ฅ'ω'ฅ ＜ ﾆｬｰﾝ"
+		echo "          Zzzzz  |\      _,,,--,,_       "
+		echo "                 /,\`.-'\`'   ._  \-;;,_ "
+		echo "                |,4-  ) )_   .;.(  \`'-' "
+		echo "@tattn         '---''(_/._)-'(_\_)       "
+    }
+
+    usagi() {
+        echo '    /) /)'
+        echo '_(　_ ๑❛ᴗ❛)_ ＜ ﾆｬｰﾝ'
+    }
+
+    kuma() {
+        echo '(´(ｪ)`) ＜ ﾆｬｰﾝ'
+    }
+
+    github() {
+        echo '=͟͟͞͞=͟͟͞͞=͟͟͞͞　(\ (\'
+        echo '=͟͟͞͞=͟͟͞͞=͟͟͞͞(,, 0 ω 0) ＜ ﾆｬｰﾝ'
+        echo '=͟͟͞͞=͟͟͞͞=͟͟͞͞(/ (/ \) \)'
+    }
+
+	trend() {
+		ruby $DOTPATH/lib/trend.rb
+	}
+
+    while [ $1 ]; do
+        case $1 in
+            -h|--help)
+                help
+                return
+                ;;
+            *)
+                modes=($modes[*] $1)
+                ;;
+        esac
+        shift
+    done
+
+    if (( $#modes == 0 )); then
+        help
+        return
+    fi
+
+    for mode in $modes; do
+        if type $mode > /dev/null 2>&1; then
+            $mode
+        else
+            echo "No such mode \"$mode\""
+        fi
+    done
+}
+
+
+tattn $@

@@ -1,9 +1,10 @@
 [user]
 	email = tatsuyars@yahoo.co.jp
-	name = Tatsuya Tanaka
+	name = Tatsuya Tanaka (tattn)
 
 [core]
-	editor = /usr/local/Cellar/vim/*/bin/vim
+	pager = less -q -R
+	# editor = /usr/local/Cellar/vim/*/bin/vim
 
 [color]
 	status = auto

@@ -1,5 +1,8 @@
 #! /usr/bin/env zsh
 
+# Load utilities
+source "$DOTPATH/etc/utils.sh"
+
 umask 022                      # default umask
 limit coredumpsize 0
 bindkey -e                     # keybind  -> emacs like
@@ -77,6 +80,7 @@ typeset -gxU fpath
 
 # load my prompt style
 source $ZDOTDIR/.zprompt
+source $ZDOTDIR/completions/_tattn.zsh
 
 # Set tab title automatically
 function chpwd() { echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007"}
@@ -91,9 +95,7 @@ alias la='ls -haFG'
 alias ll='ls -hlFG'
 alias lla='ls -hlaFG'
 alias lsd='ls -ld *(-/DN)'
-if [ "$(uname)" == 'Darwin' ]; then
-	alias ls='gls --color=auto -FG'
-fi
+is_osx && alias ls='gls --color=auto -FG'
 
 alias reload='exec zsh -l'
 
@@ -128,11 +130,6 @@ fi
 ## Anyenv
 if hash anyenv 2>/dev/null; then
 	eval "$(anyenv init - zsh)"
-
-	for D in `ls $HOME/.anyenv/envs`
-	do
-		export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
-	done
 fi
 
 if hash direnv 2>/dev/null; then
@@ -162,3 +159,5 @@ fi
 [ -d $ZSH_PLUGINS/zsh-completions ] && fpath=($ZSH_PLUGINS/zsh-completions/src $fpath)
 
 
+# start up
+tattn neko

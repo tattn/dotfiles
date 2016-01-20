@@ -42,6 +42,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 #
 
 path=(
+  $DOTPATH/bin
   $HOME/.anyenv/bin
   /usr/local/bin
   /usr/local/Cellar/qt5/5.3.2/bin/
@@ -61,6 +62,13 @@ typeset -gxU manpath
 [ -z "$ld_library_path" ] && typeset -xT LD_LIBRARY_PATH ld_library_path
 [ -z "$include" ] && typeset -xT INCLUDE include
 typeset -xU ld_library_path include
+
+if has anyenv; then
+	for D in `ls $HOME/.anyenv/envs`
+	do
+		path=( $HOME/.anyenv/envs/$D/shims $path )
+	done
+fi
 
 ## function: auto-zcompile & source
 function _auto_zcompile_source() {
