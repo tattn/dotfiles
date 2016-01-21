@@ -1,80 +1,109 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env ruby
+require 'optparse'
+require "#{ENV['DOTPATH']}/lib/color"
 
-. $DOTPATH/etc/utils.sh
+def tattn
+  puts %q{  _        _   _          }.red
+  puts %q{ | |_ __ _| |_| |_ _ __   }.red
+  puts %q{ | __/ _\` | __| __| '_ \ }.red
+  puts %q{ | || (_| | |_| |_| | | | }.red
+  puts %q{  \__\__,_|\__|\__|_| |_| }.red
+end
 
-tattn() {
-    typeset -a modes
+def neko
+  puts %q{          Zzzzz  |\      _,,,--,,_       }
+  puts %q{                 /,\`.-'\`'   ._  \-;;,_ }
+  puts %q{                |,4-  ) )_   .;.(  \`'-' }
+  puts %q{@tattn         '---''(_/._)-'(_\_)       }
+end
 
-    help() {
-		tattn
-        echo 'Usage: tattn <mode>'
-        echo
-        echo 'Modes:'
-        echo '  neko, usagi, kuma, github'
-    }
+def trend
+  require "#{ENV['DOTPATH']}/lib/trend"
+end  
 
-	tattn() {
-		ink red "  _        _   _         ";echo
-		ink red " | |_ __ _| |_| |_ _ __  ";echo
-		ink red " | __/ _\` | __| __| '_ \ ";echo
-		ink red " | || (_| | |_| |_| | | |";echo
-		ink red "  \__\__,_|\__|\__|_| |_|";echo
-	}
+def ascii args
+  require "#{ENV['DOTPATH']}/lib/ascii_art"
+  ascii_art args
+end
 
-    neko() {
-        # echo ' ∧_∧'
-        # echo "ฅ'ω'ฅ ＜ ﾆｬｰﾝ"
-		echo "          Zzzzz  |\      _,,,--,,_       "
-		echo "                 /,\`.-'\`'   ._  \-;;,_ "
-		echo "                |,4-  ) )_   .;.(  \`'-' "
-		echo "@tattn         '---''(_/._)-'(_\_)       "
-    }
+case ARGV[0]
+when 'tattn'; tattn
+when 'neko';  neko
+when 'trend';  trend
+when 'ascii'; ascii ARGV[1..-1]
+else
+end
 
-    usagi() {
-        echo '    /) /)'
-        echo '_(　_ ๑❛ᴗ❛)_ ＜ ﾆｬｰﾝ'
-    }
+options = {}
 
-    kuma() {
-        echo '(´(ｪ)`) ＜ ﾆｬｰﾝ'
-    }
+OptionParser.new do |opt|
+  begin
+    opt.version = '0.0.1'
+    # opt.on('-u VAL', '--user', 'user') {|v| OPTS[:u] = v}
+    # opt.on('-p VAL', '--password', 'password') {|v| OPTS[:p] = v}
+    # opt.on('-s [VAL]', '--server', 'server name') {|v| OPTS[:s] = v}
+    opt.on('--tattn', 'show tattn') {|v| options[:tattn] = v }
+    opt.on('--neko', 'show neko') {|v| options[:neko] = v }
+    opt.on('-h','--help','show this message') { puts opt; exit }
 
-    github() {
-        echo '=͟͟͞͞=͟͟͞͞=͟͟͞͞　(\ (\'
-        echo '=͟͟͞͞=͟͟͞͞=͟͟͞͞(,, 0 ω 0) ＜ ﾆｬｰﾝ'
-        echo '=͟͟͞͞=͟͟͞͞=͟͟͞͞(/ (/ \) \)'
-    }
+    opt.parse!(ARGV)
+  rescue => e
+    puts "ERROR: #{e}.\nSee #{opt}"
+    exit
+  end
+end
 
-	trend() {
-		ruby $DOTPATH/lib/trend.rb
-	}
+if options[:tattn]
+  tattn
+elsif options[:neko]
+  neko
+elsif options[:u]
+  artii ARGV[:u]
+end
 
-    while [ $1 ]; do
-        case $1 in
-            -h|--help)
-                help
-                return
-                ;;
-            *)
-                modes=($modes[*] $1)
-                ;;
-        esac
-        shift
-    done
-
-    if (( $#modes == 0 )); then
-        help
-        return
-    fi
-
-    for mode in $modes; do
-        if type $mode > /dev/null 2>&1; then
-            $mode
-        else
-            echo "No such mode \"$mode\""
-        fi
-    done
-}
-
-
-tattn $@
+# tattn() {
+#     usagi() {
+#         echo '    /) /)'
+#         echo '_(　_ ๑❛ᴗ❛)_ ＜ ﾆｬｰﾝ'
+#     }
+#
+#     kuma() {
+#         echo '(´(ｪ)`) ＜ ﾆｬｰﾝ'
+#     }
+#
+#     github() {
+#         echo '=͟͟͞͞=͟͟͞͞=͟͟͞͞　(\ (\'
+#         echo '=͟͟͞͞=͟͟͞͞=͟͟͞͞(,, 0 ω 0) ＜ ﾆｬｰﾝ'
+#         echo '=͟͟͞͞=͟͟͞͞=͟͟͞͞(/ (/ \) \)'
+#     }
+#
+#
+#     while [ $1 ]; do
+#         case $1 in
+#             -h|--help)
+#                 help
+#                 return
+#                 ;;
+#             *)
+#                 modes=($modes[*] $1)
+#                 ;;
+#         esac
+#         shift
+#     done
+#
+#     if (( $#modes == 0 )); then
+#         help
+#         return
+#     fi
+#
+#     for mode in $modes; do
+#         if type $mode > /dev/null 2>&1; then
+#             $mode
+#         else
+#             echo "No such mode \"$mode\""
+#         fi
+#     done
+# }
+#
+#
+# tattn $@

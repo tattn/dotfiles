@@ -2,8 +2,7 @@
 begin
   require 'mechanize'
 rescue LoadError
-  puts 'This tool needs mechanize'
-  puts 'please enter following:'
+  puts 'This tool needs [mechanize]:'
   puts 'gem install mechanize'
   exit 1
 end
