@@ -39,6 +39,15 @@ __tattn_commands() {
 }
 
 _tattn_ascii() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+	if [ ${words[1]} = image ]; then
+		_arguments '*: :_files'
+	fi
+  else
 	_arguments \
 		'(- *)'{-h,--help}'[show help]' \
 		"-f+[specify font]:font:->fonts" \
@@ -52,8 +61,8 @@ _tattn_ascii() {
 				'image[show ascii art]'
 			;;
 	esac
+  fi
 }
-
 
 compdef _tattn tattn
 

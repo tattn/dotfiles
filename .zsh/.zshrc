@@ -161,3 +161,4 @@ fi
 
 # start up
 tattn neko
+alias tt=tattn
