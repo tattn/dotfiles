@@ -50,6 +50,7 @@ when 'github'; github
 when 'trend';  trend
 when 'ascii';  ascii ARGV[1..-1]
 else
+  puts "unknown command: #{ARGV[0]}"
 end
 
 options = {}

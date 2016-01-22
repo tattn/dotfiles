@@ -153,8 +153,13 @@ fi
 [ -s ~/.autojump/etc/profile.d/autojump.sh ] && \
 	source ~/.autojump/etc/profile.d/autojump.sh
 
-[ -d $ZSH_PLUGINS/dircolors-solarized ] && \
-	eval $(gdircolors $ZSH_PLUGINS/dircolors-solarized/dircolors.ansi-dark)
+if [ -d $ZSH_PLUGINS/dircolors-solarized ]; then
+	if is_osx; then
+		eval $(gdircolors $ZSH_PLUGINS/dircolors-solarized/dircolors.ansi-dark)
+	else
+		eval $(dircolors $ZSH_PLUGINS/dircolors-solarized/dircolors.ansi-dark)
+	fi
+fi
 
 [ -d $ZSH_PLUGINS/zsh-completions ] && fpath=($ZSH_PLUGINS/zsh-completions/src $fpath)
 
