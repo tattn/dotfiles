@@ -14,7 +14,6 @@ _tattn() {
 __tattn_commands() {
 	_arguments \
 		'(- *)'{-h,--help}'[show help]' \
-		"-f+[specify font]:font:->fonts" \
 		'*: :->modes'
 
 	case $state in
@@ -27,13 +26,8 @@ __tattn_commands() {
 				'github[kawaii octcat]' \
 				'tattn[show tattn]' \
 				'trend[show trends]' \
-				'ascii[show ascii art]'
-			;;
-		ascii)
-			_values \
-				'mode' \
-				'text[show trends]' \
-				'image[show ascii art]'
+				'ascii[show ascii art]' \
+				'unpack[unpack a file]'
 			;;
 	esac
 }
@@ -62,6 +56,15 @@ _tattn_ascii() {
 			;;
 	esac
   fi
+}
+
+_tattn_unpack() {
+  local context state line curcontext="$curcontext"
+
+  _arguments \
+	  '(- *)'{-h,--help}'[show help]' \
+	  "-f+[specify font]:font:->fonts" \
+	  '*: :_files'
 }
 
 compdef _tattn tattn
