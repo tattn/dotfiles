@@ -73,9 +73,39 @@ unpack() {
 			fi
 			;;
 
-		.tar.bz2|.tbz2)
+		tar.bz2|tbz2)
 			if has tar; then tar -jxf $filepath
 			else need tar unpack
+			fi
+			;;
+
+		lzh)
+			if has lha; then lha x $filepath
+			else need lha unpack
+			fi
+			;;
+
+		7z)
+			if has 7z; then 7z x $filepath
+			else need "p7zip and p7zip-full" unpack
+			fi
+			;;
+
+		rar)
+			if has unrar; then unrar x $filepath
+			else need unrar unpack
+			fi
+			;;
+
+		arj)
+			if has unarj; then unarj $filepath
+			else need unarj unpack
+			fi
+			;;
+
+		cab)
+			if has cabextract; then cabextract $filepath
+			else need cabextract unpack
 			fi
 			;;
 

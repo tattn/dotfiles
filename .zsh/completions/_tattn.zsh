@@ -44,7 +44,6 @@ _tattn_ascii() {
   else
 	_arguments \
 		'(- *)'{-h,--help}'[show help]' \
-		"-f+[specify font]:font:->fonts" \
 		'*: :->modes'
 
 	case $state in
@@ -63,7 +62,6 @@ _tattn_unpack() {
 
   _arguments \
 	  '(- *)'{-h,--help}'[show help]' \
-	  "-f+[specify font]:font:->fonts" \
 	  '*: :_files'
 }
 

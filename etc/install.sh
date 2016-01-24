@@ -70,9 +70,17 @@ gitclone() {
 	git clone git://github.com/$1.git
 }
 
+_pushd() {
+	pushd $1 2>/dev/null
+}
+
+_popd() {
+	popd 2>/dev/null
+}
+
 if has zsh; then
 	mkdir -p $DOTPATH/.zsh/plugins
-	pushd $DOTPATH/.zsh/plugins
+	_pushd $DOTPATH/.zsh/plugins
 	zsh_plugin zaw && gitclone zsh-users/zaw
 	if zsh_plugin bd; then
 		mkdir -p bd
@@ -88,7 +96,7 @@ if has zsh; then
 	fi
 	zsh_plugin "dircolors-solarized" && gitclone seebi/dircolors-solarized
 	zsh_plugin "zsh-completions" && gitclone zsh-users/zsh-completions
-	popd
+	_popd
 fi
 
 
