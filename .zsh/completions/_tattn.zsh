@@ -27,7 +27,8 @@ __tattn_commands() {
 				'tattn[show tattn]' \
 				'trend[show trends]' \
 				'ascii[show ascii art]' \
-				'extract[extract a file]'
+				'extract[extract a file]' \
+				'image[edit an image]'
 			;;
 	esac
 }
@@ -57,12 +58,38 @@ _tattn_ascii() {
   fi
 }
 
-_tattn_unpack() {
+_tattn_extract() {
   local context state line curcontext="$curcontext"
 
   _arguments \
 	  '(- *)'{-h,--help}'[show help]' \
 	  '*: :_files'
+}
+
+_tattn_image() {
+  local context state line curcontext="$curcontext"
+
+  if (( CURRENT > 2 )); then
+    (( CURRENT-- ))
+    shift words
+	if [ ${words[1]} = resize ]; then
+		_arguments \
+			'(- *)--help[show help]' \
+			'*: :_files'
+	fi
+  else
+	_arguments \
+		'(- *)'{-h,--help}'[show help]' \
+		'*: :->modes'
+
+	case $state in
+		modes)
+			_values \
+				'mode' \
+				'resize[resize an image]'
+			;;
+	esac
+  fi
 }
 
 compdef _tattn tattn
