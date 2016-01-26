@@ -27,7 +27,7 @@ __tattn_commands() {
 				'tattn[show tattn]' \
 				'trend[show trends]' \
 				'ascii[show ascii art]' \
-				'unpack[unpack a file]'
+				'extract[extract a file]'
 			;;
 	esac
 }

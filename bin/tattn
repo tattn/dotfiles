@@ -41,6 +41,21 @@ def ascii args
   ascii_art args
 end
 
+def help
+  puts "Usage: tattn [command] [options]"
+  # printf "%8s%-28s%s\n", "", "help", "show this message"
+  line = ->(cmd, msg){ printf "%8s%-28s%s\n", "", cmd, msg }
+  line["tattn", "show tattn"]
+  line["neko", "show kawaii neko"]
+  line["usagi", "show kawaii usa-neko"]
+  line["kuma", "show kawaii kuma-neko"]
+  line["github", "show kawaii octcat"]
+  line["trend", "show trend"]
+  line["ascii", "show ascii art"]
+  line["extract", "extract a file"]
+  line["help", "show this message"]
+end
+
 case ARGV[0]
 when 'tattn';  tattn
 when 'neko';   neko
@@ -50,6 +65,7 @@ when 'github'; github
 when 'trend';  trend
 when 'ascii';  ascii ARGV[1..-1]
 when 'unpack'; exec "#{ENV['DOTPATH']}/bin/tattn-unpack.sh #{ARGV[1..-1].join ' '}"
+when 'help';   help
 else
   puts "unknown command: #{ARGV[0]}"
 end
