@@ -1,4 +1,4 @@
-export PLATFORM
+export _PLATFORM
 
 is_bash() {
     [ -n "$BASH_VERSION" ]
@@ -17,18 +17,18 @@ osname() {
 }
 
 detect_os() {
-	export PLATFORM
+	export _PLATFORM
     case "$(osname)" in
-        *'linux'*)  PLATFORM='linux'   ;;
-        *'darwin'*) PLATFORM='osx'     ;;
-        *'bsd'*)    PLATFORM='bsd'     ;;
-        *)          PLATFORM='unknown' ;;
+        *'linux'*)  _PLATFORM='linux'   ;;
+        *'darwin'*) _PLATFORM='osx'     ;;
+        *'bsd'*)    _PLATFORM='bsd'     ;;
+        *)          _PLATFORM='unknown' ;;
     esac
 }
 
 is_osx() {
     detect_os
-    if [ "$PLATFORM" = "osx" ]; then
+    if [ "$_PLATFORM" = "osx" ]; then
         return 0
     else
         return 1
@@ -37,7 +37,7 @@ is_osx() {
 
 is_linux() {
     detect_os
-    if [ "$PLATFORM" = "linux" ]; then
+    if [ "$_PLATFORM" = "linux" ]; then
         return 0
     else
         return 1
@@ -46,7 +46,7 @@ is_linux() {
 
 is_bsd() {
     os_detect
-    if [ "$PLATFORM" = "bsd" ]; then
+    if [ "$_PLATFORM" = "bsd" ]; then
         return 0
     else
         return 1
