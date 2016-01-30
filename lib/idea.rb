@@ -7,7 +7,7 @@
 def osborn baseword=nil
   list = []
 
-  # 転用：他の使い道
+  # 転用：他に使い道はないか？
   # Put to other uses?
   list[0] = %w{
   の未来はどうなっているか
@@ -23,7 +23,7 @@ def osborn baseword=nil
   の仮説を否定したら
   }
 
-  # 応用：他からアイデアを借りる
+  # 応用：他からアイデアを借りられないか？
   # Adapt?
   list[1] = %w{
   に似た商品の真似をしたら
@@ -38,7 +38,7 @@ def osborn baseword=nil
   を他分野はどうしているか
   }
 
-  # 変更：変える
+  # 変更：変えてみたらどうか？
   # Modify?
   list[2] = %w{
   の動きを変えたら
@@ -52,7 +52,7 @@ def osborn baseword=nil
   の常識を変えたら
   }
 
-  # 拡大：大きく
+  # 拡大：大きくしてみたらどうか？
   # Magnify?
   list[3] = %w{
   を大きくしたら
@@ -68,7 +68,7 @@ def osborn baseword=nil
   の市場を広げたら
   }
 
-  # 縮小：小さく
+  # 縮小：小さくしてみたらどうか？
   # Minify?
   list[4] = %w{
   を小さくしたら
@@ -84,7 +84,7 @@ def osborn baseword=nil
   の目的を狭めたら
   }
 
-  # 代用：他のものに変える
+  # 代用：他のもので代用できないか？
   # Substitute?
   list[5] = %w{
   を他の人で代用したら
@@ -101,7 +101,7 @@ def osborn baseword=nil
   が注目されたら
   }
 
-  # 置換：入れ替え
+  # 置換：入れ替えてみたらどうか？
   # Rearrange?
   list[6] = %w{
   の配置を入替えたら
@@ -114,7 +114,7 @@ def osborn baseword=nil
   を誰かと交換したら
   }
 
-  # 逆転：逆にする
+  # 逆転：逆にしてみたらどうか？
   # Reverse?
   list[7] = %w{
   のプラスマイナスを逆にしたら
@@ -130,7 +130,7 @@ def osborn baseword=nil
   の買い手になって考えたら
   }
 
-  # 結合：組み合わせる
+  # 結合：組み合わせてみたらどうか？
   # Combine?
   list[8] = %w{
   と○○を組み合わせたら
