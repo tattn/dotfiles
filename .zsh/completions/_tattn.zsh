@@ -28,7 +28,8 @@ __tattn_commands() {
 				'trend[show trends]' \
 				'ascii[show ascii art]' \
 				'extract[extract a file]' \
-				'image[edit an image]'
+				'image[edit an image]' \
+				'idea[help your inspiration]'
 			;;
 	esac
 }

@@ -41,9 +41,13 @@ def ascii args
   ascii_art args
 end
 
+def idea args
+  require "#{ENV['DOTPATH']}/lib/idea"
+  osborn args[0]
+end
+
 def help
   puts "Usage: tattn [command] [options]"
-  # printf "%8s%-28s%s\n", "", "help", "show this message"
   line = ->(cmd, msg){ printf "%8s%-28s%s\n", "", cmd, msg }
   line["tattn", "show tattn"]
   line["neko", "show kawaii neko"]
@@ -67,6 +71,7 @@ when 'ascii';  ascii ARGV[1..-1]
 when 'help';   help
 when 'extract'; exec "#{ENV['DOTPATH']}/bin/tattn-extract.sh #{ARGV[1..-1].join ' '}"
 when 'image'; exec "#{ENV['DOTPATH']}/bin/tattn-image.sh #{ARGV[1..-1].join ' '}"
+when 'idea';  idea ARGV[1..-1]
 else
   puts "unknown command: #{ARGV[0]}"
 end
