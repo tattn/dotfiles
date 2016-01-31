@@ -120,3 +120,9 @@ tt idea 世界
 tt image resize -w 128 input.png -o output.png
 ```
 
+#### Convert
+
+```bash
+tt image convert input.jpg -o output.png
+```
+

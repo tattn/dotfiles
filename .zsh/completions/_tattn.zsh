@@ -77,6 +77,10 @@ _tattn_image() {
 		_arguments \
 			'(- *)--help[show help]' \
 			'*: :_files'
+	elif [ ${words[1]} = convert ]; then
+		_arguments \
+			'(- *)--help[show help]' \
+			'*: :_files'
 	fi
   else
 	_arguments \
@@ -87,7 +91,8 @@ _tattn_image() {
 		modes)
 			_values \
 				'mode' \
-				'resize[resize an image]'
+				'resize[resize an image]' \
+				'convert[convert an image]'
 			;;
 	esac
   fi

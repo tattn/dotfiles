@@ -7,6 +7,7 @@ Usage:
 
 Commands:
     resize       -w <width> [-h <height>] input -o output       Resize an image
+    convert      input -o output                                Convert a filetype
 
 Options:
     --version, -v     print $(basename ${0}) version
@@ -34,7 +35,12 @@ convert() {
 
 		resize)
 			shift
-			_convert_resize $@
+			_resize $@
+			;;
+
+		convert)
+			shift
+			_convert $@
 			;;
 
 		*)
@@ -44,7 +50,7 @@ convert() {
 	esac
 }
 
-_convert_resize() {
+_resize() {
 	while [ $# -gt 0 ];
 	do
 		case $1 in
@@ -90,6 +96,48 @@ EOF
 		elif [ -n "$h" ]; then
 			convert -resize x${w} -unsharp 2x1.4+0.5+0 -quality 100 $input $output
 		fi
+	fi
+}
+
+_convert() {
+	while [ $# -gt 0 ];
+	do
+		case $1 in
+			-o)
+				local output=$2
+				shift
+				;;
+			-h|--help)
+				cat <<EOF
+Usage:
+    $(basename ${0}) convert input -o output
+
+EOF
+				exit
+				;;
+			*)
+				local input=$1
+				;;
+		esac
+		shift
+	done
+
+	# [ -z "$input" -a -n "$output" ] && error "cannot use the combination[-w, -h]";exit
+
+	local ext=${output##*.}
+
+	case $ext in
+		jpg|jpeg)
+			local format=jpeg;;
+		png)
+			local format=png;;
+		*)
+			error "unknown this file type [$ext]";exit;;
+	esac
+
+	if is_osx; then
+		sips -s format $format --out $output $input
+	#elif is_linux; then
 	fi
 }
 
