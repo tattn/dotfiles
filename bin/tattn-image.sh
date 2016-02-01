@@ -122,7 +122,7 @@ EOF
 		shift
 	done
 
-	# [ -z "$input" -a -n "$output" ] && error "cannot use the combination[-w, -h]";exit
+	[ -z "$input" -o -z "$output" ] && error "Need an input file and an output file";exit
 
 	local ext=${output##*.}
 
@@ -137,7 +137,9 @@ EOF
 
 	if is_osx; then
 		sips -s format $format --out $output $input
-	#elif is_linux; then
+	elif is_linux; then
+		[ ! has convert ] && error "Need 'ImageMagick'"
+		convert $input $output
 	fi
 }
 
