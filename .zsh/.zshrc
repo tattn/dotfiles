@@ -139,6 +139,8 @@ fi
 ZSH_PLUGINS=~/dotfiles/.zsh/plugins
 [ -f $ZSH_PLUGINS/k/k.sh ] && source $ZSH_PLUGINS/k/k.sh
 [ -f $ZSH_PLUGINS/bd/bd.zsh ] && source $ZSH_PLUGINS/bd/bd.zsh
+[ -d $ZSH_PLUGINS/cd-gitroot ] && fpath=($ZSH_PLUGINS/cd-gitroot(N-/) $fpath) && autoload -Uz cd-gitroot
+
 
 if [ -f $ZSH_PLUGINS/zaw/zaw.zsh ]; then
 	source $ZSH_PLUGINS/zaw/zaw.zsh

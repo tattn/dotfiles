@@ -96,6 +96,7 @@ if has zsh; then
 	fi
 	zsh_plugin "dircolors-solarized" && gitclone seebi/dircolors-solarized
 	zsh_plugin "zsh-completions" && gitclone zsh-users/zsh-completions
+	zsh_plugin "cd-gitroot" && gitclone mollifier/cd-gitroot
 	_popd
 fi
 
