@@ -12,7 +12,6 @@ export DIRSTACKSIZE=20
 export HISTFILE=$ZDOTDIR/history/${USER}-zhistory
 export HISTSIZE=100000
 export SAVEHIST=HISTSIZE
-export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 # Editor
 whence vim >/dev/null && alias vi=vim
@@ -34,55 +33,41 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[00;44;37m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
-# if whence lv >/dev/null ; then
-#     export PAGER=lv ;  export LV="-c -T8192 -l"
-# else
-#     alias lv=$PAGER
-# fi
-#
 
 path=(
+  {/usr/local,/usr,/usr/bin,/usr/local/bin}
+  {/bin,/sbin}(N-/)
   $DOTPATH/bin
-  $HOME/.anyenv/bin
-  /usr/local/bin
-  /usr/local/Cellar/qt5/5.3.2/bin/
-  /usr/local/Cellar/llvm/3.6.0/bin/
-  /usr/local/texlive/2014/bin/x86_64-darwin/
-  /usr/local/texlive/2015/bin/x86_64-darwin
-  /Applications/Android/ndk
-  /Applications/Android/sdk/platform-tools
-  {/usr/local,/usr,}{/bin,/sbin}(N-/)
+  $HOME/bin(N-/)
+  $HOME/.anyenv/bin(N-/)
 )
 manpath=(
-    {/usr,/usr/local}/share/man(N-/)
+  {/usr,/usr/local}/share/man(N-/)
 )
-typeset -gxU path
-typeset -gxU manpath
+
+if has anyenv; then
+	for D in `ls $HOME/.anyenv/envs`
+	do
+		path=($HOME/.anyenv/envs/$D/shims $path)
+	done
+fi
+
+## function: auto-zcompile & source
+# function _auto_zcompile_source() {
+#     local A; A=$1
+#     [[ -e "${A:r}.zwc" ]] && [[ "$A" -ot "${A:r}.zwc" ]] ||
+#     zcompile $A >/dev/null 2>&1 ; source $A
+# }
+#
+# [ -f $ZDOTDIR/proxy ] && _auto_zcompile_source $ZDOTDIR/proxy
 
 [ -z "$ld_library_path" ] && typeset -xT LD_LIBRARY_PATH ld_library_path
 [ -z "$include" ] && typeset -xT INCLUDE include
 typeset -xU ld_library_path include
 
-if has anyenv; then
-	for D in `ls $HOME/.anyenv/envs`
-	do
-		path=( $HOME/.anyenv/envs/$D/shims $path )
-	done
-fi
-
-## function: auto-zcompile & source
-function _auto_zcompile_source() {
-    local A; A=$1
-    [[ -e "${A:r}.zwc" ]] && [[ "$A" -ot "${A:r}.zwc" ]] ||
-    zcompile $A >/dev/null 2>&1 ; source $A
-}
-
-[ -f $ZDOTDIR/proxy ] && _auto_zcompile_source $ZDOTDIR/proxy
-
-[ -d $HOME/bin ] && path=( $HOME/bin $path )
-
-### duplicate cleaning
+# unify paths
 typeset -gxU path cdpath fpath manpath ld_library_path include
 
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+is_osx && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
+[ -f $HOME/.local_zshrc ] && source $HOME/.locol_zshrc

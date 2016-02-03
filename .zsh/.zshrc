@@ -72,10 +72,6 @@ zstyle ':completion:*' remote-access true # リモートディレクトリも補
 zstyle ':completion:*' completer \
     _oldlist _complete _match _ignored _approximate _list _history
 zstyle ':completion:*' recent-dirs-insert both # Add recent-dirs
-## 補完候補の追加
-[ -d $ZDOTDIR/modules/completions ] && \
-    fpath+=( $ZDOTDIR/modules/zsh-completions/src $fpath)
-typeset -gxU fpath
 # autoload $ZDOTDIR/functions/*.zsh
 
 # load my prompt style
@@ -137,9 +133,14 @@ if hash direnv 2>/dev/null; then
 fi
 
 ZSH_PLUGINS=~/dotfiles/.zsh/plugins
+fpath=(
+	$ZSH_PLUGINS/zsh-completions/src(N-/)
+	$ZSH_PLUGINS/cd-gitroot(N-/)
+	$fpath
+)
 [ -f $ZSH_PLUGINS/k/k.sh ] && source $ZSH_PLUGINS/k/k.sh
 [ -f $ZSH_PLUGINS/bd/bd.zsh ] && source $ZSH_PLUGINS/bd/bd.zsh
-[ -d $ZSH_PLUGINS/cd-gitroot ] && fpath=($ZSH_PLUGINS/cd-gitroot(N-/) $fpath) && autoload -Uz cd-gitroot
+[ -d $ZSH_PLUGINS/cd-gitroot ] && autoload -Uz cd-gitroot
 
 
 if [ -f $ZSH_PLUGINS/zaw/zaw.zsh ]; then
@@ -162,9 +163,6 @@ if [ -d $ZSH_PLUGINS/dircolors-solarized ]; then
 		eval $(dircolors $ZSH_PLUGINS/dircolors-solarized/dircolors.ansi-dark)
 	fi
 fi
-
-[ -d $ZSH_PLUGINS/zsh-completions ] && fpath=($ZSH_PLUGINS/zsh-completions/src $fpath)
-
 
 # start up
 tattn neko

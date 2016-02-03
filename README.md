@@ -11,6 +11,14 @@ or enter this one-liner:
 curl https://gist.github.com/raw/022a5cda3e2a1b8ef77f/dotfiles.sh | sh.
 ```
 
+## Customize settings
+
+Create a file for local settings.
+
+```
+touch ~/.local_zshrc
+```
+
 ## Install utility tools
 
 ```
