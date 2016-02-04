@@ -70,4 +70,4 @@ typeset -gxU path cdpath fpath manpath ld_library_path include
 
 is_osx && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-[ -f $HOME/.local_zshrc ] && source $HOME/.locol_zshrc
+[ -f $HOME/.local_zshrc ] && source $HOME/.local_zshrc

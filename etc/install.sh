@@ -70,6 +70,10 @@ gitclone() {
 	git clone git://github.com/$1.git
 }
 
+gitcurl() {
+	curl https://raw.githubusercontent.com/$1/master/$2 > $3
+}
+
 _pushd() {
 	pushd $1 2>/dev/null
 }
@@ -84,7 +88,8 @@ if has zsh; then
 	zsh_plugin zaw && gitclone zsh-users/zaw
 	if zsh_plugin bd; then
 		mkdir -p bd
-		curl https://raw.githubusercontent.com/Tarrasch/zsh-bd/master/bd.zsh > bd/bd.zsh
+		# curl https://raw.githubusercontent.com/Tarrasch/zsh-bd/master/bd.zsh > bd/bd.zsh
+		gitcurl Tarrasch/zsh-bd bd.zsh bd/bd.zsh
 	fi
 	if zsh_plugin k; then
 		mkdir -p k
@@ -102,6 +107,6 @@ fi
 
 
 detect_os
-. $DOTPATH/etc/$PLATFORM/install
+. $DOTPATH/etc/$_PLATFORM/install
 
 log_pass "$0: Finish!!"

@@ -1,4 +1,4 @@
-for i in $DOTPATH/etc/$PLATFORM/*.sh
+for i in $DOTPATH/etc/$_PLATFORM/*.sh
 do
     if [ -f "$i" ]; then
         log_info "$(e_arrow $(basename "$i"))"
@@ -16,6 +16,18 @@ if [ ! -d $DOTPATH/plugins/solarized ]; then
 	git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git solarized
 	cd $DOTPATH/plugins/solarized
 	./set_dark.sh
+	popd
+fi
+
+mkdir -p $DOTPATH/etc/$_PLATFORM/bin
+if [ -f $DOTPATH/etc/$_PLATFORM/bin/hub ]; then
+	pushd $DOTPATH/etc/$_PLATFORM/bin
+	wget https://github.com/github/hub/releases/download/v2.2.3/hub-linux-amd64-2.2.3.tgz
+	tt extract hub-linux-amd64-2.2.3.tgz
+	rm hub-linux-amd64-2.2.3.tgz
+	cp hub-linux-amd64-2.2.3/bin/hub hub
+	cp hub-linux-amd64-2.2.3/etc/hub.zsh_completion ../../.zsh/completions/hub.zsh_completion
+	rm -rf hub-linux-amd64-2.2.3
 	popd
 fi
 

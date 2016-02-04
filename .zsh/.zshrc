@@ -164,6 +164,11 @@ if [ -d $ZSH_PLUGINS/dircolors-solarized ]; then
 	fi
 fi
 
+if has hub; then
+	eval "$(hub alias -s)"
+	fpath=($ZDOTDIR/completions/hub.zsh_completion $fpath)
+fi
+
 # start up
 tattn neko
 alias tt=tattn

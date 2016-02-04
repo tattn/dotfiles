@@ -16,3 +16,11 @@ if [ ! -d $DOTPATH/plugins/solarized ]; then
 	git clone https://github.com/altercation/solarized
 	popd
 fi
+
+if [ ! -f $DOTPATH/.zsh/completions/hub.zsh_completion ]; then
+	log_info "====> Install hub completion"
+	pushd $DOTPATH/.zsh/completions
+	curl https://raw.githubusercontent.com/github/hub/master/etc/hub.zsh_completion > hub.zsh_completion
+	popd
+fi
+

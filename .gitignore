@@ -6,4 +6,5 @@
 .zsh/.chpwd-recent-dirs
 .zsh/plugins
 plugins
+.zsh/completions/hub.zsh_completion
 
