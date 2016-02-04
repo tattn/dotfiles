@@ -11,13 +11,7 @@ or enter this one-liner:
 curl https://gist.github.com/raw/022a5cda3e2a1b8ef77f/dotfiles.sh | sh.
 ```
 
-## Customize settings
-
-Create a file for local settings.
-
-```
-touch ~/.local_zshrc
-```
+Adding original settings, edit `~/.local_zshrc`.
 
 ## Install utility tools
 
@@ -25,6 +19,22 @@ touch ~/.local_zshrc
 cd ~/dotfiles
 make install-utility
 ```
+
+* anyenv (rbenv, pyenv)
+* hub
+
+Mac:
+* Homebrew
+* coreutils
+
+Zsh plugins:
+* zaw
+* bd
+* k
+* autojump
+* dircolors-solarized
+* zsh-completions
+* cd-gitroot
 
 ## How to use an utility command
 
