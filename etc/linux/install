@@ -31,3 +31,7 @@ if [ -f $DOTPATH/etc/$_PLATFORM/bin/hub ]; then
 	popd
 fi
 
+if ! gem list tldrb | grep tldrb; then
+	gem install tldrb
+fi
+
