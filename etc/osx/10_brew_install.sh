@@ -10,8 +10,11 @@ install_if_needed() {
 }
 
 install_if_needed coreutils
+install_if_needed reattach-to-user-namespace
 install_if_needed hub
 
 brew tap tldr-pages/tldr
 install_if_needed tldr
+
+install_if_needed git-extras
 

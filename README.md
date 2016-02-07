@@ -22,6 +22,8 @@ make install-utility
 
 * anyenv (rbenv, pyenv)
 * hub
+* tldr
+* Git Extras
 
 Mac:
 * Homebrew

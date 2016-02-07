@@ -35,3 +35,6 @@ if ! gem list tldrb | grep tldrb; then
 	gem install tldrb
 fi
 
+sudo apt-get install git-extras
+
+
