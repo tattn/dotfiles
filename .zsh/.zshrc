@@ -72,7 +72,6 @@ zstyle ':completion:*' remote-access true # リモートディレクトリも補
 zstyle ':completion:*' completer \
     _oldlist _complete _match _ignored _approximate _list _history
 zstyle ':completion:*' recent-dirs-insert both # Add recent-dirs
-# autoload $ZDOTDIR/functions/*.zsh
 
 # load my prompt style
 source $ZDOTDIR/.zprompt
@@ -96,7 +95,7 @@ is_osx && alias ls='gls --color=auto -FG'
 alias reload='exec zsh -l'
 
 ## Docker
-if hash docker 2>/dev/null; then
+if has docker; then
 	# Get latest container ID
 	alias docl="docker ps -l -q"
 	# Get container process
@@ -123,25 +122,21 @@ if hash docker 2>/dev/null; then
 	docalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
 fi
 
-## Anyenv
-if hash anyenv 2>/dev/null; then
-	eval "$(anyenv init - zsh)"
-fi
+has anyenv && eval "$(anyenv init - zsh)"
+has direnv && eval "$(direnv hook zsh)"
+has hub    && eval "$(hub alias -s)"
 
-if hash direnv 2>/dev/null; then
-	eval "$(direnv hook zsh)"
-fi
-
-ZSH_PLUGINS=~/dotfiles/.zsh/plugins
+ZSH_PLUGINS=$ZDOTDIR/plugins
 fpath=(
 	$ZSH_PLUGINS/zsh-completions/src(N-/)
 	$ZSH_PLUGINS/cd-gitroot(N-/)
+	$ZDOTDIR/completions/hub.zsh_completion(N-/)
 	$fpath
 )
+
 [ -f $ZSH_PLUGINS/k/k.sh ] && source $ZSH_PLUGINS/k/k.sh
 [ -f $ZSH_PLUGINS/bd/bd.zsh ] && source $ZSH_PLUGINS/bd/bd.zsh
 [ -d $ZSH_PLUGINS/cd-gitroot ] && autoload -Uz cd-gitroot
-
 
 if [ -f $ZSH_PLUGINS/zaw/zaw.zsh ]; then
 	source $ZSH_PLUGINS/zaw/zaw.zsh
@@ -162,11 +157,6 @@ if [ -d $ZSH_PLUGINS/dircolors-solarized ]; then
 	else
 		eval $(dircolors $ZSH_PLUGINS/dircolors-solarized/dircolors.ansi-dark)
 	fi
-fi
-
-if has hub; then
-	eval "$(hub alias -s)"
-	fpath=($ZDOTDIR/completions/hub.zsh_completion $fpath)
 fi
 
 # start up

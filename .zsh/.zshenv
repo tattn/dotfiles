@@ -52,15 +52,6 @@ if has anyenv; then
 	done
 fi
 
-## function: auto-zcompile & source
-# function _auto_zcompile_source() {
-#     local A; A=$1
-#     [[ -e "${A:r}.zwc" ]] && [[ "$A" -ot "${A:r}.zwc" ]] ||
-#     zcompile $A >/dev/null 2>&1 ; source $A
-# }
-#
-# [ -f $ZDOTDIR/proxy ] && _auto_zcompile_source $ZDOTDIR/proxy
-
 [ -z "$ld_library_path" ] && typeset -xT LD_LIBRARY_PATH ld_library_path
 [ -z "$include" ] && typeset -xT INCLUDE include
 typeset -xU ld_library_path include
