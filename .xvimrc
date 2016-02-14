@@ -4,6 +4,10 @@
 " KeyBindings
 "############################################
 
+" swap(:, ;)
+nnoremap ; :
+nnoremap : ;
+
 inoremap <C-j> <ESC>
 inoremap jj <ESC>
 nnoremap gcc :xccmd commentAndUncommentCurrentLines<CR>
