@@ -9,11 +9,19 @@ do
 done
 
 mkdir -p $DOTPATH/plugins
+mkdir -p $DOTPATH/plugins/xcode
 
 if [ ! -d $DOTPATH/plugins/solarized ]; then
 	log_info "====> Install solarized"
 	pushd $DOTPATH/plugins
 	git clone https://github.com/altercation/solarized
+
+	pushd xcode
+	git clone https://github.com/XVimProject/XVim.git
+	cd XVim
+	make
+	popd
+
 	popd
 fi
 
