@@ -20,6 +20,9 @@ if [ ! -d $DOTPATH/plugins/solarized ]; then
 	git clone https://github.com/XVimProject/XVim.git
 	cd XVim
 	make
+	git clone https://github.com/FuzzyAutocomplete/FuzzyAutocompletePlugin.git
+	cd FuzzyAutocompletePlugin
+	xcodebuild -project FuzzyAutocomplete.xcodeproj build
 	popd
 
 	popd
