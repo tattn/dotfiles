@@ -8,6 +8,8 @@ do
     fi
 done
 
+curl -L https://raw.githubusercontent.com/egold/better-xcode-ibeam-cursor/master/install.sh | bash 
+
 mkdir -p $DOTPATH/plugins
 mkdir -p $DOTPATH/plugins/xcode
 
