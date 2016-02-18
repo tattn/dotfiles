@@ -13,6 +13,7 @@ inoremap jj <ESC>
 nnoremap gcc :xccmd commentAndUncommentCurrentLines<CR>
 vnoremap gc :xccmd commentAndUncommentCurrentLines<CR>
 noremap ,b :xccmd toggleBreakpointAtCurrentLine<CR>
+nnoremap <C-d> :xccmd jumpToDefinition<CR>
 
 set cursorline
 
