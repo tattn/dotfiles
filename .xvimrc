@@ -22,10 +22,8 @@ set cursorline
 " Tab
 "############################################
 " tab pre
-"map ,ti :xccmd selectPreviousTab<CR>
 map gT :tabprevious<CR>
 " tab next
-"map ,to :xccmd selectNextTab<CR>
 map gt :tabnext<CR>
 
 "#### Search ####

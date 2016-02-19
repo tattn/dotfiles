@@ -88,7 +88,6 @@ if has zsh; then
 	zsh_plugin zaw && gitclone zsh-users/zaw
 	if zsh_plugin bd; then
 		mkdir -p bd
-		# curl https://raw.githubusercontent.com/Tarrasch/zsh-bd/master/bd.zsh > bd/bd.zsh
 		gitcurl Tarrasch/zsh-bd bd.zsh bd/bd.zsh
 	fi
 	if zsh_plugin k; then
