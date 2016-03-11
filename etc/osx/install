@@ -37,3 +37,10 @@ if [ ! -f $DOTPATH/.zsh/completions/hub.zsh_completion ]; then
 	popd
 fi
 
+if [ ! -f $DOTPATH/bin ]; then
+	pushd $DOTPATH/bin
+	wget https://raw.github.com/gnachman/iTerm2/master/tests/imgcat
+	chmod +x imgcat
+	popd
+fi
+
