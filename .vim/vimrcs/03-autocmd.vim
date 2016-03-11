@@ -36,6 +36,7 @@ augroup vimrc
 	autocmd FileType vim setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 	autocmd FileType eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+	autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd FileType coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 	autocmd FileType perl setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2

@@ -10,6 +10,7 @@ augroup filetypedetect
   au!
   au BufRead,BufNewFile *.vim setf vim
   au BufRead,BufNewFile Gemfile setf ruby
+  au BufRead,BufNewFile *.js,*.jsx setf javascript
   au BufRead,BufNewFile *.rb setf ruby
   au BufRead,BufNewFile [rR]antfile,*.rant,[rR]akefile,*.rake	setf ruby
   au BufRead,BufNewFile *.haml setf haml

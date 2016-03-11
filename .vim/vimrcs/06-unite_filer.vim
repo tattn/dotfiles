@@ -1,5 +1,5 @@
 "" Shougo/vimfiler
-" let g:vimfiler_edit_action = 'tabopen'
+let g:vimfiler_edit_action = 'tabopen'
 let g:vimfiler_safe_mode_by_default = 0
 augroup vimfiler_augroup
 	autocmd!
