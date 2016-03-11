@@ -8,3 +8,5 @@
 plugins
 .zsh/completions/hub.zsh_completion
 
+bin/imgcat
+
