@@ -36,14 +36,15 @@ augroup vimrc
 	autocmd FileType vim setlocal shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 	autocmd FileType eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
-	autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 	autocmd FileType coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 	autocmd FileType perl setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd FileType css  setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd FileType scss  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+	autocmd FileType css  setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+	autocmd FileType scss  setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+	autocmd FileType stylus  setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 	autocmd FileType gyp  setlocal shiftwidth=2 tabstop=2 softtabstop=2
-	autocmd FileType yaml  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType yaml  setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 augroup END
 
 "" Show QuickFix list automatically

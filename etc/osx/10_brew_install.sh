@@ -13,6 +13,7 @@ install_if_needed coreutils
 install_if_needed reattach-to-user-namespace
 install_if_needed hub
 install_if_needed tmux
+install_if_needed sshrc
 
 brew tap tldr-pages/tldr
 install_if_needed tldr
