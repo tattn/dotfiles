@@ -1,0 +1,63 @@
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_path = '.*'
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+on_path = '.*'
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+depends = ['neosnippet-snippets']
+on_i = 1
+on_ft = ['snippet']
+
+[[plugins]]
+repo = 'Shougo/neocomplete'
+if = 'has("lua")'
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+if = 'has("nvim")'
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+depends = 'neomru.vim'
+
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+on_i = 1
+
+#---------------------------
+## CoffeeScript
+#---------------------------
+
+# hilighter
+[[plugins]]
+repo = 'kchmck/vim-coffee-script'
+on_ft = ['coffee']
+
+#---------------------------
+## Less
+#---------------------------
+
+# hilighter
+[[plugins]]
+repo = 'groenewege/vim-less'
+on_ft = ['less']
+
+#---------------------------
+## C/C++
+#---------------------------
+
+[[plugins]]
+repo = 'Rip-Rip/clang_complete'
+on_ft = ['c', 'cpp', 'cxx']
+
+[[plugins]]
+repo = 'mrkn/vim-cruby'
+on_ft = ['c']
+

@@ -1,3 +1,4 @@
+if !has('nvim')
 set nocompatible
 
 let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
@@ -159,3 +160,4 @@ endif
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
 
+endif

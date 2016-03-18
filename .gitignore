@@ -10,3 +10,5 @@ plugins
 
 bin/imgcat
 
+.vim/.init.vim-rplugin~
+
