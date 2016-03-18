@@ -14,6 +14,7 @@ install_if_needed reattach-to-user-namespace
 install_if_needed hub
 install_if_needed tmux
 install_if_needed sshrc
+install_if_needed neovim/neovim/neovim
 
 brew tap tldr-pages/tldr
 install_if_needed tldr

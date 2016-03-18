@@ -39,7 +39,7 @@ fi
 
 if [ ! -f $DOTPATH/bin ]; then
 	pushd $DOTPATH/bin
-	wget https://raw.github.com/gnachman/iTerm2/master/tests/imgcat
+	wget -nc https://raw.github.com/gnachman/iTerm2/master/tests/imgcat
 	chmod +x imgcat
 	popd
 fi

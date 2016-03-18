@@ -61,4 +61,6 @@ typeset -gxU path cdpath fpath manpath ld_library_path include
 
 is_osx && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
+export XDG_CONFIG_HOME=~/.config
+
 [ -f $HOME/.local_zshrc ] && source $HOME/.local_zshrc

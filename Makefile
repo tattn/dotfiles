@@ -1,6 +1,6 @@
 DOTPATH      := ~/dotfiles
 ALL_DOTFILES := $(notdir $(shell find . -maxdepth 1 -name '\.*'))
-IGNORES      := . .DS_Store .git .gitmodule .travis.yml
+IGNORES      := . .DS_Store .git .gitmodule .travis.yml .gitignore .config
 DOTFILES     := $(filter-out $(wildcard ${IGNORES}), ${ALL_DOTFILES})
 
 all: install

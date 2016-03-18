@@ -82,12 +82,16 @@ set number
 set showmode
 set showmatch                  "hilight the bracket
 set mouse=a                    " use mouse
-set ttymouse=xterm2
+if !has('nvim')
+	set ttymouse=xterm2
+endif
 
 let no_buffers_menu=1
 highlight BadWhitespace ctermbg=red guibg=red
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 highlight Normal ctermbg=none
+let g:molokai_original = 1
+let g:rehash256 = 1
 colorscheme molokai
 " :set background=dark
 " colorscheme solarized
@@ -135,3 +139,8 @@ set laststatus=2  " always show statusline
 set title
 set titleold="Terminal"
 set titlestring=%F
+
+" if has('nvim')
+  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" endif
+
