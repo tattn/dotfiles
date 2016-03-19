@@ -40,6 +40,10 @@ endif
 ""#######################################################################
 "" Configuration
 
+if dein#tap('deoplete.nvim') "{{{
+	let g:deoplete#enable_at_startup = 1
+endif "}}}
+
 if dein#tap('tcomment_vim') "{{{
 	let g:tcomment_types = {
 				\'php_surround' : "<?php %s ?>",

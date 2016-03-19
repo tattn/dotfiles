@@ -60,3 +60,14 @@ nnoremap <S-Q> :ccl<CR>
 " Save as a super user
 cmap w!! w !sudo tee > /dev/null %
 
+" Terminal emurator
+if has('nvim')
+  nnoremap <leader>t  :vsplit +terminal<cr>
+  tnoremap <C-j>      <c-\><c-n>
+  tnoremap <esc>      <c-\><c-n>
+  tnoremap <a-h>      <c-\><c-n><c-w>h
+  tnoremap <a-j>      <c-\><c-n><c-w>j
+  tnoremap <a-k>      <c-\><c-n><c-w>k
+  tnoremap <a-l>      <c-\><c-n><c-w>l
+endif
+

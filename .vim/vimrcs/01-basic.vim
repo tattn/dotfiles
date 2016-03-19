@@ -140,7 +140,11 @@ set title
 set titleold="Terminal"
 set titlestring=%F
 
-" if has('nvim')
+if has('nvim')
   " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" endif
+
+	""" Terminal emurator
+	set shell=zsh
+  autocmd BufEnter term://* startinsert
+endif
 
