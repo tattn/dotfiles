@@ -12,20 +12,22 @@ if !isdirectory(s:dein_repo_dir)
 endif
 execute 'set runtimepath^=' . s:dein_repo_dir
 
-call dein#begin(s:dein_dir)
+" 設定開始
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-" 管理するプラグインを記述したファイル
-let s:toml = '~/.vim/.dein.toml'
-let s:lazy_toml = '~/.vim/.dein_lazy.toml'
+  " 管理するプラグインを記述したファイル
+  let s:toml      = '~/.vim/.dein.toml'
+  let s:lazy_toml = '~/.vim/.dein_lazy.toml'
 
-" 読み込み、キャッシュは :call dein#clear_cache() で消せます
-if dein#load_cache([expand('<sfile>', s:toml, s:lazy_toml)])
-  call dein#load_toml(s:toml, {'lazy': 0})
+  " TOML を読み込み、キャッシュしておく
+  call dein#load_toml(s:toml,      {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
-  call dein#save_cache()
-endif
 
-call dein#end()
+  " 設定終了
+  call dein#end()
+  call dein#save_state()
+endif
 
 " vimprocだけは最初にインストールしてほしい
 if dein#check_install(['vimproc'])
