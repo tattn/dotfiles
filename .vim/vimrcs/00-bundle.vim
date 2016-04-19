@@ -53,6 +53,7 @@ NeoBundle 'altercation/vim-colors-solarized'
 
 "" Beautiful StatusLine
 NeoBundle 'bling/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
 
 "" AutoComplete
 NeoBundle 'Shougo/neocomplete.vim'

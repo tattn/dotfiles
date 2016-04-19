@@ -13,6 +13,8 @@ help:
 deploy:
 	@echo '=====> deploy dotfiles...'
 	@$(foreach val, ${DOTFILES}, ln -sfnv $(abspath ${val}) ${HOME}/${val};)
+	@mkdir -p ${HOME}/.config
+	@ln -sfnv ${HOME}/.vim ${HOME}/.config/nvim
 # @$(foreach val, ${DOTFILES}, sudo chown `whoami` ${HOME}/${val};)
 
 

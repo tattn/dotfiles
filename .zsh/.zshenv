@@ -35,7 +35,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 path=(
-  {/usr/local,/usr,/usr/bin,/usr/local/bin}
+  {/usr/local,/usr,/usr/local/bin,/usr/bin}
   {/bin,/sbin}(N-/)
   $DOTPATH/bin
   $HOME/bin(N-/)
