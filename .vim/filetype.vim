@@ -22,8 +22,8 @@ augroup filetypedetect
   au BufRead,BufNewFile *.swift setf swift
   au BufRead,BufNewFile *.c,*.h setf c
   au BufRead,BufNewFile *.cpp,*.cxx,*hpp setf cpp
-  au BufRead,BufNewFile *.zshenv setf zshrc
-  au BufRead,BufNewFile *.zshrc setf zshrc
+  au BufRead,BufNewFile *.zshenv setf zsh
+  au BufRead,BufNewFile *.zshrc setf zsh
   au BufRead,BufNewFile *.markdown,*.md setf markdown
   au BufRead,BufNewFile *.tex setf tex
 
