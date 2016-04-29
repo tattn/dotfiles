@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<root>
+	<appdef>
+		<appname>TERMINAL</appname>
+		<equal>com.apple.Terminal</equal>
+	</appdef>
+	<appdef>
+		<appname>ITERM2</appname>
+		<equal>com.googlecode.iterm2</equal>
+	</appdef>
+	<appdef>
+		<appname>PYCHARM</appname>
+		<equal>com.jetbrains.pycharm</equal>
+	</appdef>
+	<appdef>
+		<appname>VSCODE</appname>
+		<equal>com.microsoft.VSCode</equal>
+	</appdef>
+	<appdef>
+		<appname>XCODE</appname>
+		<equal>com.apple.dt.Xcode</equal>
+	</appdef>
+	<windownamedef>
+		<name>VIM</name>
+		<regex>.*vim.*</regex>
+	</windownamedef>
+	<windownamedef>
+		<name>EMACS</name>
+		<regex>.*emacsclient.*</regex>
+	</windownamedef>
+	<item>
+		<name>Private Mapping</name>
+		<!-- vim -->
+		<item>
+			<name>Custom Vim Change CONTROL_J+EISUU</name>
+			<identifier>private.control_J_plus_eisuu</identifier>
+			<only>TERMINAL,ITERM2</only>
+			<windowname_only>VIM</windowname_only>
+			<autogen>
+				__KeyToKey__
+				KeyCode::J, ModifierFlag::CONTROL_L,
+				KeyCode::JIS_EISUU, KeyCode::J, ModifierFlag::CONTROL_L
+			</autogen>
+		</item>
+		<item>
+			<name>Custom Vim Change ESC+EISUU</name>
+			<identifier>private.escape_plus_eisuu</identifier>
+			<only>TERMINAL,ITERM2</only>
+			<windowname_only>VIM</windowname_only>
+			<autogen>
+				__KeyToKey__
+				KeyCode::ESCAPE,
+				KeyCode::JIS_EISUU, KeyCode::ESCAPE
+			</autogen>
+		</item>
+		<!-- Emacs -->
+		<item>
+			<name>Custom Emacs Change CONTROL_G+EISUU</name>
+			<identifier>private.control_g_plus_eisuu</identifier>
+			<only>TERMINAL,ITERM2</only>
+			<windowname_only>EMACS</windowname_only>
+			<autogen>
+				__KeyToKey__
+				KeyCode::G, ModifierFlag::CONTROL_L,
+				KeyCode::JIS_EISUU, KeyCode::G, ModifierFlag::CONTROL_L
+			</autogen>
+		</item>
+		<!-- PyCharm -->
+		<item>
+			<name>Custom PyCharm Change CONTROL_J+EISUU</name>
+			<identifier>private.control_J_plus_eisuu_pycharm</identifier>
+			<only>PYCHARM</only>
+			<autogen>
+				__KeyToKey__
+				KeyCode::J, ModifierFlag::CONTROL_L,
+				KeyCode::JIS_EISUU, KeyCode::ESCAPE
+			</autogen>
+		</item>
+		<item>
+			<name>Custom PyCharm Change ESC+EISUU</name>
+			<identifier>private.escape_plus_eisuu_pycharm</identifier>
+			<only>PYCHARM</only>
+			<autogen>
+				__KeyToKey__
+				KeyCode::ESCAPE,
+				KeyCode::JIS_EISUU, KeyCode::ESCAPE
+			</autogen>
+		</item>
+		<!-- VSCode -->
+		<item>
+			<name>Custom VSCode Ctrl+J to ESC</name>
+			<identifier>private.ctrl_j_to_escape_vscode</identifier>
+			<only>VSCODE</only>
+			<autogen>
+				__KeyToKey__
+				KeyCode::J, ModifierFlag::CONTROL_L,
+				KeyCode::JIS_EISUU, KeyCode::ESCAPE,
+			</autogen>
+		</item>             
+		<!-- Xcode -->
+		<item>
+			<name>Custom XVim Change CONTROL_J+EISUU</name>
+			<identifier>private.control_J_plus_eisuu_xcode</identifier>
+			<only>XCODE</only>
+			<autogen>
+				__KeyToKey__
+				KeyCode::J, ModifierFlag::CONTROL_L,
+				KeyCode::JIS_EISUU, KeyCode::J, ModifierFlag::CONTROL_L
+			</autogen>
+		</item>
+	</item>
+</root>

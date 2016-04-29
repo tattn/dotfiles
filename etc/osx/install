@@ -8,6 +8,7 @@ do
     fi
 done
 
+log_info "====> Install DVTIbeamCursor for Xcode"
 curl -L https://raw.githubusercontent.com/egold/better-xcode-ibeam-cursor/master/install.sh | bash 
 
 mkdir -p $DOTPATH/plugins
@@ -37,10 +38,15 @@ if [ ! -f $DOTPATH/.zsh/completions/hub.zsh_completion ]; then
 	popd
 fi
 
-if [ ! -f $DOTPATH/bin ]; then
+if [ ! -f $DOTPATH/bin/imgcat ]; then
 	pushd $DOTPATH/bin
 	wget -nc https://raw.github.com/gnachman/iTerm2/master/tests/imgcat
 	chmod +x imgcat
 	popd
+fi
+
+if [ ! -f $HOME/Library/Application\ Support/Karabiner/private.xml ]; then
+	log_info "====> Setup karabiner"
+	cp $DOTPATH/plugins/karabiner/private.xml $HOME/Library/Application\ Support/Karabiner/private.xml
 fi
 
