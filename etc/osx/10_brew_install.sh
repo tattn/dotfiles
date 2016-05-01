@@ -9,6 +9,7 @@ install_if_needed() {
 	fi
 }
 
+install_if_needed wget
 install_if_needed coreutils
 install_if_needed reattach-to-user-namespace
 install_if_needed hub
