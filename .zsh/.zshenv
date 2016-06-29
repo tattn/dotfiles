@@ -40,6 +40,7 @@ path=(
   $DOTPATH/bin
   $HOME/bin(N-/)
   $HOME/.anyenv/bin(N-/)
+  /usr/local/share/git-core/contrib/diff-highlight(N-/)
 )
 manpath=(
   {/usr,/usr/local}/share/man(N-/)
