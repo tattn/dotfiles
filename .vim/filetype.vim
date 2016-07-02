@@ -15,6 +15,7 @@ augroup filetypedetect
   au BufRead,BufNewFile *.rb setf ruby
   au BufRead,BufNewFile [rR]antfile,*.rant,[rR]akefile,*.rake, Cartfile, Podfile setf ruby
   au BufRead,BufNewFile *.styl setf stylus
+  au BufRead,BufNewFile *.yaml,*yml setf yaml
   au BufRead,BufNewFile *.haml setf haml
   au BufRead,BufNewFile *.slim setf slim
   au BufRead,BufNewFile *.py setf python
@@ -26,7 +27,6 @@ augroup filetypedetect
   au BufRead,BufNewFile *.zshrc setf zsh
   au BufRead,BufNewFile *.markdown,*.md setf markdown
   au BufRead,BufNewFile *.tex setf tex
-
   au BufRead,BufNewFile *.sh,*.zsh setf sh
 
   au BufNewFile,BufRead .bashrc*,bashrc,bash.bashrc,.bash[_-]profile*,.bash[_-]logout*,.bash[_-]aliases*,*.bash,*/{,.}bash[_-]completion{,.d,.sh}{,/*},*.ebuild,*.eclass call SetFileTypeSH("bash")
