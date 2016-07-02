@@ -1,6 +1,6 @@
 [user]
-	email = tatsuyars@yahoo.co.jp
-	name = Tatsuya Tanaka (tattn)
+	email = tatstana@yahoo-corp.jp
+	name = tatstana (Tanaka Tatsuya)
 
 [core]
 	pager = less -q -R
@@ -15,6 +15,21 @@
 
 [merge]
 	tool = vimdiff2
+
+# [pager]
+# 	log  = (diff-highlight 2>/dev/null || cat) | ${PAGER:-less}
+# 	show = (diff-highlight 2>/dev/null || cat) | ${PAGER:-less}
+# 	diff = (diff-highlight 2>/dev/null || cat) | ${PAGER:-less}
+
+[interactive]
+	diffFilter = (diff-highlight 2>/dev/null || cat)
+[diff]
+	compactionHeuristic = true
+
+[credential]
+  helper = osxkeychain
+[credential "https://github.com"]
+  username = tatstana
 
 [alias]
 	ad = add
