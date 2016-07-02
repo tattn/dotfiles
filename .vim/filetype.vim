@@ -13,7 +13,7 @@ augroup filetypedetect
   au BufRead,BufNewFile *.js,*.jsx setf javascript
   au BufRead,BufNewFile *.html setf html
   au BufRead,BufNewFile *.rb setf ruby
-  au BufRead,BufNewFile [rR]antfile,*.rant,[rR]akefile,*.rake	setf ruby
+  au BufRead,BufNewFile [rR]antfile,*.rant,[rR]akefile,*.rake, Cartfile, Podfile setf ruby
   au BufRead,BufNewFile *.styl setf stylus
   au BufRead,BufNewFile *.haml setf haml
   au BufRead,BufNewFile *.slim setf slim
