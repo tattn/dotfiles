@@ -1,6 +1,6 @@
 [user]
-	email = tatstana@yahoo-corp.jp
-	name = tatstana (Tanaka Tatsuya)
+	email = tanakasan2525@gmail.com
+	name = tattn (Tatsuya Tanaka)
 
 [core]
 	pager = less -q -R
@@ -94,3 +94,9 @@
 	# alias の確認
 	alias = !git config --get-regexp ^alias. | sed -e 's/^alias.//g'
 
+[push]
+	default = matching
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true

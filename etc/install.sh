@@ -34,7 +34,8 @@ if check anyenv; then
 	else
 		log_info "====> Install $dir"
 		git clone https://github.com/riywo/anyenv ~/.anyenv
-		exec $SHELL -l
+		echo 'Please run `exec $SHELL -l` and make install-utility'
+		exit 0
 	fi
 fi
 
@@ -48,14 +49,14 @@ if check rbenv; then
 	pushd ~/.anyenv/envs/rbenv/plugins
 	git clone git://github.com/ianheggie/rbenv-binstubs.git
 	popd
-	exec $SHELL -l
+	#exec $SHELL -l
 fi
 
 ##### Pyenv
 if check pyenv; then
 	log_info "====> Install Pyenv"
 	anyenv install pyenv
-	exec $SHELL -l
+	#exec $SHELL -l
 fi
 
 zsh_plugin() {
