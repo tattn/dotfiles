@@ -1,7 +1,5 @@
 tap 'caskroom/cask'
 
-#cask 'iterm2'
-
 # for Vim
 brew 'lua'
 cask 'xquartz'
@@ -20,4 +18,12 @@ brew 'git-lfs'
 # for Github
 cask 'trailer'
 
+
+# for Life🐈
+cask 'bettertouchtool'
+cask 'karabiner'
 cask 'atom'
+#cask 'kobito'
+#cask 'iterm2'
+
+

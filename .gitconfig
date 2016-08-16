@@ -29,7 +29,7 @@
 [credential]
   helper = osxkeychain
 [credential "https://github.com"]
-  username = tatstana
+  username = tattn
 
 [alias]
 	ad = add
