@@ -1,6 +1,6 @@
 tap 'caskroom/cask'
 
-cask 'iterm2'
+#cask 'iterm2'
 
 # for Vim
 brew 'lua'
@@ -12,6 +12,12 @@ cask 'google-japanese-ime'
 # for iOS
 cask 'realm-browser'
 brew 'swiftlint'
+brew 'carthage'
+
+# for Git
+brew 'git-lfs'
 
 # for Github
 cask 'trailer'
+
+cask 'atom'
