@@ -4,6 +4,7 @@ tap 'caskroom/cask'
 brew 'lua'
 cask 'xquartz'
 brew 'vim', args:['with-lua', 'with-perl', 'HEAD', 'override-system-vi']
+brew 'neovim/neovim/neovim'
 
 cask 'google-japanese-ime'
 
@@ -17,6 +18,18 @@ brew 'git-lfs'
 
 # for Github
 cask 'trailer'
+
+# for Terminal
+brew 'wget'
+brew 'coreutils'
+brew 'reattach-to-user-namespace'
+brew 'hub'
+brew 'tmux'
+brew 'sshrc'
+tap 'tldr-pages/tldr'
+brew 'tldr'
+brew 'git-extras'
+brew 'peco'
 
 
 # for Life🐈
