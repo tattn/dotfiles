@@ -41,6 +41,8 @@ path=(
   $HOME/bin(N-/)
   $HOME/.anyenv/bin(N-/)
   #/usr/local/share/git-core/contrib/diff-highlight(N-/)
+  $HOME/Library/Android/sdk/platform-tools(N-/)
+  $HOME/Library/Android/sdk/tools(N-/)
 )
 manpath=(
   {/usr,/usr/local}/share/man(N-/)

@@ -15,6 +15,7 @@ brew 'carthage'
 
 # for Git
 brew 'git-lfs'
+brew 'gibo'
 
 # for Github
 cask 'trailer'
@@ -30,6 +31,8 @@ tap 'tldr-pages/tldr'
 brew 'tldr'
 brew 'git-extras'
 brew 'peco'
+brew 'source-highlight'
+brew 'jq'
 
 
 # for Life🐈

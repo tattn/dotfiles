@@ -73,6 +73,18 @@ zstyle ':completion:*' completer \
     _oldlist _complete _match _ignored _approximate _list _history
 zstyle ':completion:*' recent-dirs-insert both # Add recent-dirs
 
+# peco
+if is_osx; then
+	function peco-history-selection() {
+		BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+		CURSOR=$#BUFFER
+		zle reset-prompt
+	}
+
+	zle -N peco-history-selection
+	bindkey '^R' peco-history-selection
+fi
+
 # load my prompt style
 source $ZDOTDIR/.zprompt
 source $ZDOTDIR/completions/_tattn.zsh

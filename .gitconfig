@@ -27,9 +27,16 @@
 	compactionHeuristic = true
 
 [credential]
-  helper = osxkeychain
+	helper = osxkeychain
 [credential "https://github.com"]
-  username = tattn
+	username = tattn
+
+[push]
+	default = matching
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
 
 [alias]
 	ad = add
@@ -57,6 +64,10 @@
 	bm = branch --merged
 	bn = branch --no-merged
 
+	# マージ済みのブランチをすべて削除
+	# delete-merged-branches = branch --merged | grep -vE '^\*|master$|develop$' | xargs -I % git branch -d %
+
+
 	# log
 	ll = log --pretty=oneline
 	ls = log --stat          # logに変更されたファイルも一緒に出す
@@ -76,6 +87,7 @@
 	dw = diff --color-words
 	dc = diff --cached
 	ds = diff --staged
+	d0 = diff HEAD
 	d1 = diff HEAD~
 	d2 = diff HEAD~~
 	d3 = diff HEAD~~~
@@ -92,11 +104,5 @@
 	cfgrep = config --get-regexp
 
 	# alias の確認
-	alias = !git config --get-regexp ^alias. | sed -e 's/^alias.//g'
+	aliases = !git config --get-regexp ^alias. | sed -e 's/^alias.//g'
 
-[push]
-	default = matching
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true

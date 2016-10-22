@@ -11,6 +11,7 @@ augroup filetypedetect
   au BufRead,BufNewFile *.vim setf vim
   au BufRead,BufNewFile Gemfile setf ruby
   au BufRead,BufNewFile *.js,*.jsx setf javascript
+  au BufRead,BufNewFile *.coffee setf coffee
   au BufRead,BufNewFile *.html setf html
   au BufRead,BufNewFile *.rb setf ruby
   au BufRead,BufNewFile [rR]antfile,*.rant,[rR]akefile,*.rake, Cartfile, Podfile setf ruby
@@ -28,11 +29,13 @@ augroup filetypedetect
   au BufRead,BufNewFile *.markdown,*.md setf markdown
   au BufRead,BufNewFile *.tex setf tex
   au BufRead,BufNewFile *.sh,*.zsh setf sh
-
   au BufNewFile,BufRead .bashrc*,bashrc,bash.bashrc,.bash[_-]profile*,.bash[_-]logout*,.bash[_-]aliases*,*.bash,*/{,.}bash[_-]completion{,.d,.sh}{,/*},*.ebuild,*.eclass call SetFileTypeSH("bash")
   au BufNewFile,BufRead .kshrc*,*.ksh call SetFileTypeSH("ksh")
   au BufNewFile,BufRead */etc/profile,.profile*,*.sh,*.env call SetFileTypeSH(getline(1))
   au BufNewFile,BufRead .zprofile,*/etc/zprofile,.zfbfmarks  setf zsh
   au BufNewFile,BufRead .zsh*,.zlog*,.zcompdump*  call s:StarSetf('zsh')
   au BufNewFile,BufRead *.zsh			setf zsh
+  au BufRead,BufNewFile .gitconfig setf gitconfig
+	au BufNewFile,BufRead *.gyp,*.gypi setf gyp
+	au BufNewFile,BufRead *.swift set ft=swift
 augroup END

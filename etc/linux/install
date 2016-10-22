@@ -35,6 +35,12 @@ if ! gem list tldrb | grep tldrb; then
 	gem install tldrb
 fi
 
+if ! has jq; then
+	wget http://stedolan.github.io/jq/download/linux64/jq
+	chmod 755 jq
+	mv jq /usr/local/bin/
+end
+
 sudo apt-get install git-extras
 
 sudo add-apt-repository ppa:russell-s-stewart/ppa
