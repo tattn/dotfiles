@@ -38,8 +38,8 @@ fi
 if ! has jq; then
 	wget http://stedolan.github.io/jq/download/linux64/jq
 	chmod 755 jq
-	mv jq /usr/local/bin/
-end
+	sudo mv jq /usr/local/bin/
+fi
 
 sudo apt-get install git-extras
 
