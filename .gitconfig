@@ -4,6 +4,7 @@
 
 [core]
 	pager = less -q -R
+	excludesfile = ~/.gitignore_global
 	# editor = /usr/local/Cellar/vim/*/bin/vim
 
 [color]
@@ -102,6 +103,11 @@
 	# config
 	cfg = config
 	cfgrep = config --get-regexp
+
+	# user
+	# Usage: git user                => show user
+	#        git user "name" "email" => set user
+	user = "!f() { if [ $# -eq 0 ]; then git config --get user.name && git config --get user.email; elif [ $# -eq 2 ]; then git config --local user.name \"$1\" && git config --local user.email \"$2\"; fi }; f"
 
 	# alias の確認
 	aliases = !git config --get-regexp ^alias. | sed -e 's/^alias.//g'

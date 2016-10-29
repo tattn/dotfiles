@@ -108,5 +108,15 @@
 				KeyCode::JIS_EISUU, KeyCode::J, ModifierFlag::CONTROL_L
 			</autogen>
 		</item>
+
+		<item>
+			<name>Ctrl-L+J also works as Escape</name>
+			<identifier>private.ctrl_j_to_escape</identifier>
+			<autogen>
+				__KeyToKey__
+				KeyCode::J, ModifierFlag::CONTROL_L,
+				KeyCode::ESCAPE, KeyCode::JIS_EISUU
+			</autogen>
+		</item>
 	</item>
 </root>
