@@ -11,6 +11,8 @@ augroup filetypedetect
   au BufRead,BufNewFile *.vim setf vim
   au BufRead,BufNewFile Gemfile setf ruby
   au BufRead,BufNewFile *.js,*.jsx setf javascript
+  au BufRead,BufNewFile *.json setf json
+  au BufRead,BufNewFile *.xml setf xml
   au BufRead,BufNewFile *.coffee setf coffee
   au BufRead,BufNewFile *.html setf html
   au BufRead,BufNewFile *.rb setf ruby
