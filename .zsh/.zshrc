@@ -73,18 +73,6 @@ zstyle ':completion:*' completer \
     _oldlist _complete _match _ignored _approximate _list _history
 zstyle ':completion:*' recent-dirs-insert both # Add recent-dirs
 
-# peco
-if is_osx; then
-	function peco-history-selection() {
-		BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
-		CURSOR=$#BUFFER
-		zle reset-prompt
-	}
-
-	zle -N peco-history-selection
-	bindkey '^R' peco-history-selection
-fi
-
 # load my prompt style
 source $ZDOTDIR/.zprompt
 source $ZDOTDIR/completions/_tattn.zsh
@@ -151,6 +139,27 @@ fi
 has anyenv && eval "$(anyenv init - zsh)"
 has direnv && eval "$(direnv hook zsh)"
 has hub    && eval "$(hub alias -s)"
+
+# zplug
+if [ -f ~/.zplug/init.zsh ]; then
+	source ~/.zplug/init.zsh
+
+	zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
+	function select-history() {
+		BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+		CURSOR=$#BUFFER
+	}
+	zle -N select-history
+	bindkey '^r' select-history
+
+	if ! zplug check --verbose; then
+		printf "Install? [y/N]: "
+		if read -q; then
+			echo; zplug install
+		fi
+	fi
+	zplug load --verbose
+fi
 
 ZSH_PLUGINS=$ZDOTDIR/plugins
 fpath=(

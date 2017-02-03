@@ -84,7 +84,11 @@ _popd() {
 }
 
 if has zsh; then
-	curl -sL zplug.sh/installer | zsh
+	if [ ! -d ~/.zplug ]; then
+		curl -sL zplug.sh/installer | zsh
+		exec $SHELL -l
+	fi
+	zplug install
 
 	mkdir -p $DOTPATH/.zsh/plugins
 	_pushd $DOTPATH/.zsh/plugins
