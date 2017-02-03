@@ -86,6 +86,7 @@ _popd() {
 if has zsh; then
 	if [ ! -d ~/.zplug ]; then
 		curl -sL zplug.sh/installer | zsh
+		echo "need to reload .zshrc & .zshenv"
 		exit 0
 	fi
 	zplug install
@@ -93,8 +94,6 @@ if has zsh; then
 	mkdir -p $DOTPATH/.zsh/plugins
 	_pushd $DOTPATH/.zsh/plugins
 	zsh_plugin zaw && gitclone zsh-users/zaw
-	zsh_plugin "zsh-completions" && gitclone zsh-users/zsh-completions
-	zsh_plugin "cd-gitroot" && gitclone mollifier/cd-gitroot
 	_popd
 fi
 

@@ -90,7 +90,10 @@ alias la='ls -haFG'
 alias ll='ls -hlFG'
 alias lla='ls -hlaFG'
 alias lsd='ls -ld *(-/DN)'
-is_osx && alias ls='gls --color=auto -FG'
+if is_osx; then
+	alias ls='gls --color=auto -FG'
+	alias dircolors='gdircolors'
+fi
 
 alias reload='exec zsh -l'
 
@@ -152,8 +155,16 @@ if [ -f ~/.zplug/init.zsh ]; then
 	zle -N select-history
 	bindkey '^r' select-history
 
+	zstyle ':notify:*' command-complete-timeout 5
+	zplug "marzocchi/zsh-notify"
+
+
 	zplug "supercrabtree/k"
 	zplug "Tarrasch/zsh-bd"
+	zplug "mollifier/cd-gitroot"
+	zplug "zsh-users/zsh-completions"
+	zplug "glidenote/hub-zsh-completion"
+	zplug 'Valodim/zsh-curl-completion'
 
 	zplug "b4b4r07/enhancd", use:init.sh  # or wting/autojump
 	export ENHANCD_FILTER=fzf
@@ -172,20 +183,9 @@ fi
 
 ZSH_PLUGINS=$ZDOTDIR/plugins
 fpath=(
-	$ZSH_PLUGINS/zsh-completions/src(N-/)
-	$ZSH_PLUGINS/cd-gitroot(N-/)
-	$ZDOTDIR/completions/hub.zsh_completion(N-/)
+	# $ZDOTDIR/completions/hub.zsh_completion(N-/)
 	$fpath
 )
-
-[ -f $ZSH_PLUGINS/k/k.sh ] && source $ZSH_PLUGINS/k/k.sh
-[ -f $ZSH_PLUGINS/bd/bd.zsh ] && source $ZSH_PLUGINS/bd/bd.zsh
-[ -d $ZSH_PLUGINS/cd-gitroot ] && autoload -Uz cd-gitroot
-
-if [ -d $ZSH_PLUGINS/zsh-notify ]; then
-	zstyle ':notify:*' command-complete-timeout 5
-	source $ZSH_PLUGINS/zsh-notify/notify.plugin.zsh
-fi
 
 if [ -f $ZSH_PLUGINS/zaw/zaw.zsh ]; then
 	source $ZSH_PLUGINS/zaw/zaw.zsh
@@ -195,17 +195,6 @@ if [ -f $ZSH_PLUGINS/zaw/zaw.zsh ]; then
 	bindkey '^X^B' zaw-git-branches
 	bindkey '^X^P' zaw-process
 	bindkey '^X^A' zaw-tmux
-fi
-
-[ -s ~/.autojump/etc/profile.d/autojump.sh ] && \
-	source ~/.autojump/etc/profile.d/autojump.sh
-
-if [ -d $ZSH_PLUGINS/dircolors-solarized ]; then
-	if is_osx; then
-		eval $(gdircolors $ZSH_PLUGINS/dircolors-solarized/dircolors.ansi-dark)
-	else
-		eval $(dircolors $ZSH_PLUGINS/dircolors-solarized/dircolors.ansi-dark)
-	fi
 fi
 
 # start up
