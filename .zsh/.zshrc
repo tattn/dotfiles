@@ -134,6 +134,15 @@ if has docker; then
 	docalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
 fi
 
+## Apache Spark
+if has spark-shell; then
+	if is_osx; then
+		export SPARK_HOME=/usr/local/Cellar/apache-spark/2.1.0
+		export PATH=$PATH:$SPARK_HOME/bin
+	fi
+fi
+
+
 ## RealmBrowser
 if is_osx; then
     alias realm-open="open $(find ~/Library/Developer/CoreSimulator/Devices/$(ls -t1 ~/Library/Developer/CoreSimulator/Devices/ | head -1)/data/Containers/Data/Application/ -name \*.realm)"
@@ -155,6 +164,11 @@ fpath=(
 [ -f $ZSH_PLUGINS/bd/bd.zsh ] && source $ZSH_PLUGINS/bd/bd.zsh
 [ -d $ZSH_PLUGINS/cd-gitroot ] && autoload -Uz cd-gitroot
 
+if [ -d $ZSH_PLUGINS/zsh-notify ]; then
+	zstyle ':notify:*' command-complete-timeout 5
+	source $ZSH_PLUGINS/zsh-notify/notify.plugin.zsh
+fi
+
 if [ -f $ZSH_PLUGINS/zaw/zaw.zsh ]; then
 	source $ZSH_PLUGINS/zaw/zaw.zsh
 	bindkey '^@' zaw-cdr
@@ -162,7 +176,7 @@ if [ -f $ZSH_PLUGINS/zaw/zaw.zsh ]; then
 	bindkey '^X^F' zaw-git-files
 	bindkey '^X^B' zaw-git-branches
 	bindkey '^X^P' zaw-process
-	bindkey '^A' zaw-tmux
+	bindkey '^X^A' zaw-tmux
 fi
 
 [ -s ~/.autojump/etc/profile.d/autojump.sh ] && \

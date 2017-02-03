@@ -33,12 +33,14 @@ brew 'git-extras'
 brew 'peco'
 brew 'source-highlight'
 brew 'jq'
+brew 'terminal-notifier'
 
 
 # for Life🐈
 cask 'bettertouchtool'
 cask 'karabiner'
 cask 'atom'
+cask 'dash'
 #cask 'kobito'
 #cask 'iterm2'
 

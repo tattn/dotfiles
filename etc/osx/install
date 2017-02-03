@@ -39,6 +39,7 @@ if [ ! -f $DOTPATH/.zsh/completions/hub.zsh_completion ]; then
 fi
 
 if [ ! -f $DOTPATH/bin/imgcat ]; then
+	log_info "====> Install imgcat"
 	pushd $DOTPATH/bin
 	wget -nc https://raw.github.com/gnachman/iTerm2/master/tests/imgcat
 	chmod +x imgcat
@@ -48,5 +49,12 @@ fi
 if [ ! -f $HOME/Library/Application\ Support/Karabiner/private.xml ]; then
 	log_info "====> Setup karabiner"
 	cp $DOTPATH/plugins/karabiner/private.xml $HOME/Library/Application\ Support/Karabiner/private.xml
+fi
+
+if [ ! -f $DOTPATH/.zsh/plugins/zsh-notify ]; then
+	log_info "====> Install notify.plugin"
+	pushd $DOTPATH/.zsh/plugins/
+	git clone https://github.com/marzocchi/zsh-notify
+	popd
 fi
 
