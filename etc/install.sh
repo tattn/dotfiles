@@ -84,6 +84,8 @@ _popd() {
 }
 
 if has zsh; then
+	curl -sL zplug.sh/installer | zsh
+
 	mkdir -p $DOTPATH/.zsh/plugins
 	_pushd $DOTPATH/.zsh/plugins
 	zsh_plugin zaw && gitclone zsh-users/zaw
