@@ -152,6 +152,15 @@ if [ -f ~/.zplug/init.zsh ]; then
 	zle -N select-history
 	bindkey '^r' select-history
 
+	zplug "supercrabtree/k"
+	zplug "Tarrasch/zsh-bd"
+
+	zplug "b4b4r07/enhancd", use:init.sh  # or wting/autojump
+	export ENHANCD_FILTER=fzf
+
+	zplug "joel-porquet/zsh-dircolors-solarized"
+	[[ ! -e $HOME/.zsh-dircolors.config ]] && echo "dircolors.ansi-universal" > $HOME/.zsh-dircolors.config
+
 	if ! zplug check --verbose; then
 		printf "Install? [y/N]: "
 		if read -q; then

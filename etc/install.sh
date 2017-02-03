@@ -86,26 +86,13 @@ _popd() {
 if has zsh; then
 	if [ ! -d ~/.zplug ]; then
 		curl -sL zplug.sh/installer | zsh
-		exec $SHELL -l
+		exit 0
 	fi
 	zplug install
 
 	mkdir -p $DOTPATH/.zsh/plugins
 	_pushd $DOTPATH/.zsh/plugins
 	zsh_plugin zaw && gitclone zsh-users/zaw
-	if zsh_plugin bd; then
-		mkdir -p bd
-		gitcurl Tarrasch/zsh-bd bd.zsh bd/bd.zsh
-	fi
-	if zsh_plugin k; then
-		mkdir -p k
-		curl https://raw.githubusercontent.com/rimraf/k/master/k.sh > k/k.sh
-	fi
-	if zsh_plugin autojump; then
-		gitclone joelthelion/autojump
-		pushd autojump && ./install.py && popd
-	fi
-	zsh_plugin "dircolors-solarized" && gitclone seebi/dircolors-solarized
 	zsh_plugin "zsh-completions" && gitclone zsh-users/zsh-completions
 	zsh_plugin "cd-gitroot" && gitclone mollifier/cd-gitroot
 	_popd
