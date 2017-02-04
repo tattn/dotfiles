@@ -62,6 +62,23 @@ zplug load --verbose
 # functions using zplug
 ############################################
 
+# fzf #############
+
+fzfpreviewer() {
+	local viewer
+	viewer=$(cat <<SHELL
+	if file {} | grep -q text; then
+		pygmentize {} 2>/dev/null || less {}
+	else
+		file {} \
+			| sed -E "s/^([^:]*)(:.*)$/$fg[yellow]\1$reset_color\2/g"
+	fi
+SHELL
+	)
+
+	fzf --ansi --preview="$viewer" --preview-window=up:75% --bind "enter:execute(vim {})" $@
+}
+
 # Git #############
 
 gitco() {
@@ -71,6 +88,24 @@ gitco() {
 	git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 zle -N gitco
+
+gitst() {
+	local out q k
+	diffviewer() {
+		local viewer
+		viewer="echo {} | awk '{print \$2}' | xargs git diff | pygmentize"
+		fzf --ansi --preview="$viewer" --preview-window=up:75% --expect=ctrl-a,ctrl-d
+	}
+	while out=$(git status --short | diffviewer); do
+		k=$(head -1 <<< "$out")
+		q=$(head -2 <<< "$out" | tail -1)
+		if [ "$k" = ctrl-d ]; then
+			echo $q | awk '{print $2}' | xargs git reset HEAD  > /dev/null 2>&1
+		elif [ "$k" = ctrl-a ]; then
+			echo $q | awk '{print $2}' | xargs git add
+		fi
+	done
+}
 
 gitstad() {
 	git st | sed 1d | fzf | awk '{print $2}' | xargs git add
