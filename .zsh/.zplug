@@ -1,3 +1,5 @@
+# vim:ft=zplug
+
 ############################################
 # zplug
 ############################################
@@ -13,9 +15,14 @@ function select-history() {
 zle -N select-history
 bindkey '^r' select-history
 
+zplug "junegunn/fzf", as:command, use:'bin/fzf-tmux'
+zplug "junegunn/fzf", as:plugin, use:'shell/*.zsh'
+export FZF_COMPLETION_TRIGGER='**'
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
+
 zstyle ':notify:*' command-complete-timeout 5
 zplug "marzocchi/zsh-notify"
-
 
 zplug "supercrabtree/k"
 zplug "Tarrasch/zsh-bd"
@@ -47,10 +54,19 @@ zplug load --verbose
 gitco() {
 	local branches branch
 	branches=$(git branch -vv) &&
-		branch=$(echo "$branches" | fzf +m) &&
-		git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+	branch=$(echo "$branches" | fzf +m) &&
+	git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 zle -N gitco
+
+gitstad() {
+	git st | sed 1d | fzf | awk '{print $2}' | xargs git add
+}
+
+gitstdiff() {
+	git st | sed 1d | fzf | awk '{print $2}' | xargs git diff
+}
+
 
 gitlog() {
 	git log --graph --color=always \
