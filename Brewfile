@@ -34,6 +34,12 @@ brew 'source-highlight'
 brew 'jq'
 brew 'terminal-notifier'
 
+# for Go
+brew 'go'
+
+# for Web Dev
+brew 'wrk'
+brew 'mitmproxy'
 
 # for Life🐈
 cask 'bettertouchtool'

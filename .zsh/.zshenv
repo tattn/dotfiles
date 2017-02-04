@@ -22,6 +22,7 @@ export PAGER=less
 # Less status line
 export LESS='-R -f -X -i -P ?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
 export LESSCHARSET='utf-8'
+#export LESSOPEN='| /usr/local/bin/src-hilite-lesspipe.sh %s' # source-highlight
 
 # LESS man page colors (makes Man pages more readable).
 alias man='LANG=C man'
@@ -33,6 +34,9 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[00;44;37m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+
+# Go
+export GOPATH=$HOME/.go
 
 path=(
   {/usr/local,/usr,/usr/local/bin,/usr/bin}

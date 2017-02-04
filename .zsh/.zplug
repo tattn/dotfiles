@@ -4,6 +4,9 @@
 # zplug
 ############################################
 
+ZPLUG_SUDO_PASSWORD=
+ZPLUG_PROTOCOL=ssh
+
 source ~/.zplug/init.zsh
 
 zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
@@ -21,6 +24,7 @@ export FZF_COMPLETION_TRIGGER='**'
 bindkey '^T' fzf-completion
 bindkey '^I' $fzf_default_completion
 
+
 zstyle ':notify:*' command-complete-timeout 5
 zplug "marzocchi/zsh-notify"
 
@@ -28,8 +32,17 @@ zplug "supercrabtree/k"
 zplug "Tarrasch/zsh-bd"
 zplug "mollifier/cd-gitroot"
 zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-history-substring-search", defer:3
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "glidenote/hub-zsh-completion"
 zplug 'Valodim/zsh-curl-completion'
+zplug "fujiwara/nssh", as:command, from:gh-r, rename-to:"nssh", frozen:1
+zplug "tcnksm/ghr", as:command, from:gh-r
+zplug "mitmproxy/mitmproxy", as:command, hook-build:"sudo python ./setup.py install"
+zplug "reorx/httpstat", as:command, use:'(httpstat).py', rename-to:'$1', if:'(( $+commands[python] ))'
+zplug 'dtan4/ghrls', as:command, from:gh-r
+zplug 'tianon/gosleep', as:command, hook-build:'go get -d ./src/gosleep && go build ./src/gosleep'
+zplug 'Code-Hex/pget', as:command, from:gh-r
 
 zplug "b4b4r07/enhancd", use:init.sh  # or wting/autojump
 export ENHANCD_FILTER=fzf
