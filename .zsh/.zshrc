@@ -145,40 +145,7 @@ has hub    && eval "$(hub alias -s)"
 
 # zplug
 if [ -f ~/.zplug/init.zsh ]; then
-	source ~/.zplug/init.zsh
-
-	zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
-	function select-history() {
-		BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
-		CURSOR=$#BUFFER
-	}
-	zle -N select-history
-	bindkey '^r' select-history
-
-	zstyle ':notify:*' command-complete-timeout 5
-	zplug "marzocchi/zsh-notify"
-
-
-	zplug "supercrabtree/k"
-	zplug "Tarrasch/zsh-bd"
-	zplug "mollifier/cd-gitroot"
-	zplug "zsh-users/zsh-completions"
-	zplug "glidenote/hub-zsh-completion"
-	zplug 'Valodim/zsh-curl-completion'
-
-	zplug "b4b4r07/enhancd", use:init.sh  # or wting/autojump
-	export ENHANCD_FILTER=fzf
-
-	zplug "joel-porquet/zsh-dircolors-solarized"
-	[[ ! -e $HOME/.zsh-dircolors.config ]] && echo "dircolors.ansi-universal" > $HOME/.zsh-dircolors.config
-
-	if ! zplug check --verbose; then
-		printf "Install? [y/N]: "
-		if read -q; then
-			echo; zplug install
-		fi
-	fi
-	zplug load --verbose
+	source ${ZDOTDIR}/.zplug
 fi
 
 ZSH_PLUGINS=$ZDOTDIR/plugins
@@ -186,16 +153,6 @@ fpath=(
 	# $ZDOTDIR/completions/hub.zsh_completion(N-/)
 	$fpath
 )
-
-if [ -f $ZSH_PLUGINS/zaw/zaw.zsh ]; then
-	source $ZSH_PLUGINS/zaw/zaw.zsh
-	bindkey '^@' zaw-cdr
-	bindkey '^R' zaw-history
-	bindkey '^X^F' zaw-git-files
-	bindkey '^X^B' zaw-git-branches
-	bindkey '^X^P' zaw-process
-	bindkey '^X^A' zaw-tmux
-fi
 
 # start up
 tattn neko

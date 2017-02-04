@@ -93,7 +93,7 @@ if has zsh; then
 
 	mkdir -p $DOTPATH/.zsh/plugins
 	_pushd $DOTPATH/.zsh/plugins
-	zsh_plugin zaw && gitclone zsh-users/zaw
+	# zsh_plugin zaw && gitclone zsh-users/zaw
 	_popd
 fi
 
