@@ -71,3 +71,8 @@ if has('nvim')
   tnoremap <a-l>      <c-\><c-n><c-w>l
 endif
 
+augroup keymap_html
+	autocmd!
+	autocmd FileType html nnoremap <F5> :w <Bar> !open %<CR>
+augroup END
+
