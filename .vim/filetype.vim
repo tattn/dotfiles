@@ -16,7 +16,7 @@ augroup filetypedetect
   au BufRead,BufNewFile *.coffee setf coffee
   au BufRead,BufNewFile *.html setf html
   au BufRead,BufNewFile *.rb setf ruby
-  au BufRead,BufNewFile [rR]antfile,*.rant,[rR]akefile,*.rake, Cartfile, Podfile setf ruby
+  au BufRead,BufNewFile [rR]antfile,*.rant,[rR]akefile,*.rake,Cartfile,Podfile,Fastfile setf ruby
   au BufRead,BufNewFile *.styl setf stylus
   au BufRead,BufNewFile *.yaml,*yml setf yaml
   au BufRead,BufNewFile *.haml setf haml
