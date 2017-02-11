@@ -1,4 +1,4 @@
-# vim:ft=zplug
+# vim:ft=zsh
 
 ############################################
 # zplug
@@ -90,19 +90,24 @@ gitco() {
 zle -N gitco
 
 gitst() {
-	local out q k
+	local out q k f
 	diffviewer() {
 		local viewer
 		viewer="echo {} | awk '{print \$2}' | xargs git diff | pygmentize"
-		fzf --ansi --preview="$viewer" --preview-window=up:75% --expect=ctrl-a,ctrl-d
+		fzf --ansi --preview="$viewer" --preview-window=up:75% --expect=ctrl-a,ctrl-d,ctrl-m,ctrl-e
 	}
 	while out=$(git status --short | diffviewer); do
 		k=$(head -1 <<< "$out")
 		q=$(head -2 <<< "$out" | tail -1)
+		f=$(echo $q | awk '{print $2}')
 		if [ "$k" = ctrl-d ]; then
-			echo $q | awk '{print $2}' | xargs git reset HEAD  > /dev/null 2>&1
+			git reset HEAD $f > /dev/null 2>&1
 		elif [ "$k" = ctrl-a ]; then
-			echo $q | awk '{print $2}' | xargs git add
+			git add $f
+		elif [ "$k" = ctrl-m ]; then
+			git commit
+		elif [ "$k" = ctrl-e ]; then
+			vi $f
 		fi
 	done
 }
