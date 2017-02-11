@@ -94,7 +94,7 @@ gitst() {
 	diffviewer() {
 		local viewer
 		viewer="echo {} | awk '{print \$2}' | xargs git diff | pygmentize"
-		fzf --ansi --preview="$viewer" --preview-window=up:75% --expect=ctrl-a,ctrl-d,ctrl-m,ctrl-e
+		fzf --ansi --preview="$viewer" --preview-window=up:75% --expect=ctrl-a,ctrl-d,ctrl-m,ctrl-e,ctrl-p
 	}
 	while out=$(git status --short | diffviewer); do
 		k=$(head -1 <<< "$out")
@@ -108,6 +108,8 @@ gitst() {
 			git commit
 		elif [ "$k" = ctrl-e ]; then
 			vi $f
+		elif [ "$k" = ctrl-p ]; then
+			git push origin $(git symbolic-ref --short HEAD)
 		fi
 	done
 }
