@@ -1,8 +1,10 @@
 command regex pv 's/^[[:space:]]*$/po [[[UIApplication sharedApplication] keyWindow] recursiveDescription]/' 's/^(.+)$/po [%1 recursiveDescription]/'
 command regex pe 's/^[[:space:]]*$/po [[NSProcessInfo processInfo] environment]/'
-command regex ps 's/^[[:space:]]*$/po [NSThread callStackSymbols]/'
+command regex pc 's/^[[:space:]]*$/po [NSThread callStackSymbols]/'
 command regex pd 's/^(.+)$/po [[NSString alloc] initWithData:%1 encoding:4]/'
+command regex pj 's/^(.+)$/po String(data: JSONSerialization.data(withJSONObject: data, options: .prettyPrinted), encoding: .utf8)/'
+command regex pj_ 's/^(.+)$/po [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:%1 options:1 error:nil] encoding:4]/'
 
-command script import ~/.lldb/ls_simulator.py
+command script import ~/.lldb/json.py
 
 command source ~/.lldbinit

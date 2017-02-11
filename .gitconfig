@@ -59,6 +59,9 @@
 	cma = commit -am
 	fixup = commit --amend -C HEAD
 
+	# push
+	psh = push origin $(git symbolic-ref --short HEAD)
+
 	# branch
 	br = branch
 	ba = branch -a

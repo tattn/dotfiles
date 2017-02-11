@@ -12,6 +12,7 @@ cask 'google-japanese-ime'
 cask 'realm-browser'
 brew 'swiftlint'
 brew 'carthage'
+brew 'chisel'
 
 # for Git
 brew 'git-lfs'
