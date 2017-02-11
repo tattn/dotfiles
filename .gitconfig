@@ -60,7 +60,7 @@
 	fixup = commit --amend -C HEAD
 
 	# push
-	psh = push origin $(git symbolic-ref --short HEAD)
+	psh = !git push origin $(git symbolic-ref --short HEAD)
 
 	# branch
 	br = branch
