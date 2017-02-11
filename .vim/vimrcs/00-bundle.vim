@@ -62,8 +62,9 @@ NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 
-"" Fugitive for git
+"" Git
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'rhysd/conflict-marker.vim'
 
 "" Syntax checker
 " NeoBundle 'scrooloose/syntastic'
