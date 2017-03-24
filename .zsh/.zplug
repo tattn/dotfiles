@@ -36,6 +36,7 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "glidenote/hub-zsh-completion"
 zplug 'Valodim/zsh-curl-completion'
+zplug 'dannyzen/cf-zsh-autocomplete-plugin'
 zplug "fujiwara/nssh", as:command, from:gh-r, rename-to:"nssh", frozen:1
 zplug "tcnksm/ghr", as:command, from:gh-r
 zplug "mitmproxy/mitmproxy", as:command, hook-build:"sudo python ./setup.py install"

@@ -42,11 +42,15 @@ brew 'go'
 brew 'wrk'
 brew 'mitmproxy'
 
+# for DB
+cask 'sequel-pro'
+
 # for Life🐈
 cask 'bettertouchtool'
 cask 'karabiner'
 cask 'atom'
 cask 'dash'
+cask 'clipy'
 #cask 'kobito'
 #cask 'iterm2'
 
