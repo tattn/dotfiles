@@ -72,6 +72,12 @@ NeoBundle 'rhysd/conflict-marker.vim'
 "" Gtags
 NeoBundle 'vim-scripts/gtags.vim'
 
+"---------------------------
+"" JavaScript
+"---------------------------
+"" jsx hilighter
+NeoBundle 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
 
 "---------------------------
 "" CoffeeScript

@@ -51,6 +51,7 @@ cask 'karabiner'
 cask 'atom'
 cask 'dash'
 cask 'clipy'
+cask 'skitch'
 #cask 'kobito'
 #cask 'iterm2'
 
