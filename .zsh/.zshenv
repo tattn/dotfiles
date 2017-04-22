@@ -9,7 +9,7 @@ export LANG=${LANGUAGE}
 export LC_ALL=${LANGUAGE}
 export LC_CTYPE=${LANGUAGE}
 export DIRSTACKSIZE=20
-export HISTFILE=$ZDOTDIR/history/${USER}-zhistory
+export HISTFILE=$HOME/.zhistory
 export HISTSIZE=100000
 export SAVEHIST=HISTSIZE
 
@@ -47,6 +47,9 @@ path=(
   #/usr/local/share/git-core/contrib/diff-highlight(N-/)
   $HOME/Library/Android/sdk/platform-tools(N-/)
   $HOME/Library/Android/sdk/tools(N-/)
+
+  # LLVM (homebrew)
+  /usr/local/opt/llvm/bin(N-/)
 )
 manpath=(
   {/usr,/usr/local}/share/man(N-/)
