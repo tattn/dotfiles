@@ -97,6 +97,8 @@ fi
 
 alias reload='exec zsh -l'
 
+alias be='bundle exec'
+
 ## Docker
 if has docker; then
 	# Get latest container ID

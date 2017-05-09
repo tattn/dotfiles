@@ -58,4 +58,16 @@ cask 'skitch'
 #cask 'kobito'
 #cask 'iterm2'
 
+# for mac previews (https://github.com/sindresorhus/quick-look-plugins)
+cask 'qlcolorcode'
+cask 'qlstephen'
+cask 'qlmarkdown'
+cask 'quicklook-json'
+cask 'qlprettypatch'
+cask 'quicklook-csv'
+cask 'betterzipql'
+cask 'qlimagesize'
+cask 'webpquicklook'
+cask 'suspicious-package'
+cask 'quicklookase qlvideo'
 
