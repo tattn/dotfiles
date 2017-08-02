@@ -21,3 +21,8 @@ command alias jmp register write pc
 command alias j register write pc
 
 command script import /usr/local/Cellar/chisel/1.5.0/libexec/fblldb.py
+
+
+command alias es e -l swift -- %1
+command alias eo e -l objc++ -O -- %1
+
