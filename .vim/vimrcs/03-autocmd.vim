@@ -56,5 +56,11 @@ augroup currentcursorline
 	autocmd WinEnter,BufRead * set cursorline
 augroup END
 
+augroup golang
+	autocmd!
+	au FileType go :highlight goErr cterm=bold ctermfg=214
+	au FileType go :match goErr /\<err\>/
+augroup END
+
 set autoread      " Read automatically when the file is rewrited
 

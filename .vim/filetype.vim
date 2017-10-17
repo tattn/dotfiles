@@ -40,4 +40,5 @@ augroup filetypedetect
   au BufRead,BufNewFile .gitconfig setf gitconfig
 	au BufNewFile,BufRead *.gyp,*.gypi setf gyp
 	au BufNewFile,BufRead *.swift set ft=swift
+	au BufNewFile,BufRead *.go setf go
 augroup END
