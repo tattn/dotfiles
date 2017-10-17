@@ -7,8 +7,10 @@
 .zsh/plugins
 plugins
 .zsh/completions/hub.zsh_completion
+.zsh/.zcompdump*
 
 bin/imgcat
 
 .vim/.init.vim-rplugin~
 
+.lldb/lldb-repl-history
