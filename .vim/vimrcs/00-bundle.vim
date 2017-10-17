@@ -100,8 +100,18 @@ NeoBundleLazy 'Rip-Rip/clang_complete', {
             \ 'autoload' : {'filetypes' : ['c', 'cpp']}
             \ }
 
-" CRuby
+"---------------------------
+"" CRuby
+"---------------------------
 NeoBundle 'mrkn/vim-cruby'
+
+"---------------------------
+"" Go
+"---------------------------
+"" devtool
+NeoBundle 'fatih/vim-go'
+"" AutoComplete for Go
+NeoBundle 'nsf/gocode', {'rtp': 'vim/'}
 
 
 call neobundle#end()
@@ -167,5 +177,14 @@ endif
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
+
+"" fatih/vim-go
+let g:go_highlight_functions = 1 
+let g:go_highlight_methods = 1 
+let g:go_highlight_structs = 1 
+let g:go_highlight_operators = 1 
+let g:go_highlight_build_constraints = 1 
+let g:go_fmt_fail_silently = 1 
+let g:go_fmt_autosave = 0 
 
 endif
