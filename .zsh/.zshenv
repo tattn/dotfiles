@@ -37,6 +37,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 # Go
 export GOPATH=$HOME/.go
+export GOROOT=$( go env GOROOT )
 
 path=(
   {/usr/local,/usr,/usr/local/bin,/usr/bin}
@@ -50,6 +51,9 @@ path=(
 
   # LLVM (homebrew)
   /usr/local/opt/llvm/bin(N-/)
+
+  # Go
+  $GOPATH/bin
 )
 manpath=(
   {/usr,/usr/local}/share/man(N-/)
