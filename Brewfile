@@ -37,6 +37,7 @@ brew 'git-extras'
 brew 'source-highlight'
 brew 'jq'
 brew 'terminal-notifier'
+brew 'ssh-copy-id'
 
 # for Go
 brew 'go'
