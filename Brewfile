@@ -57,6 +57,7 @@ cask 'typora'
 cask 'dash'
 cask 'clipy'
 cask 'skitch'
+brew 'translate-shell'
 #cask 'kobito'
 #cask 'iterm2'
 
