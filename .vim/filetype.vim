@@ -41,4 +41,5 @@ augroup filetypedetect
 	au BufNewFile,BufRead *.gyp,*.gypi setf gyp
 	au BufNewFile,BufRead *.swift set ft=swift
 	au BufNewFile,BufRead *.go setf go
+	au BufNewFile,BufRead *.ts setf typescript
 augroup END

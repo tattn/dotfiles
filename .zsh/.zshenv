@@ -35,10 +35,6 @@ export LESS_TERMCAP_so=$'\E[00;44;37m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-# Go
-export GOPATH=$HOME/.go
-export GOROOT=$( go env GOROOT )
-
 path=(
   {/usr/local,/usr,/usr/local/bin,/usr/bin}
   {/bin,/sbin}(N-/)
@@ -59,11 +55,18 @@ manpath=(
   {/usr,/usr/local}/share/man(N-/)
 )
 
+# Go
+export GOPATH=$HOME/.go
+export GOROOT=$( go env GOROOT )
+
 if has anyenv; then
 	for D in `ls $HOME/.anyenv/envs`
 	do
 		path=($HOME/.anyenv/envs/$D/shims $path)
 	done
+	if has ruby && has gem; then
+		PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+	fi
 fi
 
 [ -z "$ld_library_path" ] && typeset -xT LD_LIBRARY_PATH ld_library_path

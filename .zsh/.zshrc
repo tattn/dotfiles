@@ -135,12 +135,6 @@ if has spark-shell; then
 	fi
 fi
 
-
-## RealmBrowser
-if is_osx; then
-    alias realm-open="open $(find ~/Library/Developer/CoreSimulator/Devices/$(ls -t1 ~/Library/Developer/CoreSimulator/Devices/ | head -1)/data/Containers/Data/Application/ -name \*.realm)"
-fi
-
 has anyenv && eval "$(anyenv init - zsh)"
 has direnv && eval "$(direnv hook zsh)"
 has hub    && eval "$(hub alias -s)"

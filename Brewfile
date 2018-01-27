@@ -3,7 +3,8 @@ tap 'caskroom/cask'
 # for Vim
 brew 'lua'
 cask 'xquartz'
-brew 'vim', args:['with-lua', 'with-perl', 'HEAD', 'override-system-vi']
+# brew 'vim', args:['with-lua', 'with-perl', 'HEAD', 'override-system-vi']
+brew 'vim', args:['with-lua', 'with-perl', 'override-system-vi']
 
 tap 'neovim/neovim'
 brew 'neovim/neovim/neovim'
