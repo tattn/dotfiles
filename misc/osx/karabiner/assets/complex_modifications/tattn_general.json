@@ -119,6 +119,20 @@
 					]
 				}
 			]
+		},
+		{
+			"description": "Change C-w to option+delete",
+			"manipulators": [
+				{ "type": "basic",
+					"from": {
+						"key_code": "w",
+						"modifiers": { "mandatory": [ "control" ] }
+					},
+					"to": [
+						{ "key_code": "delete_or_backspace", "modifiers": [ "option" ] }
+					]
+				}
+			]
 		}
 	]
 }
