@@ -56,8 +56,10 @@ manpath=(
 )
 
 # Go
-export GOPATH=$HOME/.go
-export GOROOT=$( go env GOROOT )
+if has go; then
+	export GOPATH=$HOME/.go
+	export GOROOT=$( go env GOROOT )
+fi
 
 if has anyenv; then
 	for D in `ls $HOME/.anyenv/envs`
