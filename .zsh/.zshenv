@@ -66,7 +66,7 @@ if has anyenv; then
 	do
 		path=($HOME/.anyenv/envs/$D/shims $path)
 	done
-	if has ruby && has gem; then
+	if has ruby && has gem && is_osx; then
 		PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 	fi
 fi
