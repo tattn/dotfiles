@@ -67,7 +67,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'rhysd/conflict-marker.vim'
 
 "" Syntax checker
-" NeoBundle 'scrooloose/syntastic'
+NeoBundle 'scrooloose/syntastic'
 
 "" Gtags
 NeoBundle 'vim-scripts/gtags.vim'
@@ -186,5 +186,17 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1 
 let g:go_fmt_fail_silently = 1 
 let g:go_fmt_autosave = 0 
+
+" neocomplete
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+let g:neocomplete#sources#omni#input_patterns = {}
+endif
+if !exists('g:neocomplete#force_omni_input_patterns')
+let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
+
+imap <expr> <CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
 
 endif

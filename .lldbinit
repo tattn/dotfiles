@@ -1,6 +1,20 @@
 script import os, sys
 
+command alias reload command source ~/.lldbinit
+
+# https://gist.github.com/MiyasakaKazutoshi/2b43e9da8095f2db584589cbbdb3708c
+command regex pc  's/(.*)?-op(.*)/ exp -l objc     %2 -- %1/' 's/(.*)/ exp -l objc     -- %1/'
+command regex poc 's/(.*)?-op(.*)/ exp -l objc  -O %2 -- %1/' 's/(.*)/ exp -l objc  -O -- %1/'
+command regex ps  's/(.*)?-op(.*)/ exp -l swift    %2 -- %1/' 's/(.*)/ exp -l swift    -- %1/'
+command regex pos 's/(.*)?-op(.*)/ exp -l swift -O %2 -- %1/' 's/(.*)/ exp -l swift -O -- %1/'
+
+command regex vinfo 's/\(\((\w+)\.([a-zA-Z_0-9]+)\s\*\)(\w+?)\)/exp -l swift -- unsafeBitCast(%3,to:%1.%2.self);/' 's/\(\(([a-zA-Z_0-9]+)\s\*\)(\w+?)\)/exp -l objc++ -- *(%1 *)%2/'
+
 command alias sp script print
+
+# update views
+command alias uv e -l swift -O -- CATransaction.flush()
+
 
 # breakpoint shortcuts
 # break on function/method/selector: b -n name
@@ -20,9 +34,6 @@ command alias jump register write pc
 command alias jmp register write pc
 command alias j register write pc
 
-command script import /usr/local/Cellar/chisel/1.5.0/libexec/fblldb.py
+command script import /usr/local/opt/chisel/libexec/fblldb.py
 
-
-command alias es e -l swift -- %1
-command alias eo e -l objc++ -O -- %1
 

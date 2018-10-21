@@ -136,6 +136,7 @@ if has spark-shell; then
 fi
 
 has anyenv && eval "$(anyenv init - zsh)"
+has rbenv && eval "$(rbenv init - zsh)"
 has direnv && eval "$(direnv hook zsh)"
 has hub    && eval "$(hub alias -s)"
 

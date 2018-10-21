@@ -61,6 +61,7 @@ cask 'skitch'
 brew 'translate-shell'
 #cask 'kobito'
 #cask 'iterm2'
+cask 'mark-text'
 
 # for mac previews (https://github.com/sindresorhus/quick-look-plugins)
 cask 'qlcolorcode'
