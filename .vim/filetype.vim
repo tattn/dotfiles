@@ -42,4 +42,5 @@ augroup filetypedetect
 	au BufNewFile,BufRead *.swift set ft=swift
 	au BufNewFile,BufRead *.go setf go
 	au BufNewFile,BufRead *.ts setf typescript
+	au BufNewFile,BufRead Dockerfile setf Dockerfile
 augroup END

@@ -14,3 +14,4 @@ bin/imgcat
 .vim/.init.vim-rplugin~
 
 .lldb/lldb-repl-history
+.lldb/module_cache
