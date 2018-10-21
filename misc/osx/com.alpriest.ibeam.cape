@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Al Priest</string>
+	<key>CapeName</key>
+	<string>Inverted IBeam</string>
+	<key>CapeVersion</key>
+	<real>1</real>
+	<key>Cloud</key>
+	<true/>
+	<key>Cursors</key>
+	<dict>
+		<key>com.apple.coregraphics.IBeam</key>
+		<dict>
+			<key>FrameCount</key>
+			<integer>1</integer>
+			<key>FrameDuration</key>
+			<real>1</real>
+			<key>HotSpotX</key>
+			<real>5</real>
+			<key>HotSpotY</key>
+			<real>8</real>
+			<key>PointsHigh</key>
+			<real>16</real>
+			<key>PointsWide</key>
+			<real>16</real>
+			<key>Representations</key>
+			<array>
+				<data>
+				iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9h
+				AAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk
+				8AAAAX1JREFUOBGFUz1Lw1AUfWmIQyhSnUrBjo6u1cnJ
+				KJjVP2AhUKj6Exwc3AJqoTjUIYuDf0AzupRs+QdCW9LQ
+				xSL9AAef51RTnqXPPjicd899576b5MaQUq4JIc6AMtAG
+				noATYA/oAHeGYXyCly8UuPI8TzqOI33fT8fj8SWZMXXm
+				lzt/VAMHqlEUnadputVoNDZGo5HI5/OiXq+/F4vFbqVS
+				uUUHLW0RFGCRTeAgjuM3mCSZ8a9uaM2LicFg8MgC5MWc
+				Ls6piS8sxhmrOd3+TwHTNGftZqwzqfq8AJ73GF9gn0ky
+				Y/Xgyv10Or13XVdaliXJjFea1AO48bDX63X5EsmM1bxu
+				P38EfOsX3P7Kg2TGOpOqzwtQhGkWZ6we1O1zaDUbJKff
+				7+/CLMjQHYAD9u8g0XyKUb5IkqTcbDYLk8lE2LYtarXa
+				sFQqdTDKNyj6oO0Aie0gCHZoxg+UhmF4TWZMnXmdmTo7
+				WAdXgQLQxm3P0I6w5+88BFrQPsBL1zf4k8yiXuC0/QAA
+				AABJRU5ErkJggg==
+				</data>
+				<data>
+				iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0
+				AAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk
+				8AAAAsxJREFUWAntl89rE0EUxzetzcXQqMUeVAoBQQhE
+				Eo+55NR/wYsoePHoofkDevMogfwHBS8eAvkTvORo/AEB
+				sZAiMcGKmJAUGto6fr6b2bCNG6iTDfXggw8z8968N292
+				d2ZnEh5ijNmgKEFKTUuH8h0cgeQq5OEOJCwjyjeJROIH
+				pZsw+Bo8hSMYh/hO/QVcs6guXbiPfOS75jY6XjiXIZi1
+				SSaTplQqmWq1asbj8WdMT4Tq0smmPnKduMvblBdJYEcR
+				goDhMp/Pn3Q6na5QPWwL6vJFdmi7Cc7b8E1RJP1+39Tr
+				dZPJZPykcrmcEUT3dbKpT0jku+02Oh8TzvoAH0AOrkMG
+				Hg0GA69QKHjtdpsmykzGazabXjqdVvMVyPATPsLbhT5E
+				AvhCMitwA/TeTa1W82eO0a9Lh8imPivWLf7CDrA3HA6n
+				CaiO7MkW54jzZqFHe5BKaVuYiK0f0JItNolMgPepmZ9F
+				jHJmbREmN1VkAm6h3Lz+J3DpT+CPF8cy2wDtju9hugxV
+				R6STTZvXcsQOMN2aGcVPAn0gC229s1lHvQJtyZssN08E
+				EmpvolOfWCQqgVgCXzRIVAL6uRzyvHVWmMYJtQ9Rqs9y
+				hIEu9yMMpkUiuzC7CnYDe1xl1CuIK/aF4vybCfDktf5W
+				I6awam0RJjfVvCegc9fWaKRj/0RsfYuWbMsRZqcZ3oTH
+				4B9OGcn/EHUYtSKb+kQ9ob9ObPZQqj3+LjzUobRYLHqt
+				VssPms1mvUajERxKX6PcB92ItCe4H0qZybljea/X8w+g
+				847lOqiqT0gW+zcQaO7FRPcBLiXHIrgbMNvp3qC6lYUu
+				JueuZgqq61elUtHV7AsDPBeqSydbOAmbQBmdmxBgHV7C
+				CZzCMYyhC89AdwWhunSyqY/6yke+626jczOSIwFuU9yH
+				K6DTsOjCJ/gFEi3Ze3ALtALEKXzgV/2V0kl+A4qvsR/+
+				465pAAAAAElFTkSuQmCC
+				</data>
+			</array>
+		</dict>
+	</dict>
+	<key>HiDPI</key>
+	<true/>
+	<key>Identifier</key>
+	<string>com.alpriest.ibeam</string>
+	<key>MinimumVersion</key>
+	<real>2</real>
+	<key>Version</key>
+	<real>2</real>
+</dict>
+</plist>
