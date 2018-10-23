@@ -43,4 +43,5 @@ augroup filetypedetect
 	au BufNewFile,BufRead *.go setf go
 	au BufNewFile,BufRead *.ts setf typescript
 	au BufNewFile,BufRead Dockerfile setf Dockerfile
+	au BufNewFile,BufRead *.sql setf sql
 augroup END
