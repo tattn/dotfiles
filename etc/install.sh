@@ -85,7 +85,7 @@ _popd() {
 
 if has zsh; then
 	if [ ! -d ~/.zplug ]; then
-		curl -sL zplug.sh/installer | zsh
+		curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 		echo "need to reload .zshrc & .zshenv"
 		exit 0
 	fi

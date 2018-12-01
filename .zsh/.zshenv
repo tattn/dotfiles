@@ -36,8 +36,6 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 path=(
-  {/usr/local,/usr,/usr/local/bin,/usr/bin}
-  {/bin,/sbin}(N-/)
   $DOTPATH/bin
   $HOME/bin(N-/)
   $HOME/.anyenv/bin(N-/)
@@ -48,8 +46,14 @@ path=(
   # LLVM (homebrew)
   /usr/local/opt/llvm/bin(N-/)
 
+  # OpenSSL (homebrew)
+  /usr/local/opt/openssl/bin(N-/)
+
   # Go
   $GOPATH/bin
+
+  {/usr/local,/usr,/usr/local/bin,/usr/bin}
+  {/bin,/sbin}(N-/)
 )
 manpath=(
   {/usr,/usr/local}/share/man(N-/)
@@ -67,7 +71,7 @@ if has anyenv; then
 		path=($HOME/.anyenv/envs/$D/shims $path)
 	done
 	if has ruby && has gem && is_osx; then
-		PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+		#PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 	fi
 fi
 

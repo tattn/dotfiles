@@ -1,6 +1,6 @@
 {
     "global": {
-        "check_for_updates_on_startup": false,
+        "check_for_updates_on_startup": true,
         "show_in_menu_bar": true,
         "show_profile_name_in_menu_bar": false
     },
@@ -502,6 +502,7 @@
             },
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
+                "country_code": 0,
                 "keyboard_type": "ansi",
                 "standalone_keys_delay_milliseconds": 200
             }
