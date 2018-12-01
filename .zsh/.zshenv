@@ -35,6 +35,9 @@ export LESS_TERMCAP_so=$'\E[00;44;37m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
+# pyenv-virtualenv
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
 path=(
   $DOTPATH/bin
   $HOME/bin(N-/)

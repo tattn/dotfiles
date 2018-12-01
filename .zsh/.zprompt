@@ -19,6 +19,19 @@ function prompt_vcs_info() {
 }
 precmd_functions+=prompt_vcs_info
 
+function prompt_virtual_env() {
+    # RUBY_VERSION_STRING="rb:"$(rbenv version-name)
+    # NODE_VERSION_STRING="nd:"$(ndenv version-name)
+    local python_ver_str="py:"$(pyenv version-name)
+    if [ -n "$VIRTUAL_ENV" ]; then
+        local python_virtual_env_str="`basename \"$VIRTUAL_ENV\"`"
+		ps_virtual_env="[%B%F{yellow}$python_ver_str:$python_virtual_env_str%f%b]"
+	else
+		ps_virtual_env=''
+    fi
+}
+precmd_functions+=prompt_virtual_env
+
 function count_prompt_chars (){
     print -n -P -- "$1" | sed -e $'s/\e\[[0-9;]*m//g' | wc -m | sed -e 's/ //g'
 }
@@ -32,7 +45,7 @@ function update_prompt (){
     # URL: http://qiita.com/kubosho_/items/c200680c26e509a4f41c
     # local ps_status="[%j]%(?.%B%F{green}.%B%F{blue})%(?!(*'-')%b!(*;-;%)%b)%f "
     # local ps_status="%(?.%B%F{green}.%B%F{blue})%(?!ヽ(*ﾟд ﾟ)ノ%b!(*;-;%)%b)%f "
-    local ps_status="%(?.%B%F{green}.%B%F{blue})%(?!✘ ╹◡╹✘%b!✘ >﹏<✘%b)%f "
+    local ps_status="%(?.%B%F{green}.%B%F{blue})%(?!✘ ╹◡╹ ✘%b!✘ >﹏< ✘%b)%f "
     local ps_mark="%(!,%B%F{magenta}#%f%b,%%)"
     # local prompt_1st_left="[$ps_user@$ps_host$chroot_info]"
     local prompt_1st_left="$ps_status"
@@ -50,6 +63,6 @@ function update_prompt (){
     PROMPT2='|%j]> '
     SPROMPT="[%j]%B%F{red}%{$suggest%}(*'~'%)?<%b %U%r%u is correct? [n,y,a,e]:%f "
     # 右プロンプト
-    RPROMPT="$ps_vcs_info"
+    RPROMPT="$ps_vcs_info$ps_virtual_env"
 }
 precmd_functions+=update_prompt

@@ -56,6 +56,8 @@ fi
 if check pyenv; then
 	log_info "====> Install Pyenv"
 	anyenv install pyenv
+	log_info "====> Install Pyenv-virtualenv"
+	git clone https://github.com/yyuu/pyenv-virtualenv ~/.anyenv/envs/pyenv/plugins/pyenv-virtualenv
 	#exec $SHELL -l
 fi
 
