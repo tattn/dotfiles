@@ -5,6 +5,8 @@ brew 'lua'
 cask 'xquartz'
 # brew 'vim', args:['with-lua', 'with-perl', 'HEAD', 'override-system-vi']
 brew 'vim', args:['with-lua', 'with-perl', 'override-system-vi']
+tap 'sanemat/font'
+brew 'ricty', args:['with-powerline']
 
 tap 'neovim/neovim'
 brew 'neovim/neovim/neovim'
@@ -22,7 +24,8 @@ brew 'git-lfs'
 brew 'gibo'
 
 # for Github
-cask 'trailer'
+#cask 'trailer'
+cask 'jasper'
 
 # for Terminal
 brew 'wget'
@@ -50,9 +53,16 @@ brew 'mitmproxy'
 # for DB
 cask 'sequel-pro'
 
+# for Dev
+brew 'zlib'
+brew 'openssl'
+brew 'readline'
+brew 'xz'
+
 # for Life🐈
 cask 'bettertouchtool'
-cask 'karabiner'
+cask 'karabiner-elements'
+cask 'alfred'
 cask 'atom'
 cask 'typora'
 cask 'dash'
@@ -62,6 +72,8 @@ brew 'translate-shell'
 #cask 'kobito'
 #cask 'iterm2'
 cask 'mark-text'
+cask 'visual-studio-code'
+cask 'docker'
 
 # for mac previews (https://github.com/sindresorhus/quick-look-plugins)
 cask 'qlcolorcode'
@@ -70,9 +82,10 @@ cask 'qlmarkdown'
 cask 'quicklook-json'
 cask 'qlprettypatch'
 cask 'quicklook-csv'
-cask 'betterzipql'
+#cask 'betterzipql'
 cask 'qlimagesize'
 cask 'webpquicklook'
 cask 'suspicious-package'
-cask 'quicklookase qlvideo'
+cask 'quicklookase'
+cask 'qlvideo'
 
