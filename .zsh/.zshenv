@@ -68,6 +68,11 @@ if has go; then
 	export GOROOT=$( go env GOROOT )
 fi
 
+# Java
+if has /usr/libexec/java_home; then
+	export JAVA_HOME=`/usr/libexec/java_home`
+fi
+
 if has anyenv; then
 	for D in `ls $HOME/.anyenv/envs`
 	do
