@@ -4,7 +4,7 @@ tap 'caskroom/cask'
 brew 'lua'
 cask 'xquartz'
 # brew 'vim', args:['with-lua', 'with-perl', 'HEAD', 'override-system-vi']
-brew 'vim', args:['with-lua', 'with-perl', 'override-system-vi']
+brew 'vim', args:['with-lua', 'with-perl', 'with-python', 'override-system-vi']
 tap 'sanemat/font'
 brew 'ricty', args:['with-powerline']
 
@@ -18,6 +18,8 @@ cask 'realm-browser'
 brew 'swiftlint'
 brew 'carthage'
 brew 'chisel'
+tap 'keith/formulae'
+brew 'keith/formulae/zsh-xcode-completions'
 
 # for Git
 brew 'git-lfs'
@@ -42,6 +44,7 @@ brew 'source-highlight'
 brew 'jq'
 brew 'terminal-notifier'
 brew 'ssh-copy-id'
+brew 'oath-toolkit'
 
 # for Go
 brew 'go'
@@ -74,6 +77,7 @@ brew 'translate-shell'
 cask 'mark-text'
 cask 'visual-studio-code'
 cask 'docker'
+cask 'keepingyouawake'
 
 # for mac previews (https://github.com/sindresorhus/quick-look-plugins)
 cask 'qlcolorcode'
