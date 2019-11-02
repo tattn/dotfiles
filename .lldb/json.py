@@ -70,4 +70,4 @@ def process(debugger, command, result, internal_dict):
 
 def __lldb_init_module(debugger,internal_dict):
     debugger.HandleCommand("command script add -f json.process json")
-    print "json command enabled."
+    print("json command enabled.")

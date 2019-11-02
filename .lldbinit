@@ -17,7 +17,7 @@ command alias uv e -l swift -O -- CATransaction.flush()
 # break on C/C++ method: b -M method
 # break on selector: b -S selector:here:
 # break on address: b -a 0xfeedface
-command alias b breakpoint set
+#command alias b breakpoint set
 command alias bd breakpoint disable
 command alias be breakpoint enable
 command alias bdel breakpoint delete
@@ -26,9 +26,9 @@ command alias commands breakpoint command list
 
 # jump aliases
 # jump 0xfeedface
-command alias jump register write pc
+#command alias jump register write pc
 command alias jmp register write pc
-command alias j register write pc
+#command alias j register write pc
 
 command script import /usr/local/opt/chisel/libexec/fblldb.py
 
