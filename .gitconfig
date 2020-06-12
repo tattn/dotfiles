@@ -36,8 +36,9 @@
 	default = matching
 [filter "lfs"]
 	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+	smudge = git-lfs smudge --skip -- %f
 	required = true
+	process = git-lfs filter-process --skip
 
 [alias]
 	ad = add
@@ -49,6 +50,14 @@
 	branches = branch -a
 	remotes = remote -v
 	tags = tag -l
+
+	# switch
+	sw = switch
+	swc = switch -c
+
+	# restore
+	rs = restore
+	rss = restore --staged
 
 	# status
 	st = status --branch --short
