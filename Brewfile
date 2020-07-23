@@ -1,10 +1,9 @@
-tap 'caskroom/cask'
-
 # for Vim
 brew 'lua'
 cask 'xquartz'
 # brew 'vim', args:['with-lua', 'with-perl', 'HEAD', 'override-system-vi']
-brew 'vim', args:['with-lua', 'with-perl', 'with-python', 'override-system-vi']
+# brew 'vim', args:['with-lua', 'with-perl', 'with-python', 'override-system-vi']
+brew 'vim'
 tap 'sanemat/font'
 brew 'ricty', args:['with-powerline']
 
@@ -36,7 +35,6 @@ brew 'reattach-to-user-namespace'
 brew 'tree'
 brew 'hub'
 brew 'tmux'
-brew 'sshrc'
 tap 'tldr-pages/tldr'
 brew 'tldr'
 brew 'git-extras'
@@ -48,6 +46,10 @@ brew 'oath-toolkit'
 
 # for Go
 brew 'go'
+
+# for Flutter
+tap 'dart-lang/dart'
+brew 'dart'
 
 # for Web Dev
 brew 'wrk'
@@ -61,6 +63,8 @@ brew 'zlib'
 brew 'openssl'
 brew 'readline'
 brew 'xz'
+cask 'sourcetree'
+cask 'postman'
 
 # for Life🐈
 cask 'bettertouchtool'
