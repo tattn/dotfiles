@@ -1,6 +1,6 @@
 # for Vim
 brew 'lua'
-cask 'xquartz'
+# cask 'xquartz'
 # brew 'vim', args:['with-lua', 'with-perl', 'HEAD', 'override-system-vi']
 # brew 'vim', args:['with-lua', 'with-perl', 'with-python', 'override-system-vi']
 brew 'vim'
@@ -21,7 +21,7 @@ tap 'keith/formulae'
 brew 'keith/formulae/zsh-xcode-completions'
 
 # for Git
-brew 'git-lfs'
+#brew 'git-lfs'
 brew 'gibo'
 
 # for Github
@@ -42,18 +42,18 @@ brew 'source-highlight'
 brew 'jq'
 brew 'terminal-notifier'
 brew 'ssh-copy-id'
-brew 'oath-toolkit'
+#brew 'oath-toolkit'
 
 # for Go
-brew 'go'
+brew 'golang'
 
 # for Flutter
 tap 'dart-lang/dart'
 brew 'dart'
 
 # for Web Dev
-brew 'wrk'
-brew 'mitmproxy'
+#brew 'wrk'
+#brew 'mitmproxy'
 
 # for DB
 cask 'sequel-pro'

@@ -14,22 +14,22 @@ curl -L https://raw.githubusercontent.com/egold/better-xcode-ibeam-cursor/master
 mkdir -p $DOTPATH/plugins
 mkdir -p $DOTPATH/plugins/xcode
 
-if [ ! -d $DOTPATH/plugins/solarized ]; then
-	log_info "====> Install solarized"
-	pushd $DOTPATH/plugins
-	git clone https://github.com/altercation/solarized
-
-	pushd xcode
-	git clone https://github.com/XVimProject/XVim.git
-	cd XVim
-	make
-	git clone https://github.com/FuzzyAutocomplete/FuzzyAutocompletePlugin.git
-	cd FuzzyAutocompletePlugin
-	xcodebuild -project FuzzyAutocomplete.xcodeproj build
-	popd
-
-	popd
-fi
+# if [ ! -d $DOTPATH/plugins/solarized ]; then
+# 	log_info "====> Install solarized"
+# 	pushd $DOTPATH/plugins
+# 	git clone https://github.com/altercation/solarized
+# 
+# 	pushd xcode
+# 	git clone https://github.com/XVimProject/XVim.git
+# 	cd XVim
+# 	make
+# 	git clone https://github.com/FuzzyAutocomplete/FuzzyAutocompletePlugin.git
+# 	cd FuzzyAutocompletePlugin
+# 	xcodebuild -project FuzzyAutocomplete.xcodeproj build
+# 	popd
+# 
+# 	popd
+# fi
 
 if [ ! -f $DOTPATH/.zsh/completions/hub.zsh_completion ]; then
 	log_info "====> Install hub completion"

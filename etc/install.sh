@@ -26,6 +26,15 @@ check() {
 	fi
 }
 
+check_file() {
+	if [ -e $1 ]; then
+		log_pass "====> Pass $1"
+		return 1 # false
+	else
+		return 0
+	fi
+}
+
 ##### Anyenv
 if check anyenv; then
 	dir=~/.anyenv
@@ -36,6 +45,11 @@ if check anyenv; then
 		git clone https://github.com/riywo/anyenv ~/.anyenv
 		echo 'Please run `exec $SHELL -l` and make install-utility'
 		exit 0
+	fi
+else
+	log_info "====> Set up anyenv"
+	if check_file ~/.config/anyenv/anyenv-install; then
+		anyenv install --init
 	fi
 fi
 

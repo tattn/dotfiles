@@ -35,6 +35,10 @@ is_osx() {
     fi
 }
 
+is_arm() {
+	test $(uname -m) == "arm64";
+}
+
 is_linux() {
     detect_os
     if [ "$_PLATFORM" = "linux" ]; then

@@ -46,6 +46,9 @@ path=(
   $HOME/Library/Android/sdk/platform-tools(N-/)
   $HOME/Library/Android/sdk/tools(N-/)
 
+  # homebrew for ARM
+  /opt/homebrew/bin(N-/)
+
   # LLVM (homebrew)
   /usr/local/opt/llvm/bin(N-/)
 

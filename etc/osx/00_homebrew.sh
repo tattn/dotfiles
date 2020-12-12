@@ -11,7 +11,19 @@ if ! has ruby; then
     die "Error: require ruby"
 fi
 
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if is_arm; then
+    log_pass "Homebrew: ARM Mac"
+	pushd /opt
+	sudo mkdir -p homebrew
+	sudo chown $USER:admin homebrew
+	curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+	popd
+	export PATH="$PATH:/opt/homebrew/bin"
+else
+    log_pass "Homebrew: Intel Mac"
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
 if has brew; then
     brew doctor
 else
