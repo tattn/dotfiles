@@ -4,11 +4,13 @@ brew 'lua'
 # brew 'vim', args:['with-lua', 'with-perl', 'HEAD', 'override-system-vi']
 # brew 'vim', args:['with-lua', 'with-perl', 'with-python', 'override-system-vi']
 brew 'vim'
-tap 'sanemat/font'
-brew 'ricty', args:['with-powerline']
+#tap 'sanemat/font'
+#brew 'ricty', args:['with-powerline']
+tap 'tattn/formula'
+cask 'font-ricty-diminished-for-powerline'
 
-tap 'neovim/neovim'
-brew 'neovim/neovim/neovim'
+# tap 'neovim/neovim'
+# brew 'neovim/neovim/neovim'
 
 cask 'google-japanese-ime'
 
@@ -33,7 +35,7 @@ brew 'wget'
 brew 'coreutils'
 brew 'reattach-to-user-namespace'
 brew 'tree'
-brew 'hub'
+#brew 'hub'
 brew 'tmux'
 tap 'tldr-pages/tldr'
 brew 'tldr'
@@ -45,7 +47,7 @@ brew 'ssh-copy-id'
 #brew 'oath-toolkit'
 
 # for Go
-brew 'golang'
+#brew 'go' # still in progress for M1 Mac
 
 # for Flutter
 tap 'dart-lang/dart'

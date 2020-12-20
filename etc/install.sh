@@ -75,6 +75,13 @@ if check pyenv; then
 	#exec $SHELL -l
 fi
 
+##### Nodenv
+if check nodenv; then
+	log_info "====> Install nodenv"
+	anyenv install nodenv
+	#exec $SHELL -l
+fi
+
 zsh_plugin() {
 	if [ -d $DOTPATH/.zsh/plugins/$1 ]; then
 		return 1
