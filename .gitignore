@@ -8,6 +8,8 @@
 plugins
 .zsh/completions/hub.zsh_completion
 .zsh/.zcompdump*
+.zsh/.zsh_history
+.zsh/.zsh_sessions/
 
 bin/imgcat
 
@@ -15,3 +17,6 @@ bin/imgcat
 
 .lldb/lldb-repl-history
 .lldb/module_cache
+
+misc/osx/karabiner/automatic_backups/
+Brewfile.lock.json

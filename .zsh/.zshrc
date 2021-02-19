@@ -138,6 +138,7 @@ fi
 has anyenv && eval "$(anyenv init - zsh)"
 has rbenv && eval "$(rbenv init - zsh)"
 has pyenv && eval "$(pyenv virtualenv-init -)"
+has nodenv && eval "$(nodenv init -)"
 has direnv && eval "$(direnv hook zsh)"
 has hub    && eval "$(hub alias -s)"
 

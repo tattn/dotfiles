@@ -24,6 +24,7 @@ augroup filetypedetect
   au BufRead,BufNewFile *.py setf python
   au BufRead,BufNewFile *.php setf php
   au BufRead,BufNewFile *.swift setf swift
+  au BufRead,BufNewFile *.dart setf dart
   au BufRead,BufNewFile *.c,*.h setf c
   au BufRead,BufNewFile *.cpp,*.cxx,*hpp setf cpp
   au BufRead,BufNewFile *.zshenv setf zsh

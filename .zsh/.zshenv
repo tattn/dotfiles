@@ -58,6 +58,10 @@ path=(
   # Go
   $GOPATH/bin
 
+  # Flutter
+  $HOME/.pub-cache/bin(N-/)
+  $HOME/fvm/default/bin(N-/)
+
   {/usr/local,/usr,/usr/local/bin,/usr/bin}
   {/bin,/sbin}(N-/)
 )
