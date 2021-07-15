@@ -138,6 +138,8 @@ fi
 has anyenv && eval "$(anyenv init - zsh)"
 has rbenv && eval "$(rbenv init - zsh)"
 has pyenv && eval "$(pyenv virtualenv-init -)"
+has pyenv && has anyenv && export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
+has pyenv && eval "$(pyenv init --path)"
 has nodenv && eval "$(nodenv init -)"
 has direnv && eval "$(direnv hook zsh)"
 has hub    && eval "$(hub alias -s)"
@@ -156,3 +158,4 @@ fpath=(
 # start up
 tattn neko
 alias tt=tattn
+
