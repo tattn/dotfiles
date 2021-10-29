@@ -52,6 +52,7 @@ brew 'ssh-copy-id'
 # for Flutter
 tap 'dart-lang/dart'
 brew 'dart'
+brew 'java11'
 
 # for Web Dev
 #brew 'wrk'

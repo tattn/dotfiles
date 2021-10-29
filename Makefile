@@ -20,7 +20,7 @@ deploy:
 
 update:
 	@echo '=====> update dotfiles...'
-	git pull origin master
+	git pull origin main
 
 up: update
 

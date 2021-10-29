@@ -8,6 +8,11 @@ do
     fi
 done
 
+if is_arm; then
+    log_pass "Enable Rosetta for ARM Mac"
+	softwareupdate --install-rosetta
+fi
+
 log_info "====> Install DVTIbeamCursor for Xcode"
 curl -L https://raw.githubusercontent.com/egold/better-xcode-ibeam-cursor/master/install.sh | bash 
 
