@@ -95,6 +95,7 @@ let g:rehash256 = 1
 colorscheme molokai
 " :set background=dark
 " colorscheme solarized
+let g:vim_json_syntax_conceal = 0
 
 set mousemodel=popup           " show menu by right click
 set t_Co=256

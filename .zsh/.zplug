@@ -41,7 +41,7 @@ zplug "fujiwara/nssh", as:command, from:gh-r, rename-to:"nssh", frozen:1
 zplug "tcnksm/ghr", as:command, from:gh-r
 zplug "mitmproxy/mitmproxy", as:command, hook-build:"sudo python ./setup.py install"
 zplug "reorx/httpstat", as:command, use:'(httpstat).py', rename-to:'$1', if:'(( $+commands[python] ))'
-zplug 'dtan4/ghrls', as:command, from:gh-r
+# zplug 'dtan4/ghrls', as:command, from:gh-r
 zplug 'tianon/gosleep', as:command, hook-build:'go get -d ./src/gosleep && go build ./src/gosleep'
 zplug 'Code-Hex/pget', as:command, from:gh-r
 

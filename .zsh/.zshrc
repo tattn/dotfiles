@@ -149,6 +149,9 @@ if [ -f ~/.zplug/init.zsh ]; then
 	source ${ZDOTDIR}/.zplug
 fi
 
+# Apple Silicon
+PATH=/opt/homebrew/bin:$PATH
+
 ZSH_PLUGINS=$ZDOTDIR/plugins
 fpath=(
 	# $ZDOTDIR/completions/hub.zsh_completion(N-/)
