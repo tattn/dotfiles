@@ -15,9 +15,6 @@ cask 'font-ricty-diminished-for-powerline'
 cask 'google-japanese-ime'
 
 # for iOS
-#cask 'realm-browser'
-brew 'swiftlint'
-brew 'carthage'
 brew 'chisel'
 tap 'keith/formulae'
 brew 'keith/formulae/zsh-xcode-completions'
@@ -28,7 +25,7 @@ brew 'gibo'
 
 # for Github
 #cask 'trailer'
-cask 'jasper'
+#cask 'jasper'
 
 # for Terminal
 brew 'wget'
@@ -59,7 +56,7 @@ brew 'java11'
 #brew 'mitmproxy'
 
 # for DB
-cask 'sequel-pro'
+#cask 'sequel-pro'
 
 # for Dev
 brew 'zlib'
@@ -72,19 +69,15 @@ cask 'postman'
 # for Life🐈
 cask 'bettertouchtool'
 cask 'karabiner-elements'
-cask 'alfred'
-#cask 'atom'
 cask 'typora'
 cask 'dash'
-#cask 'clipy' # alfredに移行
 cask 'skitch'
 brew 'translate-shell'
 #cask 'kobito'
 #cask 'iterm2'
-cask 'mark-text'
+#cask 'mark-text'
 cask 'visual-studio-code'
 cask 'docker'
-cask 'keepingyouawake'
 
 # for mac previews (https://github.com/sindresorhus/quick-look-plugins)
 # cask 'qlcolorcode'
