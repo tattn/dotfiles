@@ -53,6 +53,11 @@ else
 	fi
 fi
 
+if [ ! -d ~/.anyenv/plugins/anyenv-update ]; then
+	log_info "====> Install anyenv-update"
+	git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
+fi
+
 ##### Rbenv
 if check rbenv; then
 	log_info "====> Install Rbenv"
