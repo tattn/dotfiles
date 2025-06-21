@@ -112,12 +112,23 @@ _popd() {
 }
 
 if has zsh; then
-	if [ ! -d ~/.zplug ]; then
-		curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+	if ! has sheldon; then
+		if is_osx; then
+			# Install sheldon using Homebrew on macOS
+			brew install sheldon
+		else
+			# Install sheldon using the official install script on other platforms
+			curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh \
+				| bash -s -- --repo rossmacarthur/sheldon --to ~/.local/bin
+		fi
 		echo "need to reload .zshrc & .zshenv"
 		exit 0
 	fi
-	zplug install
+	
+	# Initialize sheldon if not already done
+	if [ ! -f ~/.config/sheldon/plugins.toml ]; then
+		sheldon init --shell zsh
+	fi
 
 	mkdir -p $DOTPATH/.zsh/plugins
 	_pushd $DOTPATH/.zsh/plugins

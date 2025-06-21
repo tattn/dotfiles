@@ -144,9 +144,9 @@ has nodenv && eval "$(nodenv init -)"
 has direnv && eval "$(direnv hook zsh)"
 has hub    && eval "$(hub alias -s)"
 
-# zplug
-if [ -f ~/.zplug/init.zsh ]; then
-	source ${ZDOTDIR}/.zplug
+# sheldon
+if has sheldon; then
+	source ${ZDOTDIR}/.zsheldon
 fi
 
 # Apple Silicon

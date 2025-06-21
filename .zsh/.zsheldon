@@ -1,0 +1,167 @@
+# vim:ft=zsh
+
+############################################
+# sheldon
+############################################
+
+# FZF
+alias @='fzf'
+function select-history() {
+	BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+	CURSOR=$#BUFFER
+}
+zle -N select-history
+bindkey '^r' select-history
+
+export FZF_COMPLETION_TRIGGER='**'
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
+
+# Zsh Notify
+zstyle ':notify:*' command-complete-timeout 5
+
+# enhancd filter
+export ENHANCD_FILTER=fzf
+
+# dircolors-solarized
+[[ ! -e $HOME/.zsh-dircolors.config ]] && echo "dircolors.ansi-universal" > $HOME/.zsh-dircolors.config
+
+# Load sheldon
+eval "$(sheldon source)"
+
+############################################
+# functions 
+############################################
+
+# fzf #############
+
+fzfpreviewer() {
+	local viewer
+	viewer=$(cat <<SHELL
+	if file {} | grep -q text; then
+		pygmentize {} 2>/dev/null || less {}
+	else
+		file {} \
+			| sed -E "s/^([^:]*)(:.*)$/$fg[yellow]\1$reset_color\2/g"
+	fi
+SHELL
+	)
+
+	fzf --ansi --preview="$viewer" --preview-window=up:75% --bind "enter:execute(vim {})" $@
+}
+
+# Git #############
+
+gitco() {
+	local branches branch
+	branches=$(git branch -vv) &&
+	branch=$(echo "$branches" | fzf +m) &&
+	git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+zle -N gitco
+
+gitst() {
+	local out q k f
+	diffviewer() {
+		local viewer
+		if [ -n "$(git diff)" ]; then
+			viewer="echo {} | awk '{print \$2}' | xargs git diff | pygmentize"
+		else
+			viewer="echo {} | awk '{print \$2}' | xargs git diff --cached | pygmentize"
+		fi
+		fzf --ansi --preview="$viewer" --preview-window=up:75% --expect=ctrl-a,ctrl-d,ctrl-m,ctrl-e,ctrl-p
+	}
+	while out=$(git status --short | diffviewer); do
+		k=$(head -1 <<< "$out")
+		q=$(head -2 <<< "$out" | tail -1)
+		f=$(echo $q | awk '{print $2}')
+		if [ "$k" = ctrl-d ]; then
+			git reset HEAD $f > /dev/null 2>&1
+		elif [ "$k" = ctrl-a ]; then
+			git add $f
+		elif [ "$k" = ctrl-m ]; then
+			git commit
+		elif [ "$k" = ctrl-e ]; then
+			vi $f
+		elif [ "$k" = ctrl-p ]; then
+			git push origin $(git symbolic-ref --short HEAD)
+			break
+		fi
+	done
+}
+
+gitstad() {
+	git st | sed 1d | fzf | awk '{print $2}' | xargs git add
+}
+
+gitstdiff() {
+	git st | sed 1d | fzf | awk '{print $2}' | xargs git diff
+}
+
+gitlog() {
+	git log --graph --color=always \
+		--format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+	fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+		--bind "ctrl-m:execute:
+	(grep -o '[a-f0-9]\{7\}' | head -1 |
+	xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+	{}
+	FZF-EOF"
+}
+
+# list your stashes
+# enter shows you the contents of the stash
+# ctrl-d shows a diff of the stash against your current HEAD
+# ctrl-b checks the stash out as a branch, for easier merging
+gitstash() {
+	local out q k sha
+	while out=$(
+		git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+		fzf --ansi --no-sort --query="$q" --print-query \
+			--expect=ctrl-d,ctrl-b);
+	do
+		mapfile -t out <<< "$out"
+		q="${out[0]}"
+		k="${out[1]}"
+		sha="${out[-1]}"
+		sha="${sha%% *}"
+		[[ -z "$sha" ]] && continue
+		if [[ "$k" == 'ctrl-d' ]]; then
+			git diff $sha
+		elif [[ "$k" == 'ctrl-b' ]]; then
+			git stash branch "stash-$sha" $sha
+			break;
+		else
+			git stash show -p $sha
+		fi
+	done
+}
+
+# Grep #############
+
+grepf() {
+	grep --line-buffered --color=never -r "" * | fzf
+}
+
+# Process #############
+
+psf() {
+	ps aux | fzf
+}
+
+pkillf() {
+  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    kill -${1:-9} $pid
+  fi
+}
+
+# Tmux #############
+
+tmuxaf() {
+	local no
+	no=`tmux list-sessions | fzf | cut -d: -f 1`
+	tmux a -t $no
+}
