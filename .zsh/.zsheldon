@@ -27,6 +27,7 @@ export ENHANCD_FILTER=fzf
 [[ ! -e $HOME/.zsh-dircolors.config ]] && echo "dircolors.ansi-universal" > $HOME/.zsh-dircolors.config
 
 # Load sheldon
+sheldon lock
 eval "$(sheldon source)"
 
 ############################################

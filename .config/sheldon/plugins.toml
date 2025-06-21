@@ -4,15 +4,9 @@ shell = "zsh"
 
 [plugins]
 
-[plugins.fzf-bin]
-github = "junegunn/fzf"
-tag = "latest"
-apply = ["PATH"]
-
 [plugins.fzf]
-github = "junegunn/fzf"
-apply = ["PATH", "source"]
-use = ["shell/*.zsh"]
+github = 'junegunn/fzf'
+apply = ['fzf-install', 'fzf-source']
 
 [plugins.zsh-notify]
 github = "marzocchi/zsh-notify"
@@ -54,15 +48,8 @@ apply = ["fpath"]
 github = "dannyzen/cf-zsh-autocomplete-plugin"
 apply = ["fpath"]
 
-[plugins.nssh]
-github = "fujiwara/nssh"
-tag = "latest"
-apply = ["PATH"]
-use = ["nssh"]
-
 [plugins.ghr]
 github = "tcnksm/ghr"
-tag = "latest"
 apply = ["PATH"]
 
 [plugins.httpstat]
@@ -84,3 +71,5 @@ apply = ["source"]
 
 [templates]
 PATH = 'export PATH="{{ dir }}:$PATH"'
+fzf-install = "{{ dir }}/install --bin > /dev/null \n path=($path {{ dir }}/bin(N-/))\n"
+fzf-source = "source <(fzf --zsh)"
